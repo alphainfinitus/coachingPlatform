@@ -27,7 +27,7 @@
     </v-app-bar>
 
     <!-- Side Drawer -->
-    <v-navigation-drawer v-model="drawer" absolute temporary>
+    <v-navigation-drawer v-model="drawer" fixed temporary>
       <!-- Guest buttons -->
       <v-list nav>
         <v-list-item-group active-class="deep-purple--text text--accent-4">
