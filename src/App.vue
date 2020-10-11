@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <Navbar />
     <v-main>
       <router-view />
     </v-main>
@@ -7,7 +8,23 @@
 </template>
 
 <script>
+import Navbar from "@/components/Navbar";
 export default {
   name: "App",
+  metaInfo: {
+    titleTemplate: "%s | PlatformName",
+    meta: [
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+    ],
+  },
+  components: { Navbar },
 };
 </script>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+.montserrat-font {
+  font-family: "Montserrat", sans-serif !important;
+}
+</style>
