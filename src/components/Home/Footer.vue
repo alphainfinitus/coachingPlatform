@@ -14,29 +14,43 @@
             </p>
           </v-col>
           <v-col sm="12" md="4">
-            <v-list-item two-line>
-              <v-list-item-icon>
-                <v-icon>mdi-thumb-up</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>Follow us on Facebook</v-list-item-title>
-                <v-list-item-subtitle>
-                  facebook.com/facebookHandle
-                </v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
+            <a
+              href="http://facebook.com/facebookHandle"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <v-list-item two-line>
+                <v-list-item-icon>
+                  <v-icon>mdi-thumb-up</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>Follow us on Facebook</v-list-item-title>
+                  <v-list-item-subtitle>
+                    facebook.com/facebookHandle
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </a>
 
-            <v-list-item two-line>
-              <v-list-item-icon>
-                <v-icon>mdi-twitter-retweet</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>Engage with us on Twitter</v-list-item-title>
-                <v-list-item-subtitle>
-                  twitter.com/facebookHandle
-                </v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
+            <a
+              href="http://twitter.com/twitterHandle"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <v-list-item two-line>
+                <v-list-item-icon>
+                  <v-icon>mdi-twitter-retweet</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title
+                    >Engage with us on Twitter</v-list-item-title
+                  >
+                  <v-list-item-subtitle>
+                    twitter.com/twitterHandle
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </a>
           </v-col>
         </v-row>
       </v-container>
