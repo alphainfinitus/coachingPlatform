@@ -91,7 +91,7 @@ export default {
       backgroundColor: 0x4a96f2,
       color1: 0xf739cc,
       color2: 0xffffff,
-      separation: 70.0,
+      separation: 60.0,
       quantity: 4.0,
     });
   },
