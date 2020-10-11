@@ -21,7 +21,7 @@
         <v-col cols="12" sm="12" md="4">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon>mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
             </v-card-subtitle>
             <v-card-title class="headline"> Feature 1 </v-card-title>
 
@@ -36,7 +36,7 @@
         <v-col cols="12" sm="12" md="4" style="margin-top: -6em">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon>mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
             </v-card-subtitle>
             <v-card-title class="headline"> Feature 2 </v-card-title>
 
@@ -51,7 +51,7 @@
         <v-col cols="12" sm="12" md="4" style="margin-top: -12em">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon>mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
             </v-card-subtitle>
             <v-card-title class="headline"> Feature 3 </v-card-title>
 
@@ -66,7 +66,7 @@
         <v-col cols="12" sm="12" md="4">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon>mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
             </v-card-subtitle>
             <v-card-title class="headline"> Feature 4 </v-card-title>
 
@@ -81,7 +81,7 @@
         <v-col cols="12" sm="12" md="4" style="margin-top: -6em">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon>mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
             </v-card-subtitle>
             <v-card-title class="headline"> Feature 5 </v-card-title>
 
@@ -96,7 +96,7 @@
         <v-col cols="12" sm="12" md="4" style="margin-top: -12em">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon>mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
             </v-card-subtitle>
             <v-card-title class="headline"> Feature 6 </v-card-title>
 
@@ -114,7 +114,7 @@
         <v-col cols="12" sm="12" md="4">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon>mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
             </v-card-subtitle>
             <v-card-title class="headline"> Feature 1 </v-card-title>
 
@@ -128,7 +128,7 @@
         <v-col cols="12" sm="12" md="4">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon>mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
             </v-card-subtitle>
             <v-card-title class="headline"> Feature 2 </v-card-title>
 
@@ -142,7 +142,7 @@
         <v-col cols="12" sm="12" md="4">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon>mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
             </v-card-subtitle>
             <v-card-title class="headline"> Feature 3 </v-card-title>
 
@@ -156,7 +156,7 @@
         <v-col cols="12" sm="12" md="4">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon>mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
             </v-card-subtitle>
             <v-card-title class="headline"> Feature 4 </v-card-title>
 
@@ -170,7 +170,7 @@
         <v-col cols="12" sm="12" md="4">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon>mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
             </v-card-subtitle>
             <v-card-title class="headline"> Feature 5 </v-card-title>
 
@@ -184,7 +184,7 @@
         <v-col cols="12" sm="12" md="4">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon>mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
             </v-card-subtitle>
             <v-card-title class="headline"> Feature 6 </v-card-title>
 
@@ -202,7 +202,17 @@
 <script>
 export default {
   name: "Features",
-  data: () => ({}),
+  data: () => ({
+    colors: ["red", "orange", "blue", "teal", "pink", "purple", "green"],
+  }),
+  methods: {
+    getRandomColor() {
+      const colors = this.colors;
+      const randomColor = Math.floor(Math.random() * colors.length);
+      console.log(colors[randomColor]);
+      return colors[randomColor];
+    },
+  },
 };
 </script>
 
