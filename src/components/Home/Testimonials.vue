@@ -11,6 +11,7 @@
         <v-col cols="12" sm="12">
           <!-- Testimonial carousel Medium and Up -->
           <v-carousel
+            v-if="!$vuetify.breakpoint.mobile"
             hide-delimiters
             show-arrows-on-hover
             cycle
@@ -80,6 +81,7 @@
             height="400"
             class="hidden-md-and-up"
             cycle
+            v-else
           >
             <div v-for="(slide, i) in slideData" :key="i">
               <v-carousel-item v-for="(testimonial, j) in slide" :key="j">
