@@ -21,7 +21,7 @@
           {{ optionData.text }}
         </v-btn>
         <v-btn class="hidden-md-and-up" to="/login" depressed text x-small>
-          Login
+          Start
         </v-btn>
       </div>
     </v-app-bar>
