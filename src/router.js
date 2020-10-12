@@ -8,6 +8,19 @@ import Home from "./views/Home.vue";
 Vue.use(VueRouter);
 Vue.use(VueMeta);
 
+function checkAdminOrAuth(to, from, next) {
+  const auth = store.getters.auth;
+  const admin = store.getters.admin;
+  if (admin) {
+    next("/adminhome");
+  }
+  if (auth) {
+    next("/home");
+  } else {
+    next();
+  }
+}
+
 const routes = [
   {
     path: "/",
@@ -19,16 +32,15 @@ const routes = [
     name: "Login",
     component: () => import("./views/auth/Login.vue"),
     beforeEnter: (to, from, next) => {
-      const auth = store.getters.auth;
-      const admin = store.getters.admin;
-      if (admin) {
-        next("/adminhome");
-      }
-      if (auth) {
-        next("/home");
-      } else {
-        next();
-      }
+      checkAdminOrAuth(to, from, next);
+    },
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: () => import("./views/auth/Register.vue"),
+    beforeEnter: (to, from, next) => {
+      checkAdminOrAuth(to, from, next);
     },
   },
 ];

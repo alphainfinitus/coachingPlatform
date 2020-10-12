@@ -1,13 +1,13 @@
 <template>
   <v-container
     fluid
-    id="login"
+    id="register"
     fill-height
     class="d-flex justify-center grey lighten-2"
   >
     <v-row>
       <v-col>
-        <LoginCard
+        <RegisterCard
           :superLoading="superLoading"
           @setSuperLoading="setSuperLoading"
         />
@@ -22,23 +22,23 @@
 </template>
 
 <script>
-import LoginCard from "@/components/Auth/Login/LoginCard.vue";
+import RegisterCard from "@/components/Auth/Register/RegisterCard.vue";
 import SocialLoginCard from "@/components/Auth/Login/SocialLoginCard.vue";
 
 export default {
-  name: "Login",
+  name: "Register",
   metaInfo: {
-    title: "Login",
+    title: "Register",
     meta: [
       {
         vmid: "description",
         name: "description",
-        content: "Login Page description lorem ipsum dolor sit amet.",
+        content: "Register Page description lorem ipsum dolor sit amet.",
       },
     ],
   },
   components: {
-    LoginCard,
+    RegisterCard,
     SocialLoginCard,
   },
   data: () => ({
