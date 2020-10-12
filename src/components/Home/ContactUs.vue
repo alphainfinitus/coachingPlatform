@@ -3,13 +3,12 @@
     <v-snackbar color="success" v-model="snackbar">{{ snackbar }}</v-snackbar>
     <v-container>
       <!-- Features headline -->
-      <v-row justify="space-between">
+      <v-row
+        :class="$vuetify.breakpoint.mobile ? 'contact-bg white--text' : ''"
+        justify="space-between"
+      >
         <v-col cols="12" sm="12" md="4">
-          <div
-            :class="
-              $vuetify.breakpoint.mobile ? 'contact-bg pa-12 white--text' : ''
-            "
-          >
+          <div :class="$vuetify.breakpoint.mobile ? 'pa-12 white--text' : ''">
             <h1 class="text-h3 font-weight-light mb-4">Contact Us :)</h1>
             <p class="mt-3">Write to us here or contact us through:</p>
             <div class="d-flex align-center">

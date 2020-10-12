@@ -133,7 +133,6 @@ export default {
           value
         ) || "Invalid e-mail.",
     ],
-    dialog: false,
   }),
   methods: {
     setLoading(value) {
