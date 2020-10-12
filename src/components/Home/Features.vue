@@ -209,7 +209,6 @@ export default {
     getRandomColor() {
       const colors = this.colors;
       const randomColor = Math.floor(Math.random() * colors.length);
-      console.log(colors[randomColor]);
       return colors[randomColor];
     },
   },

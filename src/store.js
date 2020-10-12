@@ -21,10 +21,14 @@ export default new Vuex.Store({
   ],
   state: {
     auth: null,
+    admin: null,
   },
   getters: {
     auth: (state) => {
       return state.auth;
+    },
+    admin: (state) => {
+      return state.admin;
     },
   },
   mutations: {},
