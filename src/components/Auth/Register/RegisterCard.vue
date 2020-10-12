@@ -4,6 +4,7 @@
     class="mx-auto pa-md-4"
     max-width="500"
     id="registerCard"
+    elevation="24"
   >
     <v-card-text>
       <p class="title text--primary">

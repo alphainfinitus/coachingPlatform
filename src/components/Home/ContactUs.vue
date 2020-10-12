@@ -161,7 +161,6 @@ export default {
   }),
   methods: {
     submitContactForm() {
-      console.log("submitContactForm called");
       if (!this.$refs.contactForm.validate()) {
         return;
       }
