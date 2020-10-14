@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="landing">
     <HeroHeader />
     <div class="my-6 my-md-12"></div>
     <Features />
@@ -15,22 +15,22 @@
 </template>
 
 <script>
-import HeroHeader from "@/components/Home/HeroHeader.vue";
-import Features from "@/components/Home/Features.vue";
-import Accomplishments from "@/components/Home/Accomplishments.vue";
-import Testimonials from "@/components/Home/Testimonials.vue";
-import ContactUs from "@/components/Home/ContactUs.vue";
-import Footer from "@/components/Home/Footer.vue";
+import HeroHeader from "@/components/Landing/HeroHeader.vue";
+import Features from "@/components/Landing/Features.vue";
+import Accomplishments from "@/components/Landing/Accomplishments.vue";
+import Testimonials from "@/components/Landing/Testimonials.vue";
+import ContactUs from "@/components/Landing/ContactUs.vue";
+import Footer from "@/components/Landing/Footer.vue";
 
 export default {
-  name: "Home",
+  name: "Landing",
   metaInfo: {
-    title: "Home",
+    title: "Welcome",
     meta: [
       {
         vmid: "description",
         name: "description",
-        content: "Home Page description lorem ipsum dolor sit amet.",
+        content: "Landing Page description lorem ipsum dolor sit amet.",
       },
     ],
   },
