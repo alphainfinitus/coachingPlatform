@@ -10,11 +10,14 @@
     >
       <v-card-text>
         <p class="title text--primary">
-          Student Login
+          <span v-if="isAdmin"> Admin </span>
+          <span v-else>Student</span>
+          Login
           <v-btn
             color="deep-purple accent-4"
             class="ml-md-2"
             to="/register"
+            v-if="!isAdmin"
             :disabled="loading || superLoading"
             outlined
             >or create account</v-btn
@@ -142,7 +145,7 @@
 <script>
 export default {
   name: "LoginCard",
-  props: ["superLoading"],
+  props: ["superLoading", "isAdmin"],
   data: () => ({
     loading: false,
     valid: false,
@@ -178,14 +181,25 @@ export default {
       }
       this.login_error = null;
       this.setLoading(true);
-      const payload = {
+
+      var payload = {
         email: this.email,
         password: this.password,
+        isAdmin: false,
       };
+
+      if (this.isAdmin) {
+        payload.isAdmin = true;
+      }
+
       this.$store
         .dispatch("login", payload)
         .then(() => {
-          this.$router.push("home");
+          if (this.isAdmin) {
+            this.$router.push("AdminHome");
+          } else {
+            this.$router.push("Home");
+          }
         })
         .catch((error) => {
           if (

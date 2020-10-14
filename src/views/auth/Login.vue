@@ -8,11 +8,13 @@
     <v-row>
       <v-col>
         <LoginCard
+          :isAdmin="isAdmin"
           :superLoading="superLoading"
           @setSuperLoading="setSuperLoading"
         />
         <div class="my-4"></div>
         <SocialLoginCard
+          v-if="!isAdmin"
           :superLoading="superLoading"
           @setSuperLoading="setSuperLoading"
         />
@@ -40,6 +42,12 @@ export default {
   components: {
     LoginCard,
     SocialLoginCard,
+  },
+  computed: {
+    isAdmin() {
+      const currRoute = this.$route.name;
+      return currRoute != "Login" ? true : false;
+    },
   },
   data: () => ({
     superLoading: true,
