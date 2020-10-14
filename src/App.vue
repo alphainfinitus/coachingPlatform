@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/NavBar/Navbar.vue";
 export default {
   name: "App",
   metaInfo: {
-    titleTemplate: "%s | PlatformName",
+    titleTemplate: "%s - PlatformName",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
