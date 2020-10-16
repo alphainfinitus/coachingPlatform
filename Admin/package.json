@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "cropperjs": "^1.5.9",
     "firebase": "^7.23.0",
+    "moment": "^2.29.1",
     "three": "^0.121.1",
     "vanta": "^0.5.19",
     "vue": "^2.6.11",

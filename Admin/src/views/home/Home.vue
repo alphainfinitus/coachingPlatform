@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <!-- Check if the coaching profile is complete -->
-    <v-container v-if="!userData.coachingURL" class="mt-12">
+    <v-container v-if="!loading || !userData.coachingURL" class="mt-12">
       <ProfileAlertRow />
     </v-container>
     <v-container v-else>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import ProfileAlertRow from "@/components/Home/ProfileAlertRow.vue";
+import ProfileAlertRow from "@/components/Home/Home/ProfileAlertRow.vue";
 
 export default {
   name: "Home",
@@ -30,10 +30,13 @@ export default {
   components: {
     ProfileAlertRow,
   },
-  computed: {
-    userData() {
-      return this.$store.getters.userData;
-    },
+  data: () => ({
+    loading: true,
+    userData: {},
+  }),
+  mounted() {
+    this.userData = this.$store.getters.userData;
+    this.loading = false;
   },
 };
 </script>

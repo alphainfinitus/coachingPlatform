@@ -8,7 +8,7 @@ import {
   //   fire_auth_provider,
   //   fire_functions,
   fire_store,
-  //   fire_storage,
+  fire_storage,
 } from "@/firebase/init";
 
 Vue.use(Vuex);
@@ -32,6 +32,7 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    // Auth Mutations
     login: (state, payload) => {
       state.auth = payload;
     },
@@ -43,8 +44,14 @@ export default new Vuex.Store({
       state.userData = {};
       sessionStorage.clear();
     },
+
+    // Profile Mutations
+    setUserDataPhotoURL: (state, payload) => {
+      state.userData.photoURL = payload;
+    },
   },
   actions: {
+    // Auth Actions
     register: (context, payload) => {
       return new Promise((resolve, reject) => {
         fire_auth
@@ -137,6 +144,41 @@ export default new Vuex.Store({
           })
           .catch((error) => {
             reject(error.code);
+          });
+      });
+    },
+
+    // Profile Actions
+    setProfilePhoto: (context, payload) => {
+      const docRef = fire_store
+        .collection("admins")
+        .doc(context.state.auth.uid);
+
+      //admins/[uid]/dp.jpeg
+      const storageRef = fire_storage
+        .ref()
+        .child(`admins/${context.state.auth.uid}/dp.jpeg`);
+
+      return new Promise((resolve, reject) => {
+        storageRef
+          .putString(payload.image_data, "data_url")
+          .then((snapshot) => {
+            snapshot.ref.getDownloadURL().then((url) => {
+              docRef
+                .update({ photoURL: url })
+                .then(() => {
+                  context.commit("setUserDataPhotoURL", url);
+                  resolve();
+                })
+                .catch((err) => {
+                  console.log(err);
+                  reject(err);
+                });
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
           });
       });
     },

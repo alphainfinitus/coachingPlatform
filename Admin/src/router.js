@@ -61,7 +61,7 @@ const routes = [
   {
     path: "/profile",
     name: "Profile",
-    component: () => import("./views/home/profile/Profile.vue"),
+    component: () => import("./views/home/Profile.vue"),
     beforeEnter: (to, from, next) => {
       checkAuthStatus(to, from, next);
     },
