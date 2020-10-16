@@ -8,6 +8,7 @@ import Landing from "./views/Landing.vue";
 Vue.use(VueRouter);
 Vue.use(VueMeta);
 
+// for (auth) routes that should redirect if already authenticated
 function verifyAuthRoute(to, from, next) {
   const auth = store.getters.auth;
   if (auth) {
@@ -17,6 +18,7 @@ function verifyAuthRoute(to, from, next) {
   }
 }
 
+// for routes that require authentication
 function checkAuthStatus(to, from, next) {
   const auth = store.getters.auth;
   if (!auth) {
@@ -52,6 +54,14 @@ const routes = [
     path: "/home",
     name: "Home",
     component: () => import("./views/home/Home.vue"),
+    beforeEnter: (to, from, next) => {
+      checkAuthStatus(to, from, next);
+    },
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: () => import("./views/home/profile/Profile.vue"),
     beforeEnter: (to, from, next) => {
       checkAuthStatus(to, from, next);
     },

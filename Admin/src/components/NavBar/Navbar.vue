@@ -3,12 +3,11 @@
     <v-app-bar dense app flat elevate-on-scroll>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
-        <v-btn to="/" depressed text>AdminPlatform</v-btn>
+        <v-btn :to="auth ? '/home' : '/'" depressed text>AdminPlatform</v-btn>
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
       <!-- Navigation buttons top right -->
-
       <NavButtons
         :isAuth="auth"
         :options="auth ? authOptions : guestOptions"
@@ -50,7 +49,10 @@ export default {
       { to: "/login", icon: "mdi-login-variant", text: "Login" },
       { to: "/register", icon: "mdi-account-plus-outline", text: "Register" },
     ],
-    authOptions: [{ to: "/home", icon: "mdi-home-outline", text: "Home" }],
+    authOptions: [
+      { to: "/home", icon: "mdi-home-outline", text: "Home" },
+      { to: "/profile", icon: "mdi-account-cog-outline", text: "Profile" },
+    ],
   }),
   methods: {
     setDrawer(value) {

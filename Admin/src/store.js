@@ -21,11 +21,14 @@ export default new Vuex.Store({
   ],
   state: {
     auth: null,
-    userdata: {},
+    userData: {},
   },
   getters: {
     auth: (state) => {
       return state.auth;
+    },
+    userData: (state) => {
+      return state.userData;
     },
   },
   mutations: {
@@ -33,11 +36,11 @@ export default new Vuex.Store({
       state.auth = payload;
     },
     setUserData: (state, payload) => {
-      state.userdata = payload;
+      state.userData = payload;
     },
     logout: (state) => {
       state.auth = null;
-      state.userdata = {};
+      state.userData = {};
       sessionStorage.clear();
     },
   },
