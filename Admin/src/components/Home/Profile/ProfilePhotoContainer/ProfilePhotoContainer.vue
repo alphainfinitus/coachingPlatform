@@ -1,5 +1,5 @@
 <template>
-  <v-container id="profilePhotoContainer">
+  <v-container id="profilePhotoContainer" fluid>
     <v-snackbar v-model="showSnackbar">
       {{ snackbarText }}
     </v-snackbar>
@@ -19,7 +19,13 @@
       </v-col>
 
       <v-col cols="12" sm="12" class="d-flex justify-center mt-n3 headline">
-        {{ userData.fullName }}
+        <v-btn
+          target="_blank"
+          :href="'https://student.platform.com/' + userData.username"
+        >
+          <v-icon class="mr-2">mdi-earth-arrow-right</v-icon>
+          {{ userData.fullName }}
+        </v-btn>
       </v-col>
 
       <v-col cols="12" sm="12" class="d-flex justify-center">
