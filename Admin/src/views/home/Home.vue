@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <!-- Check if the coaching profile is complete -->
-    <v-container v-if="!loading || !userData.coachingURL" class="mt-12">
+    <v-container v-if="!userData.username" class="mt-12">
       <ProfileAlertRow />
     </v-container>
     <v-container v-else>

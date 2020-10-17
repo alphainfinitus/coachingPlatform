@@ -7,25 +7,10 @@
     <v-row justify="center">
       <!-- Display Profile Photo or icon -->
       <v-col cols="12" sm="12" class="d-flex justify-center">
-        <v-avatar
-          class="mb-3"
-          width="150"
-          height="150"
-          v-if="userData.photoURL"
-        >
+        <v-avatar width="150" height="150" v-if="userData.photoURL">
           <v-img class="d-block mx-auto" :src="userData.photoURL" />
         </v-avatar>
         <v-icon v-else size="120">mdi-account-circle</v-icon>
-      </v-col>
-
-      <v-col cols="12" sm="12" class="d-flex justify-center mt-n3 headline">
-        <v-btn
-          target="_blank"
-          :href="'https://student.platform.com/' + userData.username"
-        >
-          <v-icon class="mr-2">mdi-earth-arrow-right</v-icon>
-          {{ userData.fullName }}
-        </v-btn>
       </v-col>
 
       <v-col cols="12" sm="12" class="d-flex justify-center">
@@ -47,6 +32,16 @@
             />
           </v-row>
         </v-dialog>
+      </v-col>
+
+      <v-col cols="12" sm="12" class="d-flex justify-center headline">
+        <v-btn
+          target="_blank"
+          :href="'https://student.platform.com/' + userData.username"
+        >
+          <v-icon class="mr-2">mdi-earth-arrow-right</v-icon>
+          {{ userData.fullName }}
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>

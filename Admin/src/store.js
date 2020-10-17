@@ -54,6 +54,9 @@ export default new Vuex.Store({
       state.userData.phone = payload.phone;
       state.userData.username = payload.username;
     },
+    setUserEmail: (state, payload) => {
+      state.userData.email = payload;
+    },
   },
   actions: {
     // Auth Actions
@@ -152,6 +155,18 @@ export default new Vuex.Store({
           });
       });
     },
+    resetPassword: (context, payload) => {
+      return new Promise((resolve, reject) => {
+        fire_auth
+          .sendPasswordResetEmail(payload)
+          .then(() => {
+            resolve();
+          })
+          .catch((error) => {
+            reject(error.code);
+          });
+      });
+    },
 
     // Profile Actions
     setProfilePhoto: (context, payload) => {
@@ -229,6 +244,29 @@ export default new Vuex.Store({
                   reject(err);
                 });
             }
+          });
+      });
+    },
+    changeEmail: (context, payload) => {
+      var user = fire_auth.currentUser;
+      const ref = fire_store.collection("admins").doc(context.state.auth.uid);
+      return new Promise((resolve, reject) => {
+        user
+          .updateEmail(payload)
+          .then(function() {
+            ref
+              .update({ email: payload })
+              .then(() => {
+                user.sendEmailVerification();
+                context.commit("setUserEmail", payload);
+                resolve();
+              })
+              .catch((err) => {
+                reject(err);
+              });
+          })
+          .catch((error) => {
+            reject(error.code);
           });
       });
     },
