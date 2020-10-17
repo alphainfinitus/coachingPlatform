@@ -49,6 +49,11 @@ export default new Vuex.Store({
     setUserDataPhotoURL: (state, payload) => {
       state.userData.photoURL = payload;
     },
+    setUserDataOrganisationDetails: (state, payload) => {
+      state.userData.fullName = payload.fullName;
+      state.userData.phone = payload.phone;
+      state.userData.username = payload.username;
+    },
   },
   actions: {
     // Auth Actions
@@ -179,6 +184,51 @@ export default new Vuex.Store({
           .catch((err) => {
             console.log(err);
             reject(err);
+          });
+      });
+    },
+    checkUsernameExists: (context, payload) => {
+      const ref = fire_store
+        .collection("admins")
+        .where("username", "==", payload)
+        .limit(1);
+
+      return new Promise((resolve, reject) => {
+        // if user has not changed his original username, then return username does NOT exist
+        if (payload == context.state.userData.username) {
+          resolve(false);
+        } else {
+          ref
+            .get()
+            .then((querySnapshot) => {
+              resolve(!querySnapshot.empty);
+            })
+            .catch((error) => {
+              reject(error);
+            });
+        }
+      });
+    },
+    submitOrganisationDetails: (context, payload) => {
+      const ref = fire_store.collection("admins").doc(context.state.auth.uid);
+      return new Promise((resolve, reject) => {
+        context
+          .dispatch("checkUsernameExists", payload.username)
+          .then((res) => {
+            const userNameExists = res;
+            if (userNameExists) {
+              reject("invalidUsername");
+            } else {
+              ref
+                .update(payload)
+                .then(() => {
+                  context.commit("setUserDataOrganisationDetails", payload);
+                  resolve();
+                })
+                .catch((err) => {
+                  reject(err);
+                });
+            }
           });
       });
     },

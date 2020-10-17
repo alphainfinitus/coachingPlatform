@@ -2,8 +2,13 @@
   <div id="profile" class="grey lighten-3 fill-height">
     <v-container>
       <v-row justify="center">
-        <v-card :loading="superLoading">
+        <v-card :loading="superLoading" class="w-100">
           <ProfilePhotoContainer
+            :superLoading="superLoading"
+            @setSuperLoading="setSuperLoading"
+          />
+
+          <ProfileDetailsContainer
             :superLoading="superLoading"
             @setSuperLoading="setSuperLoading"
           />
@@ -14,7 +19,8 @@
 </template>
 
 <script>
-import ProfilePhotoContainer from "@/components/Home/Profile/ProfilePhotoContainer.vue";
+import ProfilePhotoContainer from "@/components/Home/Profile/ProfilePhotoContainer/ProfilePhotoContainer.vue";
+import ProfileDetailsContainer from "@/components/Home/Profile/ProfileDetailsContainer.vue";
 
 export default {
   name: "Profile",
@@ -30,6 +36,7 @@ export default {
   },
   components: {
     ProfilePhotoContainer,
+    ProfileDetailsContainer,
   },
   computed: {
     userData() {
@@ -50,4 +57,8 @@ export default {
 };
 </script>
 
-
+<style>
+.w-100 {
+  width: 100%;
+}
+</style>
