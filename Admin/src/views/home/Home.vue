@@ -73,7 +73,7 @@ export default {
           {
             title: "Question Bank",
             subTitle:
-              "Edit and categorise existing questions (folders, solution etc.)",
+              "Edit and view existing questions (folders, solution etc.)",
             to: "/manage/question-bank",
             image: "undraw_collecting_fjjl.svg",
           },

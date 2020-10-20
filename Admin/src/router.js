@@ -34,6 +34,7 @@ const routes = [
     name: "Landing",
     component: Landing,
   },
+  // Auth Routes
   {
     path: "/login",
     name: "Login",
@@ -50,6 +51,7 @@ const routes = [
       verifyAuthRoute(to, from, next);
     },
   },
+  // User Routes
   {
     path: "/home",
     name: "Home",
@@ -62,6 +64,24 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: () => import("./views/home/Profile.vue"),
+    beforeEnter: (to, from, next) => {
+      checkAuthStatus(to, from, next);
+    },
+  },
+  // /create routes
+  {
+    path: "/create/question",
+    name: "createQuestion",
+    component: () => import("./views/home/create/Question.vue"),
+    beforeEnter: (to, from, next) => {
+      checkAuthStatus(to, from, next);
+    },
+  },
+  // manage routes
+  {
+    path: "/manage/question-bank",
+    name: "questionBank",
+    component: () => import("./views/home/manage/QuestionBank.vue"),
     beforeEnter: (to, from, next) => {
       checkAuthStatus(to, from, next);
     },

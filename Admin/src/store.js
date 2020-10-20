@@ -22,6 +22,7 @@ export default new Vuex.Store({
   state: {
     auth: null,
     userData: {},
+    questionFolders: {},
   },
   getters: {
     auth: (state) => {
@@ -29,6 +30,9 @@ export default new Vuex.Store({
     },
     userData: (state) => {
       return state.userData;
+    },
+    questionFolders: (state) => {
+      return state.questionFolders;
     },
   },
   mutations: {
@@ -56,6 +60,9 @@ export default new Vuex.Store({
     },
     setUserEmail: (state, payload) => {
       state.userData.email = payload;
+    },
+    setQuestionFolders: (state, payload) => {
+      state.questionFolders = payload;
     },
   },
   actions: {
@@ -267,6 +274,51 @@ export default new Vuex.Store({
           })
           .catch((error) => {
             reject(error.code);
+          });
+      });
+    },
+
+    // home/manage Actions
+    getQuestionFolders: (context) => {
+      const ref = fire_store
+        .collection("admins")
+        .doc(context.state.auth.uid)
+        .collection("meta")
+        .doc("questionFolders");
+
+      return new Promise((resolve, reject) => {
+        ref
+          .get()
+          .then((doc) => {
+            if (doc.exists) {
+              const data = doc.data();
+              context.commit("setQuestionFolders", data);
+              resolve(data);
+            } else {
+              resolve(false);
+            }
+          })
+          .catch((error) => {
+            reject(error.code);
+          });
+      });
+    },
+    saveQuestionFolders: (context, payload) => {
+      const ref = fire_store
+        .collection("admins")
+        .doc(context.state.auth.uid)
+        .collection("meta")
+        .doc("questionFolders");
+
+      return new Promise((resolve, reject) => {
+        ref
+          .set(payload)
+          .then(() => {
+            context.commit("setQuestionFolders", payload);
+            resolve();
+          })
+          .catch((err) => {
+            reject(err);
           });
       });
     },

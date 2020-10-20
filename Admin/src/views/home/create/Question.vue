@@ -1,0 +1,43 @@
+<template>
+  <div id="createQuestion" class="grey lighten-3 fill-height">
+    <QuestionForm
+      :superLoading="superLoading"
+      @setSuperLoading="setSuperLoading"
+    />
+  </div>
+</template>
+
+<script>
+import QuestionForm from "@/components/Home/Create/Question/QuestionForm.vue";
+export default {
+  name: "CreateQuestion",
+  metaInfo: {
+    title: "Create Question",
+    meta: [
+      {
+        vmid: "description",
+        name: "description",
+        content: "Create Question Page description lorem ipsum dolor sit amet.",
+      },
+    ],
+  },
+  components: { QuestionForm },
+  data: () => ({
+    superLoading: true,
+  }),
+  methods: {
+    setSuperLoading(value) {
+      this.superLoading = value;
+    },
+  },
+  mounted() {
+    this.superLoading = false;
+  },
+};
+</script>
+
+<style>
+.w-100 {
+  width: 100%;
+}
+</style>
