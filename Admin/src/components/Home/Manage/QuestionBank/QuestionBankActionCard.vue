@@ -1,8 +1,8 @@
 <template>
   <div id="questionBankActionCard" class="w-100">
-    <v-snackbar color="success" v-model="snackbar">{{
-      snackbarText
-    }}</v-snackbar>
+    <v-snackbar color="success" v-model="snackbar">
+      {{ snackbarText }}
+    </v-snackbar>
 
     <v-card :loading="loading || superLoading" class="w-100 pb-4 px-4">
       <!-- Actions -->

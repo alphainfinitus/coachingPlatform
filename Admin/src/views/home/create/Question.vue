@@ -1,5 +1,16 @@
 <template>
   <div id="createQuestion" class="grey lighten-3 fill-height">
+    <v-container>
+      <v-row justify="center">
+        <!-- title -->
+        <h1 class="text-title">
+          <v-icon class="text-h3 mr-2" color="blue darken-4">
+            mdi-text-box-plus
+          </v-icon>
+          Create Question
+        </h1>
+      </v-row>
+    </v-container>
     <QuestionForm
       :superLoading="superLoading"
       @setSuperLoading="setSuperLoading"

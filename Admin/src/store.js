@@ -278,6 +278,27 @@ export default new Vuex.Store({
       });
     },
 
+    // home/create Actions
+    submitQuestion: (context, payload) => {
+      const ref = fire_store
+        .collection("admins")
+        .doc(context.state.auth.uid)
+        .collection("questions")
+        .doc(payload.id);
+
+      return new Promise((resolve, reject) => {
+        ref
+          .set(payload)
+          .then(() => {
+            resolve();
+          })
+          .catch((error) => {
+            console.log(error);
+            reject(error);
+          });
+      });
+    },
+
     // home/manage Actions
     getQuestionFolders: (context) => {
       const ref = fire_store
