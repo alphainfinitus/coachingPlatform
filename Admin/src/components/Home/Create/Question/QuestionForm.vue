@@ -76,7 +76,6 @@ export default {
       this.$store
         .dispatch("getQuestionFolders")
         .then((res) => {
-          console.log("res", res);
           if (res) {
             this.questionFolders = res.folderNames;
           }

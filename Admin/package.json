@@ -9,6 +9,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@tinymce/tinymce-vue": "^3.2.4",
     "core-js": "^3.6.5",
     "cropperjs": "^1.5.9",
     "firebase": "^7.23.0",
