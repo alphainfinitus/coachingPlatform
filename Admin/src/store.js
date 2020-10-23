@@ -343,5 +343,128 @@ export default new Vuex.Store({
           });
       });
     },
+    getAllQuestions: (context, payload) => {
+      var ref = "";
+
+      switch (payload.requestType) {
+        case "prev":
+          ref = fire_store
+            .collection("admins")
+            .doc(context.state.auth.uid)
+            .collection("questions")
+            .orderBy("id", "desc")
+            .endBefore(payload.doc)
+            .limit(10);
+          break;
+        case "next":
+          ref = fire_store
+            .collection("admins")
+            .doc(context.state.auth.uid)
+            .collection("questions")
+            .orderBy("id", "desc")
+            .startAfter(payload.doc)
+            .limit(10);
+
+          break;
+        default:
+          ref = fire_store
+            .collection("admins")
+            .doc(context.state.auth.uid)
+            .collection("questions")
+            .orderBy("id", "desc")
+            .limit(10);
+      }
+
+      return new Promise((resolve, reject) => {
+        ref
+          .get()
+          .then((snapshot) => {
+            const resData = snapshot.docs.map((doc) => doc.data());
+            const res = {
+              data: resData,
+              firstAndLastVisible: {
+                firstVisible: snapshot.docs[0],
+                lastVisible: snapshot.docs[snapshot.docs.length - 1],
+              },
+            };
+            resolve(res);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
+    getFolderQuestions: (context, payload) => {
+      var ref = "";
+
+      switch (payload.requestType) {
+        case "prev":
+          ref = fire_store
+            .collection("admins")
+            .doc(context.state.auth.uid)
+            .collection("questions")
+            .where("folder", "==", payload.folder)
+            .orderBy("id", "desc")
+            .endBefore(payload.doc)
+            .limit(10);
+          break;
+        case "next":
+          ref = fire_store
+            .collection("admins")
+            .doc(context.state.auth.uid)
+            .collection("questions")
+            .where("folder", "==", payload.folder)
+            .orderBy("id", "desc")
+            .startAfter(payload.doc)
+            .limit(10);
+          break;
+        default:
+          ref = fire_store
+            .collection("admins")
+            .doc(context.state.auth.uid)
+            .collection("questions")
+            .where("folder", "==", payload.folder)
+            .orderBy("id", "desc")
+            .limit(10);
+      }
+
+      return new Promise((resolve, reject) => {
+        ref
+          .get()
+          .then((snapshot) => {
+            const resData = snapshot.docs.map((doc) => doc.data());
+            const res = {
+              data: resData,
+              firstAndLastVisible: {
+                firstVisible: snapshot.docs[0],
+                lastVisible: snapshot.docs[snapshot.docs.length - 1],
+              },
+            };
+            resolve(res);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
+    deleteQuestion: (context, payload) => {
+      const ref = fire_store
+        .collection("admins")
+        .doc(context.state.auth.uid)
+        .collection("questions")
+        .doc(payload);
+
+      return new Promise((resolve, reject) => {
+        ref
+          .delete()
+          .then(() => {
+            resolve();
+          })
+          .catch((error) => {
+            console.log(error);
+            reject(error.code);
+          });
+      });
+    },
   },
 });
