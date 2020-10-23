@@ -32,6 +32,7 @@ export default {
       },
     ],
   },
+  props: ["questionObj"],
   components: { QuestionForm },
   data: () => ({
     superLoading: true,
@@ -43,6 +44,7 @@ export default {
   },
   mounted() {
     this.superLoading = false;
+    console.log(this.questionObj);
   },
 };
 </script>

@@ -72,6 +72,7 @@ const routes = [
   {
     path: "/create/question",
     name: "createQuestion",
+    props: true,
     component: () => import("./views/home/create/Question.vue"),
     beforeEnter: (to, from, next) => {
       checkAuthStatus(to, from, next);
