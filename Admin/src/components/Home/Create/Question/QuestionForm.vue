@@ -179,9 +179,10 @@
 
           <!-- Save Button -->
           <v-btn
-            @click="submitQuestion"
             class="float-right mt-2"
             color="info"
+            @click="submitQuestion"
+            :disabled="loading || superLoading"
             large
           >
             <v-icon>mdi-content-save</v-icon> Save Question

@@ -207,36 +207,39 @@ export default {
           this.dialog = false;
         });
     },
+    fetchFolders() {
+      // get question folders from store
+      const questionFolders = this.$store.getters.questionFolders;
+
+      //if not found in store
+      if (
+        Object.keys(questionFolders).length === 0 &&
+        questionFolders.constructor === Object
+      ) {
+        //get folder names from server
+        this.$store
+          .dispatch("getQuestionFolders")
+          .then((res) => {
+            if (res) {
+              this.questionFolders = res.folderNames;
+            }
+          })
+          .catch(() => {
+            this.error = "Network error in fetching folders, please try again.";
+          })
+          .finally(() => {
+            this.setLoading(false);
+            this.dialog = false;
+          });
+      } else {
+        // if found in store
+        this.questionFolders = questionFolders.folderNames;
+        this.setLoading(false);
+      }
+    },
   },
   mounted() {
-    // get question folders from store
-    const questionFolders = this.$store.getters.questionFolders;
-
-    //if not found in store
-    if (
-      Object.keys(questionFolders).length === 0 &&
-      questionFolders.constructor === Object
-    ) {
-      //get folder names from server
-      this.$store
-        .dispatch("getQuestionFolders")
-        .then((res) => {
-          if (res) {
-            this.questionFolders = res.folderNames;
-          }
-        })
-        .catch(() => {
-          this.error = "Network error in fetching folders, please try again.";
-        })
-        .finally(() => {
-          this.setLoading(false);
-          this.dialog = false;
-        });
-    } else {
-      // if found in store
-      this.questionFolders = questionFolders.folderNames;
-      this.setLoading(false);
-    }
+    this.fetchFolders();
   },
 };
 </script>

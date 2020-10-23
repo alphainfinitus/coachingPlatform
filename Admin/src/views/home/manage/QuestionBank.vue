@@ -11,8 +11,15 @@
         </h1>
       </v-row>
 
-      <v-row justify="center" class="mt-4">
+      <v-row justify="center" class="my-4">
         <QuestionBankActionCard
+          :superLoading="superLoading"
+          @setSuperLoading="setSuperLoading"
+        />
+      </v-row>
+
+      <v-row justify="center">
+        <QuestionBankQuestionsCard
           :superLoading="superLoading"
           @setSuperLoading="setSuperLoading"
         />
@@ -23,6 +30,8 @@
 
 <script>
 import QuestionBankActionCard from "@/components/Home/Manage/QuestionBank/QuestionBankActionCard.vue";
+import QuestionBankQuestionsCard from "@/components/Home/Manage/QuestionBank/QuestionBankQuestionsCard.vue";
+
 export default {
   name: "QuestionBank",
   metaInfo: {
@@ -37,6 +46,7 @@ export default {
   },
   components: {
     QuestionBankActionCard,
+    QuestionBankQuestionsCard,
   },
   data: () => ({
     superLoading: true,
