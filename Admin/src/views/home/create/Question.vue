@@ -12,6 +12,7 @@
       </v-row>
     </v-container>
     <QuestionForm
+      :questionObj="questionObj"
       :superLoading="superLoading"
       @setSuperLoading="setSuperLoading"
     />
@@ -44,7 +45,6 @@ export default {
   },
   mounted() {
     this.superLoading = false;
-    console.log(this.questionObj);
   },
 };
 </script>

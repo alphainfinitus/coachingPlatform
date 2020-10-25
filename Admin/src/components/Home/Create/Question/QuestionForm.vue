@@ -200,7 +200,7 @@ import Editor from "@tinymce/tinymce-vue";
 
 export default {
   name: "QuestionForm",
-  props: ["superLoading"],
+  props: ["superLoading", "questionObj"],
   components: {
     editor: Editor,
   },
@@ -262,20 +262,20 @@ export default {
       this.error = "";
       this.setLoading(true);
 
-      const unix_timestamp = this.$route.params.questionObj
-        ? this.$route.params.questionObj.id
+      const unix_timestamp_id = this.questionObj
+        ? this.questionObj.id
         : moment().unix();
 
       const payload = this.subjective
         ? {
-            id: `${unix_timestamp}`,
+            id: `${unix_timestamp_id}`,
             isSubjective: this.subjective,
             question: this.question,
             solution: this.solution,
             folder: this.selectedFolder,
           }
         : {
-            id: `${unix_timestamp}`,
+            id: `${unix_timestamp_id}`,
             isSubjective: this.subjective,
             question: this.question,
             options: {
@@ -288,8 +288,6 @@ export default {
             solution: this.solution,
             folder: this.selectedFolder,
           };
-
-      console.log(payload);
 
       this.$store
         .dispatch("submitQuestion", payload)
@@ -312,34 +310,51 @@ export default {
           this.setLoading(false);
         });
     },
+    fetchFolders() {
+      // get question folders from store
+      const questionFolders = this.$store.getters.questionFolders;
+
+      //if not found in store
+      if (
+        Object.keys(questionFolders).length === 0 &&
+        questionFolders.constructor === Object
+      ) {
+        //get folder names from server
+        this.$store
+          .dispatch("getQuestionFolders")
+          .then((res) => {
+            if (res) {
+              this.questionFolders = res.folderNames;
+            }
+          })
+          .catch(() => {
+            this.error = "Network error in fetching folders, please try again.";
+          })
+          .finally(() => {
+            this.setLoading(false);
+          });
+      } else {
+        // if found in store
+        this.questionFolders = questionFolders.folderNames;
+        this.setLoading(false);
+      }
+    },
   },
   mounted() {
-    // get question folders from store
-    const questionFolders = this.$store.getters.questionFolders;
-
-    //if not found in store
-    if (
-      Object.keys(questionFolders).length === 0 &&
-      questionFolders.constructor === Object
-    ) {
-      //get folder names from server
-      this.$store
-        .dispatch("getQuestionFolders")
-        .then((res) => {
-          if (res) {
-            this.questionFolders = res.folderNames;
-          }
-        })
-        .catch(() => {
-          this.error = "Network error in fetching folders, please try again.";
-        })
-        .finally(() => {
-          this.setLoading(false);
-        });
-    } else {
-      // if found in store
-      this.questionFolders = questionFolders.folderNames;
-      this.setLoading(false);
+    this.fetchFolders();
+    const questionObj = this.questionObj;
+    if (questionObj) {
+      this.subjective = questionObj.isSubjective;
+      this.selectedFolder = questionObj.folder;
+      this.question = questionObj.question;
+      this.solution = questionObj.solution;
+      if (!questionObj.isSubjective) {
+        this.optionA = questionObj.options.optionA;
+        this.optionB = questionObj.options.optionB;
+        this.optionC = questionObj.options.optionC;
+        this.optionD = questionObj.options.optionD;
+        this.correctAnswer = questionObj.correctAnswer;
+      }
     }
   },
 };
