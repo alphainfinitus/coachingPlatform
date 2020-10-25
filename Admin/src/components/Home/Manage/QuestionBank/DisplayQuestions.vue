@@ -66,22 +66,28 @@
                 <b>Options:</b>
               </v-row>
               <v-row align="center" v-for="(option, i) in optionsData" :key="i">
-                <v-col cols="12" sm="2" class="d-flex">
-                  <v-icon
-                    :color="
-                      selectedQuestion.correctAnswer == `Option ${option.title}`
-                        ? 'green'
-                        : 'grey'
-                    "
-                    class="mr-2"
-                  >
-                    mdi-check-circle mdi-18px
-                  </v-icon>
-                  <b>{{ option.title }} :</b>
-                </v-col>
-                <v-col cols="12" sm="10" class="d-flex">
+                <v-col cols="12" sm="12" class="d-flex">
+                  <!-- Option Title -->
+                  <span class="mr-2 d-flex align-md-center align-start">
+                    <v-icon
+                      :color="
+                        selectedQuestion.correctAnswer ==
+                        `Option ${option.title}`
+                          ? 'green'
+                          : 'grey'
+                      "
+                      class="mr-2"
+                      style="margin-top: 0.8px"
+                    >
+                      mdi-check-circle mdi-18px
+                    </v-icon>
+                    <b class="mr-1">{{ option.title }}</b>
+                    :
+                  </span>
+
+                  <!-- Option Content -->
                   <span
-                    class="mb-n3"
+                    class="mb-n4"
                     v-html="selectedQuestion.options[`option${option.title}`]"
                   ></span>
                 </v-col>
@@ -167,12 +173,10 @@
             elevation="0"
             @click="openQuestionModal(i)"
           >
-            <!-- ID; Type and Action Buttons -->
+            <!-- ID and Action Buttons -->
             <v-card-subtitle>
               <span class="d-md-flex">
                 <b class="mr-1">ID:</b> {{ question.id }}
-                <b class="ml-2 mr-1"> Type:</b>
-                {{ question.isSubjective ? "Subjective" : "Objective" }}
                 <v-spacer></v-spacer>
                 <div class="mt-2 mt-md-0">
                   <v-btn
@@ -205,6 +209,18 @@
             <v-card-text class="text-h6 ml-1">
               <span v-html="question.question"></span>
             </v-card-text>
+
+            <!-- Question Type and Folder -->
+            <v-card-subtitle class="mt-n6">
+              <span class="d-md-flex text-capitalize">
+                <b class="mr-1"> Folder:</b>
+                {{ question.folder ? `'${question.folder}'` : "None" }}
+
+                <b class="mr-1 ml-2"> Type:</b>
+                {{ question.isSubjective ? "Subjective" : "Objective" }}
+                <v-spacer></v-spacer>
+              </span>
+            </v-card-subtitle>
           </v-card>
         </v-col>
       </v-row>
