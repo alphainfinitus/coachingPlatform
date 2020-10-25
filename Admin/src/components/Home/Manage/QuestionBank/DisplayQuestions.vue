@@ -20,7 +20,13 @@
           <v-toolbar-title>Question</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-btn dark text class="mr-1" small>
+            <v-btn
+              @click="deleteQuestionModal(selectedQuestion.arrayPos)"
+              dark
+              text
+              class="mr-1"
+              small
+            >
               <v-icon class="mr-1">mdi-trash-can-outline mdi-18px</v-icon>
               Delete
             </v-btn>
@@ -290,6 +296,7 @@ export default {
     },
     openQuestionModal(index) {
       this.selectedQuestion = this.allQuestions[index];
+      this.selectedQuestion.arrayPos = index;
       if (!this.deleteDialog) {
         this.questionDialog = true;
       }
@@ -309,6 +316,7 @@ export default {
           //remove from allQuestions array
           this.$emit("removeQuestion", this.selectedQuestion.arrayPos);
           this.deleteDialog = false;
+          this.questionDialog = false;
         })
         .catch(() => {
           this.snackbarText = "Network error, please try again :(";
