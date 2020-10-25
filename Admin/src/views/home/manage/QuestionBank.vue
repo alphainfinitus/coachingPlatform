@@ -12,14 +12,14 @@
       </v-row>
 
       <v-row justify="center" class="my-4">
-        <QuestionBankActionCard
+        <ActionCard
           :superLoading="superLoading"
           @setSuperLoading="setSuperLoading"
         />
       </v-row>
 
       <v-row justify="center">
-        <QuestionBankQuestionsCard
+        <QuestionsCard
           :superLoading="superLoading"
           @setSuperLoading="setSuperLoading"
         />
@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import QuestionBankActionCard from "@/components/Home/Manage/QuestionBank/QuestionBankActionCard.vue";
-import QuestionBankQuestionsCard from "@/components/Home/Manage/QuestionBank/QuestionBankQuestionsCard.vue";
+import ActionCard from "@/components/Home/Manage/QuestionBank/ActionCard.vue";
+import QuestionsCard from "@/components/Home/Manage/QuestionBank/QuestionsCard.vue";
 
 export default {
   name: "QuestionBank",
@@ -45,8 +45,8 @@ export default {
     ],
   },
   components: {
-    QuestionBankActionCard,
-    QuestionBankQuestionsCard,
+    ActionCard,
+    QuestionsCard,
   },
   data: () => ({
     superLoading: true,

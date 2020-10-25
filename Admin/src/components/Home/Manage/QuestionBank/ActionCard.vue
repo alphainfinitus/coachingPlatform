@@ -1,5 +1,5 @@
 <template>
-  <div id="questionBankActionCard" class="w-100">
+  <div id="actionCard" class="w-100">
     <v-snackbar color="success" v-model="snackbar">
       {{ snackbarText }}
     </v-snackbar>
@@ -150,7 +150,7 @@
 
 <script>
 export default {
-  name: "QuestionBankActionCard",
+  name: "ActionCard",
   props: ["superLoading"],
   data: () => ({
     loading: true,

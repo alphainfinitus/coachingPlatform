@@ -78,6 +78,15 @@ const routes = [
       checkAuthStatus(to, from, next);
     },
   },
+  {
+    path: "/create/test",
+    name: "createTest",
+    props: true,
+    component: () => import("./views/home/create/Test.vue"),
+    beforeEnter: (to, from, next) => {
+      checkAuthStatus(to, from, next);
+    },
+  },
   // manage routes
   {
     path: "/manage/question-bank",

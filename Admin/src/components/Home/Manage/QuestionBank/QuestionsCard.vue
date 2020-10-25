@@ -1,5 +1,5 @@
 <template>
-  <div id="questionBankQuestionsCard" class="w-100">
+  <div id="questionsCard" class="w-100">
     <v-snackbar color="success" v-model="snackbar">
       {{ snackbarText }}
     </v-snackbar>
@@ -73,7 +73,7 @@
 import DisplayQuestions from "@/components/Home/Manage/QuestionBank/DisplayQuestions.vue";
 
 export default {
-  name: "QuestionBankQuestionsCard",
+  name: "QuestionsCard",
   props: ["superLoading"],
   components: { DisplayQuestions },
   data: () => ({
