@@ -1,25 +1,19 @@
 <template>
-  <div id="questionBank" class="grey lighten-3 fill-height">
+  <div id="batches" class="grey lighten-3 fill-height">
     <v-container>
+      <!-- title -->
       <v-row justify="center">
-        <!-- title -->
         <h1 class="text-title">
           <v-icon class="text-h3 mr-2" color="pink darken-1">
-            mdi-cloud-question
+            mdi-account-group
           </v-icon>
-          Question Bank
+          Batches
         </h1>
       </v-row>
 
+      <!-- Add Batches -->
       <v-row justify="center" class="my-4">
-        <ActionCard
-          :superLoading="superLoading"
-          @setSuperLoading="setSuperLoading"
-        />
-      </v-row>
-
-      <v-row justify="center">
-        <QuestionsCard
+        <BatchesCard
           :superLoading="superLoading"
           @setSuperLoading="setSuperLoading"
         />
@@ -29,24 +23,22 @@
 </template>
 
 <script>
-import ActionCard from "@/components/Home/Manage/QuestionBank/ActionCard.vue";
-import QuestionsCard from "@/components/Home/Manage/QuestionBank/QuestionsCard.vue";
+import BatchesCard from "@/components/Home/Manage/Batches/BatchesCard.vue";
 
 export default {
-  name: "QuestionBank",
+  name: "Batches",
   metaInfo: {
-    title: "Question Bank",
+    title: "Batches",
     meta: [
       {
         vmid: "description",
         name: "description",
-        content: "Question Bank Page description lorem ipsum dolor sit amet.",
+        content: "Batches Page description lorem ipsum dolor sit amet.",
       },
     ],
   },
   components: {
-    ActionCard,
-    QuestionsCard,
+    BatchesCard,
   },
   data: () => ({
     superLoading: true,

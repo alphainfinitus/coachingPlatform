@@ -23,6 +23,7 @@ export default new Vuex.Store({
     auth: null,
     userData: {},
     questionFolders: {},
+    batches: {},
   },
   getters: {
     auth: (state) => {
@@ -33,6 +34,9 @@ export default new Vuex.Store({
     },
     questionFolders: (state) => {
       return state.questionFolders;
+    },
+    batches: (state) => {
+      return state.batches;
     },
   },
   mutations: {
@@ -46,6 +50,7 @@ export default new Vuex.Store({
     logout: (state) => {
       state.auth = null;
       state.userData = {};
+      state.batches = {};
       sessionStorage.clear();
     },
 
@@ -63,6 +68,11 @@ export default new Vuex.Store({
     },
     setQuestionFolders: (state, payload) => {
       state.questionFolders = payload;
+    },
+
+    // home/manage Mutations
+    setBatches: (state, payload) => {
+      state.batches = payload;
     },
   },
   actions: {
@@ -463,6 +473,49 @@ export default new Vuex.Store({
           .catch((error) => {
             console.log(error);
             reject(error.code);
+          });
+      });
+    },
+    getBatches: (context) => {
+      const ref = fire_store
+        .collection("admins")
+        .doc(context.state.auth.uid)
+        .collection("meta")
+        .doc("batches");
+
+      return new Promise((resolve, reject) => {
+        ref
+          .get()
+          .then((doc) => {
+            if (doc.exists) {
+              const data = doc.data();
+              context.commit("setBatches", data.batches);
+              resolve(data.batches);
+            } else {
+              resolve(false);
+            }
+          })
+          .catch((error) => {
+            reject(error.code);
+          });
+      });
+    },
+    saveBatches: (context, payload) => {
+      const ref = fire_store
+        .collection("admins")
+        .doc(context.state.auth.uid)
+        .collection("meta")
+        .doc("batches");
+
+      return new Promise((resolve, reject) => {
+        ref
+          .set(payload)
+          .then(() => {
+            context.commit("setBatches", payload);
+            resolve();
+          })
+          .catch((err) => {
+            reject(err);
           });
       });
     },

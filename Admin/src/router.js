@@ -96,6 +96,14 @@ const routes = [
       checkAuthStatus(to, from, next);
     },
   },
+  {
+    path: "/manage/batches",
+    name: "batches",
+    component: () => import("./views/home/manage/Batches.vue"),
+    beforeEnter: (to, from, next) => {
+      checkAuthStatus(to, from, next);
+    },
+  },
 ];
 
 const router = new VueRouter({

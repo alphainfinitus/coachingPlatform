@@ -77,6 +77,12 @@ export default {
             to: "/manage/question-bank",
             image: "undraw_collecting_fjjl.svg",
           },
+          {
+            title: "Batches",
+            subTitle: "Add and manage batches (subscription fee etc.)",
+            to: "/manage/batches",
+            image: "undraw_online_friends_x73e.svg",
+          },
         ],
       },
       view: {
