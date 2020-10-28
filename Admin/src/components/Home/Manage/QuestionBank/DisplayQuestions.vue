@@ -4,22 +4,17 @@
       {{ snackbarText }}
     </v-snackbar>
 
-    <!-- Question FullScreen dialog -->
-    <v-dialog
-      v-model="questionDialog"
-      fullscreen
-      hide-overlay
-      transition="dialog-bottom-transition"
-    >
+    <!-- Question dialog -->
+    <v-dialog v-model="questionDialog" transition="dialog-bottom-transition">
       <v-card tile v-if="selectedQuestion">
         <!-- Toolbar -->
         <v-toolbar dense dark color="primary">
           <v-btn icon dark @click="questionDialog = false">
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title>Question</v-toolbar-title>
+          <v-toolbar-title class="hidden-sm-and-down">Question</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-toolbar-items>
+          <v-toolbar-items v-if="!enableSelect">
             <v-btn
               @click="deleteQuestionModal(selectedQuestion.arrayPos)"
               dark
@@ -172,62 +167,79 @@
           v-for="(question, i) in allQuestions"
           :key="i"
         >
-          <v-card
-            color="pink lighten-5"
-            class="ma-1"
-            outlined
-            elevation="0"
-            @click="openQuestionModal(i)"
-          >
-            <!-- ID and Action Buttons -->
-            <v-card-subtitle>
-              <span class="d-md-flex">
-                <b class="mr-1">ID:</b> {{ question.id }}
-                <v-spacer></v-spacer>
-                <div class="mt-2 mt-md-0">
-                  <v-btn
-                    class="ml-md-1 ml-n1 mr-1"
-                    @click="deleteQuestionModal(i)"
-                    small
-                  >
-                    <v-icon class="mr-1">mdi-trash-can-outline mdi-18px</v-icon>
-                    Delete
-                  </v-btn>
-                  <v-btn
-                    :to="{
-                      name: 'createQuestion',
-                      params: { questionObj: question },
-                    }"
-                    class="mx-1"
-                    small
-                  >
-                    <v-icon class="mr-1"
-                      >mdi-square-edit-outline mdi-18px</v-icon
+          <div class="d-flex">
+            <v-checkbox
+              v-if="enableSelect"
+              label="Add Question"
+              v-model="selectedQuestions"
+              :value="question.id"
+              :key="question.id"
+              @change="emitSelectedQuestions"
+            ></v-checkbox>
+            <v-card
+              color="pink lighten-5"
+              class="ma-1 w-100"
+              outlined
+              elevation="0"
+              @click="openQuestionModal(i)"
+            >
+              <!-- ID and Action Buttons -->
+              <v-card-subtitle :class="enableSelect ? 'mb-n5' : ''">
+                <span class="d-md-flex">
+                  <b>ID:</b>
+                  {{ question.id }}
+                  <v-spacer></v-spacer>
+                  <div class="mt-2 mt-md-0" v-if="!enableSelect">
+                    <v-btn
+                      class="ml-md-1 ml-n1 mr-1"
+                      @click="deleteQuestionModal(i)"
+                      small
                     >
-                    Edit
-                  </v-btn>
-                </div>
-              </span>
-            </v-card-subtitle>
+                      <v-icon class="mr-1"
+                        >mdi-trash-can-outline mdi-18px</v-icon
+                      >
+                      Delete
+                    </v-btn>
+                    <v-btn
+                      :to="{
+                        name: 'createQuestion',
+                        params: { questionObj: question },
+                      }"
+                      class="mx-1"
+                      small
+                    >
+                      <v-icon class="mr-1"
+                        >mdi-square-edit-outline mdi-18px</v-icon
+                      >
+                      Edit
+                    </v-btn>
+                  </div>
+                </span>
+              </v-card-subtitle>
 
-            <!-- Question text-->
-            <v-card-subtitle class="pt-0 pb-1"> Question: </v-card-subtitle>
-            <v-card-text class="text-h6 ml-1">
-              <span v-html="question.question"></span>
-            </v-card-text>
+              <!-- Question text-->
+              <v-card-subtitle
+                :class="enableSelect ? 'mt-5 pt-0 pb-1' : 'pt-0 pb-1'"
+              >
+                Question:
+              </v-card-subtitle>
+              <v-card-text class="text-h6 ml-1">
+                <span v-html="question.question"></span>
+              </v-card-text>
 
-            <!-- Question Type and Folder -->
-            <v-card-subtitle class="mt-n6">
-              <span class="d-md-flex text-capitalize">
-                <b class="mr-1"> Folder:</b>
-                {{ question.folder ? `'${question.folder}'` : "None" }}
+              <!-- Question Type and Folder -->
+              <v-card-subtitle class="mt-n6">
+                <span class="d-md-flex text-capitalize">
+                  <b class="mr-1"> Folder:</b>
+                  {{ question.folder ? `'${question.folder}'` : "None" }}
 
-                <b class="mr-1 ml-2"> Type:</b>
-                {{ question.isSubjective ? "Subjective" : "Objective" }}
-                <v-spacer></v-spacer>
-              </span>
-            </v-card-subtitle>
-          </v-card>
+                  <b class="mr-1 ml-2"> Type:</b>
+                  {{ question.isSubjective ? "Subjective" : "Objective" }}
+                  <v-spacer></v-spacer>
+                </span>
+              </v-card-subtitle>
+            </v-card>
+          </div>
         </v-col>
       </v-row>
 
@@ -262,7 +274,7 @@
 <script>
 export default {
   name: "DisplayQuestions",
-  props: ["superLoading", "allQuestions"],
+  props: ["superLoading", "allQuestions", "enableSelect"],
   data: () => ({
     loading: true,
     snackbar: false,
@@ -285,6 +297,7 @@ export default {
         title: "D",
       },
     ],
+    selectedQuestions: [],
   }),
   methods: {
     setLoading(value) {
@@ -325,6 +338,11 @@ export default {
           this.snackbar = true;
           this.setLoading(false);
         });
+    },
+
+    //enableSelect Methods
+    emitSelectedQuestions() {
+      this.$emit("questionsSelected", this.selectedQuestions);
     },
   },
   mounted() {

@@ -308,6 +308,25 @@ export default new Vuex.Store({
           });
       });
     },
+    getSingleQuestion: (context) => {
+      const ref = fire_store
+        .collection("admins")
+        .doc(context.state.auth.uid)
+        .collection("questions")
+        .orderBy("id", "desc")
+        .limit(1);
+
+      return new Promise((resolve, reject) => {
+        ref
+          .get()
+          .then((snapshot) => {
+            resolve(!snapshot.empty);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
 
     // home/manage Actions
     getQuestionFolders: (context) => {
@@ -511,7 +530,7 @@ export default new Vuex.Store({
         ref
           .set(payload)
           .then(() => {
-            context.commit("setBatches", payload);
+            context.commit("setBatches", payload.batches);
             resolve();
           })
           .catch((err) => {

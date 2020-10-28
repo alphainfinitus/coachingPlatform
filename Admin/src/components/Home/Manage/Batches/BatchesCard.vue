@@ -41,7 +41,7 @@
                 color="deep-purple accent-4"
                 prefix="Rs."
                 v-model="batchFee"
-                type="text"
+                type="number"
                 :rules="batchFeeRules"
                 label="Subscription Fee/Month"
                 class="mx-1"
@@ -80,7 +80,7 @@
                 at
                 <v-chip class="ma-2" label>
                   <v-icon left> mdi-tag-text mdi-18px </v-icon> Rs.
-                  {{ batch.fee }}
+                  {{ batch.fee }} / month
                 </v-chip>
               </span>
             </div>
@@ -127,8 +127,7 @@ export default {
     ],
     batchFeeRules: [
       (value) => !!value || "Required.",
-      (value) => value.length > 0 || "Please provide a valid number",
-      (value) => /^[0-9]{0,9}$/.test(value) || "Please provide a valid number",
+      (value) => value.length > 0 || "Please provide a valid amount",
     ],
     batches: {},
   }),
@@ -147,7 +146,7 @@ export default {
 
       const batchObj = {
         name: this.batchName.toLowerCase(),
-        fee: +this.batchFee,
+        fee: parseFloat(this.batchFee),
       };
 
       this.$set(this.batches, this.batchName.toLowerCase(), batchObj);
@@ -187,7 +186,6 @@ export default {
     fetchBatches() {
       // get batches from store
       const batches = this.$store.getters.batches;
-      console.log("batches", batches);
 
       //if not found in store
       if (Object.keys(batches).length === 0 && batches.constructor === Object) {
@@ -207,8 +205,9 @@ export default {
           });
       } else {
         // if found in store
-        this.batches = batches.batches;
+        this.batches = batches;
         this.setLoading(false);
+        console.log(batches);
       }
     },
   },

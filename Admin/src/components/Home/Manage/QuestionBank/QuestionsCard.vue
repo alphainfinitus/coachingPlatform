@@ -4,9 +4,13 @@
       {{ snackbarText }}
     </v-snackbar>
 
-    <v-card :loading="loading || superLoading" class="w-100 pb-4 px-1 px-md-4">
-      <!-- Actions -->
-      <h6 class="text-h6 pt-4">
+    <v-card
+      :loading="loading || superLoading"
+      :elevation="enableSelect ? 0 : 3"
+      class="w-100 pb-4 px-1 px-md-4"
+    >
+      <!-- Title -->
+      <h6 class="text-h6 pt-4" v-if="!enableSelect">
         <v-icon class="mr-1">mdi-chevron-right</v-icon> Fetch Questions:
       </h6>
 
@@ -19,7 +23,11 @@
         </v-row>
 
         <!-- Fetch Questions Row -->
-        <v-row justify="center" align="center">
+        <v-row
+          justify="center"
+          align="center"
+          :class="enableSelect ? 'mt-n2 mt-md-n7 mb-n4' : ''"
+        >
           <!-- All Questions Column -->
           <v-col cols="12" sm="12" md="6" class="d-flex">
             <v-btn
@@ -37,9 +45,9 @@
           </v-col>
 
           <!-- Show by folder select column -->
-          <v-col cols="12" sm="12" md="6" class="d-flex">
+          <v-col cols="12" sm="12" md="6" class="d-flex mt-n6 mt-md-0">
             <v-select
-              label="Or Select folder"
+              label="or Browse folder"
               class="text-capitalize mt-7"
               color="pink darken-1"
               v-model="selectedFolder"
@@ -52,16 +60,18 @@
           </v-col>
         </v-row>
 
-        <v-divider class="mb-4"></v-divider>
+        <v-divider class="mb-2"></v-divider>
 
         <!-- Display Questions Row -->
         <v-row justify="center" align="center" v-if="allQuestions.length > 0">
           <DisplayQuestions
-            :allQuestions="allQuestions"
             :superLoading="superLoading"
             @setSuperLoading="setLoading"
+            :enableSelect="enableSelect"
+            :allQuestions="allQuestions"
             @fetchQuestions="fetchQuestions"
             @removeQuestion="removeQuestion"
+            @questionsSelected="emitSelectedQuestions"
           />
         </v-row>
       </v-container>
@@ -74,7 +84,7 @@ import DisplayQuestions from "@/components/Home/Manage/QuestionBank/DisplayQuest
 
 export default {
   name: "QuestionsCard",
-  props: ["superLoading"],
+  props: ["superLoading", "enableSelect"],
   components: { DisplayQuestions },
   data: () => ({
     loading: true,
@@ -234,6 +244,9 @@ export default {
       //remove question from allQuestions array
       this.allQuestions.splice(arrayPos, 1);
       this.setLoading(false);
+    },
+    emitSelectedQuestions(selectedQuestions) {
+      this.$emit("questionsSelected", selectedQuestions);
     },
   },
   mounted() {

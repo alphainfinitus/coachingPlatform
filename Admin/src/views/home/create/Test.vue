@@ -11,10 +11,13 @@
         </h1>
       </v-row>
     </v-container>
+
+    <TestForm :superLoading="superLoading" @setSuperLoading="setSuperLoading" />
   </div>
 </template>
 
 <script>
+import TestForm from "@/components/Home/Create/Test/TestForm.vue";
 export default {
   name: "CreateTest",
   metaInfo: {
@@ -26,6 +29,9 @@ export default {
         content: "Create Test Page description lorem ipsum dolor sit amet.",
       },
     ],
+  },
+  components: {
+    TestForm,
   },
   props: ["testObj"],
   data: () => ({

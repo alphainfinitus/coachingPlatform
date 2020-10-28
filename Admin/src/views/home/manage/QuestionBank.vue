@@ -22,6 +22,7 @@
         <QuestionsCard
           :superLoading="superLoading"
           @setSuperLoading="setSuperLoading"
+          :enableSelect="false"
         />
       </v-row>
     </v-container>
