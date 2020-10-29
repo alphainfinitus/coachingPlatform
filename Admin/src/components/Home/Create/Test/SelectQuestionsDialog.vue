@@ -16,13 +16,13 @@
       </template>
       <v-card tile>
         <v-toolbar dense dark color="primary">
-          <v-btn icon dark @click="dialog = false">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
           <v-toolbar-title class="text-capitalize"
             >'{{ sectionName }}' Questions
           </v-toolbar-title>
           <v-spacer></v-spacer>
+          <v-btn text @click="dialog = false">
+            <v-icon class="mr-1">mdi-content-save</v-icon>Save
+          </v-btn>
         </v-toolbar>
         <QuestionsCard
           :superLoading="superLoading"

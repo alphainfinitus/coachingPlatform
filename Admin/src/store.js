@@ -327,6 +327,19 @@ export default new Vuex.Store({
           });
       });
     },
+    submitTest: (context, payload) => {
+      const ref = fire_store.collection("admins").doc(context.state.auth.uid).collection("tests").doc(payload.id);
+      return new Promise((resolve, reject) => {
+        ref
+          .set(payload)
+          .then(() => {
+            resolve();
+          })
+          .catch((error) => {
+            reject(error.code);
+          });
+      });
+    },
 
     // home/manage Actions
     getQuestionFolders: (context) => {
