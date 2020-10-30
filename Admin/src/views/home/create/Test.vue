@@ -11,8 +11,11 @@
         </h1>
       </v-row>
     </v-container>
-
-    <TestForm :superLoading="superLoading" @setSuperLoading="setSuperLoading" />
+    <TestForm
+      :superLoading="superLoading"
+      @setSuperLoading="setSuperLoading"
+      :testObj="testObj"
+    />
   </div>
 </template>
 

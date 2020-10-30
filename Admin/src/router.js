@@ -104,6 +104,14 @@ const routes = [
       checkAuthStatus(to, from, next);
     },
   },
+  {
+    path: "/manage/edit-tests",
+    name: "editTests",
+    component: () => import("./views/home/manage/EditTests.vue"),
+    beforeEnter: (to, from, next) => {
+      checkAuthStatus(to, from, next);
+    },
+  },
 ];
 
 const router = new VueRouter({

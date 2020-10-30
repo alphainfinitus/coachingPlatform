@@ -193,6 +193,7 @@
                     <v-btn
                       class="ml-md-1 ml-n1 mr-1"
                       @click="deleteQuestionModal(i)"
+                      :disabled="loading || superLoading"
                       small
                     >
                       <v-icon class="mr-1"
@@ -205,6 +206,7 @@
                         name: 'createQuestion',
                         params: { questionObj: question },
                       }"
+                      :disabled="loading || superLoading"
                       class="mx-1"
                       small
                     >

@@ -177,7 +177,7 @@
                       type="number"
                       min="0"
                       :rules="basicRules"
-                      label="Reward Points / Question"
+                      label="Punishment Points / Question"
                       class="mx-1"
                       :disabled="loading || superLoading"
                       outlined
@@ -415,7 +415,7 @@
                         <template v-slot:activator="{ on }">
                           <v-text-field
                             class="mx-4"
-                            v-model="startTime"
+                            v-model="startTimeText"
                             label="Start Time"
                             prepend-icon="mdi-timeline-clock"
                             :rules="basicRules"
@@ -491,7 +491,7 @@
                         <template v-slot:activator="{ on }">
                           <v-text-field
                             class="mx-4"
-                            v-model="endTime"
+                            v-model="endTimeText"
                             label="End Time"
                             prepend-icon="mdi-timeline-clock"
                             :rules="basicRules"
@@ -583,6 +583,28 @@ export default {
       get() {
         return this.endDate
           ? moment(this.endDate).format("dddd, MMMM Do YYYY")
+          : "";
+      },
+      set(newDateText) {
+        return newDateText;
+      },
+    },
+
+    startTimeText: {
+      get() {
+        return this.startTime
+          ? moment(this.startTime, ["HH:mm "]).format("hh:mm a")
+          : "";
+      },
+      set(newDateText) {
+        return newDateText;
+      },
+    },
+
+    endTimeText: {
+      get() {
+        return this.endTime
+          ? moment(this.endTime, ["HH:mm "]).format("hh:mm a")
           : "";
       },
       set(newDateText) {
@@ -778,7 +800,7 @@ export default {
     },
     folderSelected(value, sectionName) {
       this.$set(this.selectedQuestions, sectionName, { folderName: value });
-      this.selectedFolder[sectionName] = value;
+      this.$set(this.selectedFolder, sectionName, value);
     },
     selectQuestionsValid() {
       //run only when select Questions form is displayed
@@ -872,12 +894,50 @@ export default {
           this.setLoading(false);
         });
     },
+    fillTestForm() {
+      this.testName = this.testObj.testName;
+      this.testInstructions = this.testObj.testInstructions;
+      this.selectedBatches = this.testObj.selectedBatches;
+      this.rewardPoints = `${this.testObj.rewardPoints}`;
+      this.punishmentPoints = `${this.testObj.punishmentPoints}`;
+      this.sections = this.testObj.sections;
+      this.selectedBatches = this.testObj.selectedBatches;
+      this.selectedQuestions = this.testObj.selectedQuestions;
+      this.testDuration = `${this.testObj.testDuration}`;
+      this.startDate = moment(this.testObj.startDateTime.seconds * 1000)
+        .format()
+        .substr(0, 10);
+      this.startTime = moment(this.testObj.startDateTime.seconds * 1000).format(
+        "HH:mm"
+      );
+      this.endDate = moment(this.testObj.endDateTime.seconds * 1000)
+        .format()
+        .substr(0, 10);
+      this.endTime = moment(this.testObj.endDateTime.seconds * 1000).format(
+        "HH:mm"
+      );
+
+      //fill this.selectedFolder
+      for (var key of Object.keys(this.selectedQuestions)) {
+        if (!(this.selectedQuestions[key] instanceof Array)) {
+          // if folder Selected
+          this.$set(
+            this.selectedFolder,
+            key,
+            this.selectedQuestions[key].folderName
+          );
+        }
+      }
+    },
   },
   mounted() {
     //to check if user has created any questions before creating a test
     this.fetchSingleQuestion();
     this.fetchBatches();
     this.fetchFolders();
+    if (this.testObj) {
+      this.fillTestForm();
+    }
   },
 };
 </script>

@@ -328,7 +328,11 @@ export default new Vuex.Store({
       });
     },
     submitTest: (context, payload) => {
-      const ref = fire_store.collection("admins").doc(context.state.auth.uid).collection("tests").doc(payload.id);
+      const ref = fire_store
+        .collection("admins")
+        .doc(context.state.auth.uid)
+        .collection("tests")
+        .doc(payload.id);
       return new Promise((resolve, reject) => {
         ref
           .set(payload)
@@ -548,6 +552,76 @@ export default new Vuex.Store({
           })
           .catch((err) => {
             reject(err);
+          });
+      });
+    },
+    getAllTests: (context, payload) => {
+      var ref = "";
+
+      switch (payload.requestType) {
+        case "prev":
+          ref = fire_store
+            .collection("admins")
+            .doc(context.state.auth.uid)
+            .collection("tests")
+            .orderBy("id", "desc")
+            .endBefore(payload.doc)
+            .limit(10);
+          break;
+        case "next":
+          ref = fire_store
+            .collection("admins")
+            .doc(context.state.auth.uid)
+            .collection("tests")
+            .orderBy("id", "desc")
+            .startAfter(payload.doc)
+            .limit(10);
+
+          break;
+        default:
+          ref = fire_store
+            .collection("admins")
+            .doc(context.state.auth.uid)
+            .collection("tests")
+            .orderBy("id", "desc")
+            .limit(10);
+      }
+
+      return new Promise((resolve, reject) => {
+        ref
+          .get()
+          .then((snapshot) => {
+            const resData = snapshot.docs.map((doc) => doc.data());
+            const res = {
+              data: resData,
+              firstAndLastVisible: {
+                firstVisible: snapshot.docs[0],
+                lastVisible: snapshot.docs[snapshot.docs.length - 1],
+              },
+            };
+            resolve(res);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
+    deleteTest: (context, payload) => {
+      const ref = fire_store
+        .collection("admins")
+        .doc(context.state.auth.uid)
+        .collection("tests")
+        .doc(payload);
+
+      return new Promise((resolve, reject) => {
+        ref
+          .delete()
+          .then(() => {
+            resolve();
+          })
+          .catch((error) => {
+            console.log(error);
+            reject(error.code);
           });
       });
     },
