@@ -51,6 +51,7 @@ export default new Vuex.Store({
       state.auth = null;
       state.userData = {};
       state.batches = {};
+      state.questionFolders = {};
       sessionStorage.clear();
     },
 
@@ -66,13 +67,13 @@ export default new Vuex.Store({
     setUserEmail: (state, payload) => {
       state.userData.email = payload;
     },
-    setQuestionFolders: (state, payload) => {
-      state.questionFolders = payload;
-    },
 
     // home/manage Mutations
     setBatches: (state, payload) => {
       state.batches = payload;
+    },
+    setQuestionFolders: (state, payload) => {
+      state.questionFolders = payload;
     },
   },
   actions: {

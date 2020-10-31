@@ -61,9 +61,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.w-100 {
-  width: 100%;
-}
-</style>
