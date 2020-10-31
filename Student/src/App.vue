@@ -27,4 +27,8 @@ export default {
 .montserrat-font {
   font-family: "Montserrat", sans-serif !important;
 }
+
+.w-100 {
+  width: 100%;
+}
 </style>

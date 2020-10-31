@@ -8,7 +8,7 @@ import {
   //   fire_auth_provider,
   //   fire_functions,
   fire_store,
-  //   fire_storage,
+  fire_storage,
 } from "@/firebase/init";
 
 Vue.use(Vuex);
@@ -21,27 +21,44 @@ export default new Vuex.Store({
   ],
   state: {
     auth: null,
-    userdata: {},
+    userData: {},
   },
   getters: {
     auth: (state) => {
       return state.auth;
     },
+    userData: (state) => {
+      return state.userData;
+    },
   },
   mutations: {
+    // Auth Mutations
     login: (state, payload) => {
       state.auth = payload;
     },
     setUserData: (state, payload) => {
-      state.userdata = payload;
+      state.userData = payload;
     },
     logout: (state) => {
       state.auth = null;
-      state.userdata = {};
+      state.userData = {};
       sessionStorage.clear();
+    },
+
+    // Profile Mutations
+    setUserDataPhotoURL: (state, payload) => {
+      state.userData.photoURL = payload;
+    },
+    submitProfile: (state, payload) => {
+      state.userData.fullName = payload.fullName;
+      state.userData.phone = payload.phone;
+    },
+    setUserEmail: (state, payload) => {
+      state.userData.email = payload;
     },
   },
   actions: {
+    // Auth Actions
     register: (context, payload) => {
       return new Promise((resolve, reject) => {
         fire_auth
@@ -57,7 +74,7 @@ export default new Vuex.Store({
                 uid: cred.user.uid,
               };
               fire_store
-                .collection("users")
+                .collection("students")
                 .doc(cred.user.uid)
                 .set(userData);
 
@@ -66,7 +83,7 @@ export default new Vuex.Store({
               //send verification email:
               fire_auth.currentUser
                 .sendEmailVerification()
-                .then(function() {
+                .then(() => {
                   // Email sent.
                   resolve();
                 })
@@ -109,7 +126,7 @@ export default new Vuex.Store({
       });
     },
     setUserData: (context) => {
-      const ref = fire_store.collection("users").doc(context.state.auth.uid);
+      const ref = fire_store.collection("students").doc(context.state.auth.uid);
 
       return new Promise((resolve, reject) => {
         ref
@@ -131,6 +148,90 @@ export default new Vuex.Store({
           .then(() => {
             context.commit("logout");
             resolve();
+          })
+          .catch((error) => {
+            reject(error.code);
+          });
+      });
+    },
+    resetPassword: (context, payload) => {
+      return new Promise((resolve, reject) => {
+        fire_auth
+          .sendPasswordResetEmail(payload)
+          .then(() => {
+            resolve();
+          })
+          .catch((error) => {
+            reject(error.code);
+          });
+      });
+    },
+
+    // Profile Actions
+    setProfilePhoto: (context, payload) => {
+      const docRef = fire_store
+        .collection("students")
+        .doc(context.state.auth.uid);
+
+      //students/[uid]/dp.jpeg
+      const storageRef = fire_storage
+        .ref()
+        .child(`students/${context.state.auth.uid}/dp.jpeg`);
+
+      return new Promise((resolve, reject) => {
+        storageRef
+          .putString(payload.image_data, "data_url")
+          .then((snapshot) => {
+            snapshot.ref.getDownloadURL().then((url) => {
+              docRef
+                .update({ photoURL: url })
+                .then(() => {
+                  context.commit("setUserDataPhotoURL", url);
+                  resolve();
+                })
+                .catch((err) => {
+                  console.log(err);
+                  reject(err);
+                });
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
+          });
+      });
+    },
+    submitProfile: (context, payload) => {
+      const ref = fire_store.collection("students").doc(context.state.auth.uid);
+      return new Promise((resolve, reject) => {
+        ref
+          .update(payload)
+          .then(() => {
+            context.commit("submitProfile", payload);
+            resolve();
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
+    changeEmail: (context, payload) => {
+      var user = fire_auth.currentUser;
+      const ref = fire_store.collection("students").doc(context.state.auth.uid);
+      return new Promise((resolve, reject) => {
+        user
+          .updateEmail(payload)
+          .then(function() {
+            ref
+              .update({ email: payload })
+              .then(() => {
+                user.sendEmailVerification();
+                context.commit("setUserEmail", payload);
+                resolve();
+              })
+              .catch((err) => {
+                reject(err);
+              });
           })
           .catch((error) => {
             reject(error.code);

@@ -155,6 +155,7 @@ export default {
         fullName: this.fullName,
         password: this.password,
         phone: parseInt(this.phone),
+        photoURL: null,
       };
       this.$store
         .dispatch("register", payload)
@@ -174,6 +175,8 @@ export default {
             this.register_error = error;
           }
           this.password = "";
+          this.password_confirm = "";
+
           this.setLoading(false);
         });
     },

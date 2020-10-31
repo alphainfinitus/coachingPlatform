@@ -33,7 +33,8 @@ export default {
       {
         vmid: "description",
         name: "description",
-        content: "Register Page description lorem ipsum dolor sit amet.",
+        content:
+          "Student Register Page description lorem ipsum dolor sit amet.",
       },
     ],
   },
