@@ -37,7 +37,9 @@
       <v-col cols="12" sm="12" class="d-flex justify-center headline">
         <v-btn
           target="_blank"
-          :href="'https://student.platform.com/' + userData.username"
+          :href="
+            'https://student.platform.com/institution/' + userData.username
+          "
         >
           <v-icon class="mr-2">mdi-earth-arrow-right</v-icon>
           {{ userData.fullName }}

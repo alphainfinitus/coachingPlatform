@@ -28,7 +28,7 @@
                 v-model="fullName"
                 type="text"
                 :rules="fullNameRules"
-                label="Organisation Name"
+                label="Institution Name"
                 :disabled="loading || superLoading"
                 outlined
                 required
@@ -50,7 +50,7 @@
                 v-model="username"
                 type="text"
                 :rules="usernameRules"
-                label="Username (for organisation link)"
+                label="Institution Code (for organisation link)"
                 :disabled="loading || superLoading"
                 outlined
                 required
@@ -63,7 +63,7 @@
                       </v-btn>
                     </template>
                     <span
-                      >Example: student.coachingplatform.com/{{
+                      >Example: student.coachingplatform.com/institution/{{
                         !username ? "username" : lowerCaseUserName
                       }}</span
                     >
