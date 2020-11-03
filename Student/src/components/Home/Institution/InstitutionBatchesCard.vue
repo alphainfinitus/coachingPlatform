@@ -173,6 +173,7 @@ export default {
         .dispatch("joinBatch", payload)
         .then(() => {
           this.snackbarText = "Batch joined successfully 🎉";
+          this.$router.push("/home");
         })
         .catch(() => {
           this.error = "Error in joining batch, please try again :(";

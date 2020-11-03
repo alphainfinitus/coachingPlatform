@@ -48,9 +48,9 @@ export default {
 
 <style>
 #institutionDataCard .bg {
-  background-image: url("../../../assets/svg/undraw_road_to_knowledge_m8s0.svg");
+  background-image: url("../../../assets/svg/undraw_Meeting_re_i53h.svg");
   background-size: contain;
   height: 30vh;
-  background-position: 41vw bottom;
+  background-position: 46vw bottom;
 }
 </style>
