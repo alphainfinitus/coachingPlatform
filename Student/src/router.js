@@ -68,6 +68,21 @@ const routes = [
       checkAuthStatus(to, from, next);
     },
   },
+  {
+    path: "/institution/:institutionCode",
+    name: "Institution",
+    props: true,
+    component: () => import("./views/home/Institution.vue"),
+    beforeEnter: (to, from, next) => {
+      checkAuthStatus(to, from, next);
+    },
+  },
+  // 404
+  {
+    path: "*",
+    name: "NotFound404",
+    component: () => import("./views/NotFound404.vue"),
+  },
 ];
 
 const router = new VueRouter({

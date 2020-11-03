@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 
 import {
-  //   firestore_fieldvalue,
+  // firestore_fieldvalue,
   fire_auth,
   //   fire_auth_provider,
   //   fire_functions,
@@ -56,6 +56,12 @@ export default new Vuex.Store({
     setUserEmail: (state, payload) => {
       state.userData.email = payload;
     },
+
+    // Institution Mutations
+    joinBatch: (state, payload) => {
+      state.userData.subscriptions = payload.subscriptions;
+      state.userData.subscriptionsData = payload.subscriptionsData;
+    },
   },
   actions: {
     // Auth Actions
@@ -72,6 +78,8 @@ export default new Vuex.Store({
                 fullName: payload.fullName,
                 phone: payload.phone,
                 uid: cred.user.uid,
+                subscriptions: [],
+                subscriptionsData: {},
               };
               fire_store
                 .collection("students")
@@ -235,6 +243,79 @@ export default new Vuex.Store({
           })
           .catch((error) => {
             reject(error.code);
+          });
+      });
+    },
+    checkUsernameExists: (context, payload) => {
+      const ref = fire_store
+        .collection("admins")
+        .where("username", "==", payload)
+        .limit(1);
+
+      return new Promise((resolve, reject) => {
+        ref
+          .get()
+          .then((querySnapshot) => {
+            resolve(!querySnapshot.empty);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
+
+    // Institute Actions
+    fetchInstitutionByUsername: (context, payload) => {
+      const ref = fire_store
+        .collection("admins")
+        .where("username", "==", payload)
+        .limit(1);
+
+      return new Promise((resolve, reject) => {
+        ref
+          .get()
+          .then((snapshot) => {
+            if (!snapshot.empty) {
+              const resData = snapshot.docs.map((doc) => doc.data());
+              resolve(resData[0]);
+            } else {
+              resolve(false);
+            }
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
+    fetchInstitutionBatches: (context, payload) => {
+      const ref = fire_store
+        .collection("admins")
+        .doc(payload)
+        .collection("meta")
+        .doc("batches");
+
+      return new Promise((resolve, reject) => {
+        ref
+          .get()
+          .then((doc) => {
+            resolve(doc.data());
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
+    joinBatch: (context, payload) => {
+      const ref = fire_store.collection("students").doc(context.state.auth.uid);
+      return new Promise((resolve, reject) => {
+        ref
+          .update(payload)
+          .then(() => {
+            context.commit("joinBatch", payload);
+            resolve();
+          })
+          .catch((err) => {
+            reject(err);
           });
       });
     },

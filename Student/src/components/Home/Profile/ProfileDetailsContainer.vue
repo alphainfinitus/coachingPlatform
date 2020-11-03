@@ -108,6 +108,7 @@ export default {
       const payload = {
         fullName: this.fullName,
         phone: parseInt(this.phone),
+        subscriptions: [],
       };
 
       this.$store
