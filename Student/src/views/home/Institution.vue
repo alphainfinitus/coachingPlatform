@@ -1,6 +1,6 @@
 <template>
   <div id="institution">
-    <v-container>
+    <v-container v-if="institutionData">
       <v-row justify="center">
         <v-col cols="12" sm="12">
           <InstitutionDataCard
@@ -17,6 +17,13 @@
             @setSuperLoading="setSuperLoading"
             :institutionData="institutionData"
           />
+        </v-col>
+      </v-row>
+    </v-container>
+    <v-container v-else>
+      <v-row justify="center">
+        <v-col cols="12" sm="12">
+          <v-alert v-if="error" type="error">{{ error }}</v-alert>
         </v-col>
       </v-row>
     </v-container>
@@ -49,7 +56,7 @@ export default {
   data: () => ({
     superLoading: true,
     error: "",
-    institutionData: {},
+    institutionData: null,
   }),
   methods: {
     setSuperLoading(value) {
@@ -62,7 +69,11 @@ export default {
       this.$store
         .dispatch("fetchInstitutionByUsername", this.institutionCode)
         .then((res) => {
-          this.institutionData = res;
+          if (!res) {
+            this.error = "Invalid link, please check with a diffrent one :(";
+          } else {
+            this.institutionData = res;
+          }
         })
         .catch(() => {
           this.error =

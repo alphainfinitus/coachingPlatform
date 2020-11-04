@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="#institutionBatchesCard">
     <!-- Snackbar to show success -->
     <v-snackbar v-model="showSnackbar">
       {{ snackbarText }}
@@ -65,7 +65,7 @@
                       {{ batch.name }}
                     </v-list-item-title>
                     <v-list-item-subtitle>
-                      Rs. {{ batch.fee }}/month
+                      {{ batch.fee != 0 ? `Rs. ${batch.fee}/month` : "Free" }}
                     </v-list-item-subtitle>
                   </v-list-item-content>
                   <v-list-item-action>
