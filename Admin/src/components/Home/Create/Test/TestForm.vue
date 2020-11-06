@@ -866,6 +866,7 @@ export default {
 
       const payload = {
         id: `${unix_timestamp_id}`,
+        institutionUID: "",
         testName: this.testName,
         testInstructions: this.testInstructions,
         selectedBatches: this.selectedBatches,

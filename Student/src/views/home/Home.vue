@@ -1,31 +1,50 @@
 <template>
-  <div id="home" class="fill-height d-flex">
-    <!-- if there is no subscription -->
-    <v-container
-      v-if="userData.subscriptions.length < 1"
-      class="align-self-center"
-    >
+  <div id="home" class="fill-height d-flex grey lighten-3">
+    <!-- if there is no subscription: add Institute form -->
+    <v-container v-if="subLength < 1" class="align-self-center">
       <v-row class="mt-n12">
         <v-col cols="12" sm="12">
           Please enter the code provided by the institution:
         </v-col>
 
         <v-col cols="12" sm="12">
-          <AddInstitutionForm />
+          <AddInstitutionForm
+            :superLoading="superLoading"
+            @setSuperLoading="setSuperLoading"
+          />
         </v-col>
       </v-row>
     </v-container>
 
-    <v-container v-else>
-      <h1 class="text-h3">
-        You have joined {{ userData.subscriptions.length }} batch(es)
-      </h1>
+    <!-- if there is subscription -->
+    <v-container v-else class="align-self-start">
+      <!-- Active Tests -->
+      <v-row>
+        <v-col cols="12" sm="12" class="pa-1 pa-md-3">
+          <ActiveTestsCard
+            :superLoading="superLoading"
+            @setSuperLoading="setSuperLoading"
+          />
+        </v-col>
+      </v-row>
+
+      <!-- Subscribed Batches -->
+      <v-row>
+        <v-col cols="12" sm="12" class="pa-1 pa-md-3">
+          <YourSubscriptionsCard
+            :superLoading="superLoading"
+            @setSuperLoading="setSuperLoading"
+          />
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
 
 <script>
 import AddInstitutionForm from "@/components/Home/Home/AddInstitutionForm.vue";
+import ActiveTestsCard from "@/components/Home/Home/ActiveTestsCard.vue";
+import YourSubscriptionsCard from "@/components/Home/Home/YourSubscriptionsCard.vue";
 
 export default {
   name: "Home",
@@ -41,16 +60,33 @@ export default {
   },
   components: {
     AddInstitutionForm,
+    ActiveTestsCard,
+    YourSubscriptionsCard,
+  },
+  computed: {
+    subLength() {
+      if (
+        Object.keys(this.$store.getters.userData).length === 0 &&
+        this.$store.getters.userData.constructor === Object
+      ) {
+        return 0;
+      }
+      return this.$store.getters.userData.length;
+    },
+    userData() {
+      return this.$store.getters.userData;
+    },
   },
   data: () => ({
-    loading: true,
-    userData: {},
+    superLoading: true,
   }),
-  created() {
-    this.userData = this.$store.getters.userData;
+  methods: {
+    setSuperLoading(value) {
+      this.superLoading = value;
+    },
   },
   mounted() {
-    this.loading = false;
+    this.setSuperLoading(false);
   },
 };
 </script>

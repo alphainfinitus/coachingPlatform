@@ -77,6 +77,15 @@ const routes = [
       checkAuthStatus(to, from, next);
     },
   },
+  {
+    path: "/test",
+    name: "Test",
+    props: true,
+    component: () => import("./views/home/Test.vue"),
+    beforeEnter: (to, from, next) => {
+      checkAuthStatus(to, from, next);
+    },
+  },
   // 404
   {
     path: "*",

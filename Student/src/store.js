@@ -22,6 +22,7 @@ export default new Vuex.Store({
   state: {
     auth: null,
     userData: {},
+    activeTests: {},
   },
   getters: {
     auth: (state) => {
@@ -29,6 +30,9 @@ export default new Vuex.Store({
     },
     userData: (state) => {
       return state.userData;
+    },
+    activeTests: (state) => {
+      return state.activeTests;
     },
   },
   mutations: {
@@ -42,25 +46,25 @@ export default new Vuex.Store({
     logout: (state) => {
       state.auth = null;
       state.userData = {};
+      state.activeTests = {};
       sessionStorage.clear();
     },
 
     // Profile Mutations
     setUserDataPhotoURL: (state, payload) => {
-      state.userData.photoURL = payload;
+      Vue.set(state.userData, "photoURL", payload);
     },
     submitProfile: (state, payload) => {
-      state.userData.fullName = payload.fullName;
-      state.userData.phone = payload.phone;
+      Vue.set(state.userData, "fullName", payload.fullName);
+      Vue.set(state.userData, "phone", payload.phone);
     },
     setUserEmail: (state, payload) => {
-      state.userData.email = payload;
+      Vue.set(state.userData, "email", payload);
     },
 
-    // Institution Mutations
-    joinBatch: (state, payload) => {
-      state.userData.subscriptions = payload.subscriptions;
-      state.userData.subscriptionsData = payload.subscriptionsData;
+    // Home Mutations
+    setActiveTests: (state, payload) => {
+      Vue.set(state.activeTests, payload.institutionUID, payload.tests);
     },
   },
   actions: {
@@ -264,7 +268,7 @@ export default new Vuex.Store({
       });
     },
 
-    // Institute Actions
+    // /institute Actions
     fetchInstitutionByUsername: (context, payload) => {
       const ref = fire_store
         .collection("admins")
@@ -311,12 +315,45 @@ export default new Vuex.Store({
         ref
           .update(payload)
           .then(() => {
-            context.commit("joinBatch", payload);
+            context.dispatch("setUserData");
             resolve();
           })
           .catch((err) => {
             reject(err);
           });
+      });
+    },
+
+    // /Home Actions
+    fetchActiveTests: (context, payload) => {
+      return new Promise((resolve) => {
+        for (let key of Object.keys(payload)) {
+          fire_store
+            .collection("admins")
+            .doc(key)
+            .collection("tests")
+            .where(
+              "selectedBatches",
+              "array-contains-any",
+              payload[key].batchNames
+            )
+            .where("endDateTime", ">", new Date())
+            .onSnapshot((snapshot) => {
+              console.log("snapshot recieved");
+              var institutionTestsObj = {
+                institutionUID: key,
+                tests: [],
+              };
+
+              if (!snapshot.empty) {
+                snapshot.docs.forEach((doc) => {
+                  institutionTestsObj.tests.push(doc.data());
+                });
+              }
+              context.commit("setActiveTests", institutionTestsObj);
+            });
+        }
+        resolve();
       });
     },
   },
