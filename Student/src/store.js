@@ -339,7 +339,6 @@ export default new Vuex.Store({
             )
             .where("endDateTime", ">", new Date())
             .onSnapshot((snapshot) => {
-              console.log("snapshot recieved");
               var institutionTestsObj = {
                 institutionUID: key,
                 tests: [],

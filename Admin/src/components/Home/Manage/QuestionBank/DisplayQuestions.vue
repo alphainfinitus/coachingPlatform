@@ -177,54 +177,27 @@
               @change="emitSelectedQuestions"
             ></v-checkbox>
             <v-card
-              color="pink lighten-5"
               class="ma-1 w-100"
+              color="grey darken-4"
+              dark
               outlined
               elevation="0"
+              :disabled="loading || superLoading"
               @click="openQuestionModal(i)"
             >
               <!-- ID and Action Buttons -->
-              <v-card-subtitle :class="enableSelect ? 'mb-n5' : ''">
-                <span class="d-md-flex">
-                  <b>ID:</b>
-                  {{ question.id }}
-                  <v-spacer></v-spacer>
-                  <div class="mt-2 mt-md-0" v-if="!enableSelect">
-                    <v-btn
-                      class="ml-md-1 ml-n1 mr-1"
-                      @click="deleteQuestionModal(i)"
-                      :disabled="loading || superLoading"
-                      small
-                    >
-                      <v-icon class="mr-1"
-                        >mdi-trash-can-outline mdi-18px</v-icon
-                      >
-                      Delete
-                    </v-btn>
-                    <v-btn
-                      :to="{
-                        name: 'createQuestion',
-                        params: { questionObj: question },
-                      }"
-                      :disabled="loading || superLoading"
-                      class="mx-1"
-                      small
-                    >
-                      <v-icon class="mr-1"
-                        >mdi-square-edit-outline mdi-18px</v-icon
-                      >
-                      Edit
-                    </v-btn>
-                  </div>
-                </span>
+              <v-card-subtitle>
+                <b class="pink--text mr-1">ID:</b>
+                {{ question.id }}
               </v-card-subtitle>
 
+              <v-divider class="mb-3"></v-divider>
+
               <!-- Question text-->
-              <v-card-subtitle
-                :class="enableSelect ? 'mt-5 pt-0 pb-1' : 'pt-0 pb-1'"
-              >
+              <v-card-subtitle class="mt-5 pt-0 pb-1 pink--text">
                 Question:
               </v-card-subtitle>
+
               <v-card-text class="text-h6 ml-1">
                 <span v-html="question.question"></span>
               </v-card-text>
@@ -232,14 +205,48 @@
               <!-- Question Type and Folder -->
               <v-card-subtitle class="mt-n6">
                 <span class="d-md-flex text-capitalize">
-                  <b class="mr-1"> Folder:</b>
-                  {{ question.folder ? `'${question.folder}'` : "None" }}
+                  <v-chip small class="ma-1">
+                    <b class="mr-1 pink--text"> Folder:</b>
+                    {{ question.folder ? `'${question.folder}'` : "None" }}
+                  </v-chip>
 
-                  <b class="mr-1 ml-2"> Type:</b>
-                  {{ question.isSubjective ? "Subjective" : "Objective" }}
+                  <v-chip small class="ma-1">
+                    <b class="mr-1 ml-2 pink--text"> Type:</b>
+                    {{ question.isSubjective ? "Subjective" : "Objective" }}
+                  </v-chip>
+
                   <v-spacer></v-spacer>
                 </span>
               </v-card-subtitle>
+
+              <v-divider v-if="!enableSelect" class="my-2"></v-divider>
+
+              <!-- Delete and Edit Buttons -->
+              <v-card-actions v-if="!enableSelect">
+                <v-spacer></v-spacer>
+                <v-btn
+                  class="ml-md-1 ml-n1 mr-1"
+                  color="pink lighten-1"
+                  @click="deleteQuestionModal(i)"
+                  :disabled="loading || superLoading"
+                  outlined
+                >
+                  <v-icon class="mr-1">mdi-trash-can-outline mdi-18px</v-icon>
+                  Delete
+                </v-btn>
+                <v-btn
+                  :to="{
+                    name: 'createQuestion',
+                    params: { questionObj: question },
+                  }"
+                  :disabled="loading || superLoading"
+                  color="pink lighten-1"
+                  class="mx-1"
+                >
+                  <v-icon class="mr-1">mdi-square-edit-outline mdi-18px</v-icon>
+                  Edit
+                </v-btn>
+              </v-card-actions>
             </v-card>
           </div>
         </v-col>

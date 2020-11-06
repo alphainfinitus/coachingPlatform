@@ -47,7 +47,7 @@
       <!-- Title -->
       <h6 class="text-h6 pt-4 d-flex align-center">
         <v-icon class="mr-1">mdi-chevron-right</v-icon> Tests (or
-        <v-btn class="mx-2" to="/create/test" dark small>
+        <v-btn color="pink" class="mx-2" to="/create/test" dark small>
           <v-icon class="mr-1">mdi-timetable mdi-18px</v-icon> Create Test </v-btn
         >) :
       </h6>
@@ -61,80 +61,80 @@
         </v-row>
 
         <!-- Display Tests Row -->
-        <v-row align="center" no-gutters>
+        <v-row align="center">
           <v-col
             cols="12"
             sm="12"
-            lg="6"
+            md="6"
             v-for="(test, i) in allTests"
             :key="i"
           >
-            <div class="d-flex">
-              <v-card
-                color="pink lighten-5"
-                class="ma-1 w-100"
-                outlined
-                elevation="0"
-              >
-                <!-- ID and Action Buttons -->
-                <v-card-subtitle>
-                  <span class="d-md-flex">
-                    <b>ID:</b>
-                    {{ test.id }}
-                    <v-spacer></v-spacer>
-                    <div class="mt-2 mt-md-n1">
-                      <v-btn
-                        class="ml-md-1 ml-n1 mr-1"
-                        @click="deleteTestModal(i)"
-                        :disabled="loading || superLoading"
-                        small
-                      >
-                        <v-icon class="mr-1"
-                          >mdi-trash-can-outline mdi-18px</v-icon
-                        >
-                        Delete
-                      </v-btn>
-                      <v-btn
-                        :to="{
-                          name: 'createTest',
-                          params: { testObj: test },
-                        }"
-                        class="mx-1"
-                        :disabled="loading || superLoading"
-                        small
-                      >
-                        <v-icon class="mr-1"
-                          >mdi-square-edit-outline mdi-18px</v-icon
-                        >
-                        Edit
-                      </v-btn>
-                    </div>
-                  </span>
-                </v-card-subtitle>
+            <v-card
+              class="pa-0 pa-md-2"
+              :disabled="loading || superLoading"
+              color="grey darken-4"
+              dark
+            >
+              <!-- Test Name and Duration -->
+              <v-card-title class="my-n2">
+                <span class="text-capitalize">
+                  {{ test.testName }}
+                </span>
+              </v-card-title>
 
-                <!-- Test name -->
-                <v-card-subtitle class="pt-0 pb-1 mb-3">
-                  <b>Test Name:</b> {{ test.testName }}
-                </v-card-subtitle>
+              <v-divider></v-divider>
 
-                <!-- Test Batches -->
-                <v-card-subtitle class="mt-n6">
-                  <span class="d-md-flex align-center text-capitalize">
-                    <b class="mr-1"> Batches:</b>
-                    <v-chip
-                      v-for="(batch, i) in test.selectedBatches"
-                      class="ma-2 text-capitalize"
-                      color="pink lighten-3"
-                      :key="`chip_${i}`"
-                      small
-                    >
-                      {{ batch }}
-                    </v-chip>
-                    <v-spacer></v-spacer>
-                  </span>
-                </v-card-subtitle>
-              </v-card>
-            </div>
+              <v-card-subtitle class="text-capitalize">
+                <b>ID:</b> {{ test.id }}
+              </v-card-subtitle>
+              <v-card-text>
+                <span class="d-flex align-center">
+                  <v-icon color="pink lighten-2">mdi-calendar mdi-18px</v-icon>
+                  <b class="mx-1">Starts at :</b>
+                  {{ dateTimeText(test.startDateTime.seconds * 1000) }}
+                </span>
+                <span class="d-flex align-center">
+                  <v-icon color="pink lighten-2">mdi-calendar mdi-18px</v-icon>
+                  <b class="mx-1">Ends at :</b>
+                  {{ dateTimeText(test.endDateTime.seconds * 1000) }}
+                </span>
+                <span class="d-flex align-center text-subtitle-2">
+                  <v-icon color="pink lighten-2">mdi-clock mdi-18px</v-icon>
+                  <b class="mx-1">Duration :</b>
+                  {{ test.testDuration }} min
+                </span>
+              </v-card-text>
+
+              <v-divider class="my-2"></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  class="ml-md-1 ml-n1 mr-1"
+                  color="pink lighten-1"
+                  outlined
+                  @click="deleteTestModal(i)"
+                  :disabled="loading || superLoading"
+                  dark
+                >
+                  <v-icon class="mr-1">mdi-trash-can-outline mdi-18px</v-icon>
+                  Delete
+                </v-btn>
+                <v-btn
+                  :to="{
+                    name: 'createTest',
+                    params: { testObj: test },
+                  }"
+                  class="mx-1"
+                  color="pink lighten-1"
+                  :disabled="loading || superLoading"
+                  dark
+                >
+                  <v-icon class="mr-1">mdi-square-edit-outline mdi-18px</v-icon>
+                  Edit
+                </v-btn>
+              </v-card-actions>
+            </v-card>
           </v-col>
         </v-row>
 
@@ -168,6 +168,8 @@
 </template>
 
 <script>
+const moment = require("moment");
+
 export default {
   name: "TestsCard",
   props: ["superLoading"],
@@ -238,6 +240,9 @@ export default {
           this.snackbar = true;
           this.setLoading(false);
         });
+    },
+    dateTimeText(timestamp) {
+      return moment(timestamp).format("hh:mm a, Do MMM");
     },
     deleteTestModal(index) {
       this.selectedTest = this.allTests[index];
