@@ -57,15 +57,15 @@ export default new Vuex.Store({
 
     // Profile Mutations
     setUserDataPhotoURL: (state, payload) => {
-      state.userData.photoURL = payload;
+      Vue.set(state.userData, "photoURL", payload);
     },
     setUserDataOrganisationDetails: (state, payload) => {
-      state.userData.fullName = payload.fullName;
-      state.userData.phone = payload.phone;
-      state.userData.username = payload.username;
+      Vue.set(state.userData, "fullName", payload.fullName);
+      Vue.set(state.userData, "phone", payload.phone);
+      Vue.set(state.userData, "username", payload.username);
     },
     setUserEmail: (state, payload) => {
-      state.userData.email = payload;
+      Vue.set(state.userData, "email", payload);
     },
 
     // home/manage Mutations
@@ -329,6 +329,10 @@ export default new Vuex.Store({
       });
     },
     submitTest: (context, payload) => {
+      var payloadWithUID = payload;
+      payloadWithUID.institutionUID = context.state.auth.uid;
+      payloadWithUID.institutionName = context.state.userData.fullName;
+
       const ref = fire_store
         .collection("admins")
         .doc(context.state.auth.uid)
@@ -336,7 +340,7 @@ export default new Vuex.Store({
         .doc(payload.id);
       return new Promise((resolve, reject) => {
         ref
-          .set(payload)
+          .set(payloadWithUID)
           .then(() => {
             resolve();
           })
