@@ -18,8 +18,8 @@
               <v-card
                 class="pa-0 pa-md-2"
                 @click="gotoTest(test)"
+                :color="getRandomGradient()"
                 :disabled="loading || superLoading"
-                :color="getRandomColor()"
                 dark
               >
                 <!-- Test Name and Duration -->
@@ -75,17 +75,23 @@ export default {
   data: () => ({
     loading: false,
     error: "",
-    colors: ["red", "orange", "blue", "teal", "pink", "purple", "green"],
+    gradientClasses: [
+      "amethyst",
+      "day-tripper",
+      "endless-river",
+      "ohhappiness",
+      "purpink",
+    ],
   }),
   methods: {
     setLoading(value) {
       this.loading = value;
       this.$emit("setSuperLoading", value);
     },
-    getRandomColor() {
-      const colors = this.colors;
-      const randomColor = Math.floor(Math.random() * colors.length);
-      return colors[randomColor];
+    getRandomGradient() {
+      const gradientClasses = this.gradientClasses;
+      const randomClass = Math.floor(Math.random() * gradientClasses.length);
+      return gradientClasses[randomClass];
     },
     endDateTimeText(timestamp) {
       return moment(timestamp).format("hh:mm a, Do MMM");
@@ -138,3 +144,77 @@ export default {
   },
 };
 </script>
+
+<style>
+/* from uiGradients.com */
+
+#activeTestsCard .amethyst {
+  background: #9d50bb; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #6e48aa,
+    #9d50bb
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #6e48aa,
+    #9d50bb
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#activeTestsCard .day-tripper {
+  background: #f857a6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #ff5858,
+    #f857a6
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #ff5858,
+    #f857a6
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#activeTestsCard .endless-river {
+  background: #43cea2; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #185a9d,
+    #43cea2
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #185a9d,
+    #43cea2
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#activeTestsCard .ohhappiness {
+  background: #00b09b; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #96c93d,
+    #00b09b
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #96c93d,
+    #00b09b
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#activeTestsCard .purpink {
+  background: #7f00ff; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #e100ff,
+    #7f00ff
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #e100ff,
+    #7f00ff
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+</style>
