@@ -77,23 +77,26 @@ export default {
     ],
   }),
   mounted() {
-    const heroContainer = document.getElementById("hero_header");
-    this.vantaEffect = Vanta({
-      el: "#hero_header",
-      THREE,
-      mouseControls: true,
-      touchControls: true,
-      gyroControls: false,
-      minHeight: heroContainer.clientHeight,
-      minWidth: heroContainer.clientWidth,
-      scale: 1.0,
-      scaleMobile: 1.0,
-      backgroundColor: 0x4a96f2,
-      color1: 0xf739cc,
-      color2: 0xffffff,
-      separation: 60.0,
-      quantity: 4.0,
-    });
+    if (!this.$vuetify.breakpoint.smAndDown) {
+      // pc
+      const heroContainer = document.getElementById("hero_header");
+      this.vantaEffect = Vanta({
+        el: "#hero_header",
+        THREE,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: heroContainer.clientHeight,
+        minWidth: heroContainer.clientWidth,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        backgroundColor: 0x4a96f2,
+        color1: 0xf739cc,
+        color2: 0xffffff,
+        separation: 60.0,
+        quantity: 4.0,
+      });
+    }
   },
 };
 </script>

@@ -71,7 +71,7 @@ export default {
       ) {
         return 0;
       }
-      return this.$store.getters.userData.length;
+      return this.$store.getters.userData.subscriptions.length;
     },
     userData() {
       return this.$store.getters.userData;
