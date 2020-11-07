@@ -76,11 +76,11 @@ export default {
     loading: false,
     error: "",
     gradientClasses: [
-      "amethyst",
+      "calm-darya",
       "day-tripper",
       "endless-river",
       "ohhappiness",
-      "purpink",
+      "nelson",
     ],
   }),
   methods: {
@@ -90,8 +90,8 @@ export default {
     },
     getRandomGradient() {
       const gradientClasses = this.gradientClasses;
-      const randomClass = Math.floor(Math.random() * gradientClasses.length);
-      return gradientClasses[randomClass];
+      const randomIndex = Math.floor(Math.random() * gradientClasses.length);
+      return gradientClasses[randomIndex];
     },
     endDateTimeText(timestamp) {
       return moment(timestamp).format("hh:mm a, Do MMM");
@@ -148,17 +148,17 @@ export default {
 <style>
 /* from uiGradients.com */
 
-#activeTestsCard .amethyst {
-  background: #9d50bb; /* fallback for old browsers */
+#activeTestsCard .calm-darya {
+  background: #5f2c82; /* fallback for old browsers */
   background: -webkit-linear-gradient(
-    to right bottom,
-    #6e48aa,
-    #9d50bb
+    to left bottom,
+    #49a09d,
+    #5f2c82
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
-    to right bottom,
-    #6e48aa,
-    #9d50bb
+    to left bottom,
+    #49a09d,
+    #5f2c82
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
@@ -204,17 +204,17 @@ export default {
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-#activeTestsCard .purpink {
-  background: #7f00ff; /* fallback for old browsers */
+#activeTestsCard .nelson {
+  background: #f2709c; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to left bottom,
-    #e100ff,
-    #7f00ff
+    #ff9472,
+    #f2709c
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to left bottom,
-    #e100ff,
-    #7f00ff
+    #ff9472,
+    #f2709c
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 </style>
