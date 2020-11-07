@@ -151,12 +151,12 @@ export default {
 #activeTestsCard .amethyst {
   background: #9d50bb; /* fallback for old browsers */
   background: -webkit-linear-gradient(
-    to right,
+    to right bottom,
     #6e48aa,
     #9d50bb
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
-    to right,
+    to right bottom,
     #6e48aa,
     #9d50bb
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -165,12 +165,12 @@ export default {
 #activeTestsCard .day-tripper {
   background: #f857a6; /* fallback for old browsers */
   background: -webkit-linear-gradient(
-    to right,
+    to right bottom,
     #ff5858,
     #f857a6
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
-    to right,
+    to right bottom,
     #ff5858,
     #f857a6
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -179,12 +179,12 @@ export default {
 #activeTestsCard .endless-river {
   background: #43cea2; /* fallback for old browsers */
   background: -webkit-linear-gradient(
-    to right,
+    to right bottom,
     #185a9d,
     #43cea2
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
-    to right,
+    to right bottom,
     #185a9d,
     #43cea2
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -193,12 +193,12 @@ export default {
 #activeTestsCard .ohhappiness {
   background: #00b09b; /* fallback for old browsers */
   background: -webkit-linear-gradient(
-    to left,
+    to left bottom,
     #96c93d,
     #00b09b
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
-    to left,
+    to left bottom,
     #96c93d,
     #00b09b
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -207,12 +207,12 @@ export default {
 #activeTestsCard .purpink {
   background: #7f00ff; /* fallback for old browsers */
   background: -webkit-linear-gradient(
-    to left,
+    to left bottom,
     #e100ff,
     #7f00ff
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
-    to left,
+    to left bottom,
     #e100ff,
     #7f00ff
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
