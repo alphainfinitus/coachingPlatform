@@ -266,6 +266,11 @@ export default {
         ? this.questionObj.id
         : moment().unix();
 
+      const actionName =
+        this.questionObj && this.questionObj.folder == this.selectedFolder
+          ? "updateQuestion"
+          : "submitQuestion";
+
       const payload = this.subjective
         ? {
             id: `${unix_timestamp_id}`,
@@ -290,7 +295,7 @@ export default {
           };
 
       this.$store
-        .dispatch("submitQuestion", payload)
+        .dispatch(actionName, payload)
         .then(() => {
           this.snackbarText = "Question saved successfully :)";
           this.$refs.questionForm.reset();
@@ -300,6 +305,20 @@ export default {
           this.optionC = "";
           this.optionD = "";
           this.solution = "";
+
+          // if question is being edited AND the folder is changed
+          if (
+            this.questionObj &&
+            this.questionObj.folder != this.selectedFolder
+          ) {
+            //decrease old folder count
+
+            this.$store
+              .dispatch("decrementFolderCount", this.questionObj.folder)
+              .then(() => {
+                this.$router.push("/home");
+              });
+          }
         })
         .catch(() => {
           this.error = "Network error, please try again.";

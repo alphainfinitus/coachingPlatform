@@ -337,6 +337,47 @@ export default new Vuex.Store({
           });
       });
     },
+    updateQuestion: (context, payload) => {
+      const ref = fire_store
+        .collection("admins")
+        .doc(context.state.auth.uid)
+        .collection("questions")
+        .doc(payload.id);
+
+      return new Promise((resolve, reject) => {
+        ref
+          .set(payload)
+          .then(() => {
+            resolve();
+          })
+          .catch((error) => {
+            console.log(error);
+            reject(error);
+          });
+      });
+    },
+    decrementFolderCount: (context, payload) => {
+      const counterRef = fire_store
+        .collection("admins")
+        .doc(context.state.auth.uid)
+        .collection("meta")
+        .doc("questionCounter");
+
+      return new Promise((resolve, reject) => {
+        counterRef
+          .update({
+            [payload]: firestore_fieldvalue.increment(-1),
+          })
+          .then(() => {
+            resolve();
+          })
+          .catch((error) => {
+            console.log(error);
+            reject(error);
+          });
+      });
+    },
+
     getSingleQuestion: (context) => {
       const ref = fire_store
         .collection("admins")

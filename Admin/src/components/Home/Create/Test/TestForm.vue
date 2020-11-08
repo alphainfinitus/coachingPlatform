@@ -920,6 +920,7 @@ export default {
         .then(() => {
           this.snackbarText = "Test deployed successfully :)";
           this.resetTestForm();
+          this.$router.push("/home");
         })
         .catch(() => {
           this.error = "Network error, please try again.";
