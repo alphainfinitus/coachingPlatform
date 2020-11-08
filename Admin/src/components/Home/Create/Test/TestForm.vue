@@ -539,6 +539,16 @@
                       </v-row>
                     </v-container>
                   </div>
+
+                  <v-divider class="my-6"></v-divider>
+
+                  <!-- Allow submit before time -->
+                  <div>
+                    <v-checkbox
+                      v-model="submitBeforeTime"
+                      label="Allow students to submit before duration is complete"
+                    ></v-checkbox>
+                  </div>
                 </v-form>
               </v-card>
               <v-btn
@@ -667,6 +677,7 @@ export default {
     endDate: moment().format().substr(0, 10),
     endTime: null,
     testDuration: 1,
+    submitBeforeTime: true,
   }),
   methods: {
     setLoading(value) {
@@ -877,6 +888,7 @@ export default {
         startDateTime: moment(this.startDate + " " + this.startTime).toDate(),
         endDateTime: moment(this.endDate + " " + this.endTime).toDate(),
         testDuration: parseInt(this.testDuration),
+        submitBeforeTime: this.submitBeforeTime
       };
 
       this.$store
@@ -917,6 +929,7 @@ export default {
       this.endTime = moment(this.testObj.endDateTime.seconds * 1000).format(
         "HH:mm"
       );
+      this.submitBeforeTime = this.testObj.submitBeforeTime;
 
       //fill this.selectedFolder
       for (var key of Object.keys(this.selectedQuestions)) {

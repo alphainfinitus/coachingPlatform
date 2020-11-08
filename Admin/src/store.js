@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 
 import {
-  //   firestore_fieldvalue,
+  firestore_fieldvalue,
   fire_auth,
   //   fire_auth_provider,
   //   fire_functions,
@@ -291,15 +291,33 @@ export default new Vuex.Store({
 
     // home/create Actions
     submitQuestion: (context, payload) => {
+      var batch = fire_store.batch();
+
       const ref = fire_store
         .collection("admins")
         .doc(context.state.auth.uid)
         .collection("questions")
         .doc(payload.id);
 
+      batch.set(ref, payload);
+
+      const counterRef = fire_store
+        .collection("admins")
+        .doc(context.state.auth.uid)
+        .collection("meta")
+        .doc("questionCounter");
+
+      batch.set(
+        counterRef,
+        {
+          [payload.folder]: firestore_fieldvalue.increment(1),
+        },
+        { merge: true }
+      );
+
       return new Promise((resolve, reject) => {
-        ref
-          .set(payload)
+        batch
+          .commit()
           .then(() => {
             resolve();
           })
@@ -499,15 +517,33 @@ export default new Vuex.Store({
       });
     },
     deleteQuestion: (context, payload) => {
+      var batch = fire_store.batch();
+
       const ref = fire_store
         .collection("admins")
         .doc(context.state.auth.uid)
         .collection("questions")
-        .doc(payload);
+        .doc(payload.id);
+
+      batch.delete(ref);
+
+      const counterRef = fire_store
+        .collection("admins")
+        .doc(context.state.auth.uid)
+        .collection("meta")
+        .doc("questionCounter");
+
+      batch.set(
+        counterRef,
+        {
+          [payload.folder]: firestore_fieldvalue.increment(-1),
+        },
+        { merge: true }
+      );
 
       return new Promise((resolve, reject) => {
-        ref
-          .delete()
+        batch
+          .commit()
           .then(() => {
             resolve();
           })

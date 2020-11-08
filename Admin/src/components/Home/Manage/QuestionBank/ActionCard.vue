@@ -58,7 +58,7 @@
                     <v-container>
                       <v-row align="center" no-gutters v-if="error">
                         <v-col cols="12">
-                          <v-alert type="error">{{ error }}</v-alert>
+                          <v-alert type="error" dense>{{ error }}</v-alert>
                         </v-col>
                       </v-row>
                       <v-row align="center" no-gutters>
@@ -91,15 +91,11 @@
                   <v-container>
                     <v-row no-gutters>
                       <v-col>
-                        <v-list
-                          dense
-                          v-for="(question, i) in questionFolders"
-                          :key="i"
-                        >
+                        <v-list dense v-for="(folder, i) in folders" :key="i">
                           <v-list-item>
                             <v-list-item-content>
                               <v-list-item-title class="text-capitalize">
-                                {{ question }}
+                                {{ folder }}
                               </v-list-item-title>
                             </v-list-item-content>
                             <v-list-item-icon>
@@ -124,14 +120,12 @@
                   <v-btn
                     text
                     :loading="loading || superLoading"
-                    :disabled="loading || superLoading"
                     @click="dialog = false"
                   >
                     Close
                   </v-btn>
                   <v-btn
                     :loading="loading || superLoading"
-                    :disabled="loading || superLoading"
                     color="blue darken-1"
                     dark
                     @click="submitFolderNames()"
@@ -165,7 +159,7 @@ export default {
       (value) =>
         value.length > 2 || "Field length should be greater than 2 characters",
     ],
-    questionFolders: [],
+    folders: [],
   }),
   methods: {
     setLoading(value) {
@@ -174,21 +168,28 @@ export default {
     },
     addFolderName() {
       this.error = "";
-      if (this.questionFolders.includes(this.folderName.toLowerCase())) {
+
+      if (this.folders.includes(this.folderName.toLowerCase())) {
         this.error = "This folder already exists :(";
         return;
       }
-      this.questionFolders.push(this.folderName.toLowerCase());
+
+      this.$set(
+        this.folders,
+        this.folders.length,
+        this.folderName.toLowerCase()
+      );
+
       this.folderName = "";
     },
     deleteFolderName(index) {
-      this.questionFolders.splice(index, 1);
+      this.folders.splice(index, 1);
     },
     submitFolderNames() {
       this.setLoading(true);
 
       const payload = {
-        folderNames: this.questionFolders,
+        folderNames: this.folders,
       };
 
       //save foldersName to server
@@ -221,7 +222,7 @@ export default {
           .dispatch("getQuestionFolders")
           .then((res) => {
             if (res) {
-              this.questionFolders = res.folderNames;
+              this.folders = res.folderNames;
             }
           })
           .catch(() => {
@@ -233,12 +234,12 @@ export default {
           });
       } else {
         // if found in store
-        this.questionFolders = questionFolders.folderNames;
+        this.folders = questionFolders.folderNames;
         this.setLoading(false);
       }
     },
   },
-  mounted() {
+  created() {
     this.fetchFolders();
   },
 };

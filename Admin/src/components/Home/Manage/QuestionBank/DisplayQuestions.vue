@@ -176,42 +176,31 @@
               :key="question.id"
               @change="emitSelectedQuestions"
             ></v-checkbox>
+
+            <!-- Question Card -->
             <v-card
               class="ma-1 w-100"
-              color="grey darken-4"
+              color="grey darken-3"
               dark
               outlined
               elevation="0"
               :disabled="loading || superLoading"
               @click="openQuestionModal(i)"
             >
-              <!-- ID and Action Buttons -->
-              <v-card-subtitle>
-                <b class="pink--text mr-1">ID:</b>
-                {{ question.id }}
-              </v-card-subtitle>
-
-              <v-divider class="mb-3"></v-divider>
-
-              <!-- Question text-->
-              <v-card-subtitle class="mt-5 pt-0 pb-1 pink--text">
-                Question:
-              </v-card-subtitle>
-
-              <v-card-text class="text-h6 ml-1">
-                <span v-html="question.question"></span>
-              </v-card-text>
-
-              <!-- Question Type and Folder -->
-              <v-card-subtitle class="mt-n6">
-                <span class="d-md-flex text-capitalize">
+              <!-- ID, Question Type and Folder -->
+              <v-card-subtitle class="my-n2">
+                <span class="d-md-flex align-center text-capitalize">
                   <v-chip small class="ma-1">
-                    <b class="mr-1 pink--text"> Folder:</b>
+                    <b class="pink--text text--lighten-3 mr-1">ID:</b>
+                    {{ question.id }}
+                  </v-chip>
+                  <v-chip small class="ma-1">
+                    <b class="mr-1 pink--text text--lighten-3"> Folder:</b>
                     {{ question.folder ? `'${question.folder}'` : "None" }}
                   </v-chip>
 
                   <v-chip small class="ma-1">
-                    <b class="mr-1 ml-2 pink--text"> Type:</b>
+                    <b class="mr-1 pink--text text--lighten-3"> Type:</b>
                     {{ question.isSubjective ? "Subjective" : "Objective" }}
                   </v-chip>
 
@@ -219,7 +208,20 @@
                 </span>
               </v-card-subtitle>
 
-              <v-divider v-if="!enableSelect" class="my-2"></v-divider>
+              <v-divider class="mb-3"></v-divider>
+
+              <!-- Question text-->
+              <v-card-subtitle
+                class="mt-5 pt-0 pb-1 pink--text text--lighten-3"
+              >
+                Question:
+              </v-card-subtitle>
+
+              <v-card-text class="text-h6 ml-2">
+                <span v-html="question.question"></span>
+              </v-card-text>
+
+              <v-divider v-if="!enableSelect" class="mb-2"></v-divider>
 
               <!-- Delete and Edit Buttons -->
               <v-card-actions v-if="!enableSelect">
@@ -230,6 +232,7 @@
                   @click="deleteQuestionModal(i)"
                   :disabled="loading || superLoading"
                   outlined
+                  small
                 >
                   <v-icon class="mr-1">mdi-trash-can-outline mdi-18px</v-icon>
                   Delete
@@ -242,6 +245,7 @@
                   :disabled="loading || superLoading"
                   color="pink lighten-1"
                   class="mx-1"
+                  small
                 >
                   <v-icon class="mr-1">mdi-square-edit-outline mdi-18px</v-icon>
                   Edit
@@ -331,8 +335,13 @@ export default {
     deleteQuestion() {
       this.setLoading(true);
 
+      const payload = {
+        id: this.selectedQuestion.id,
+        folder: this.selectedQuestion.folder,
+      };
+
       this.$store
-        .dispatch("deleteQuestion", this.selectedQuestion.id)
+        .dispatch("deleteQuestion", payload)
         .then(() => {
           this.snackbarText = "Question deleted successfully :)";
           //remove from allQuestions array
