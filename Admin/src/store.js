@@ -24,6 +24,7 @@ export default new Vuex.Store({
     userData: {},
     questionFolders: {},
     batches: {},
+    questionCount: {},
   },
   getters: {
     auth: (state) => {
@@ -37,6 +38,9 @@ export default new Vuex.Store({
     },
     batches: (state) => {
       return state.batches;
+    },
+    questionCount: (state) => {
+      return state.questionCount;
     },
   },
   mutations: {
@@ -52,6 +56,7 @@ export default new Vuex.Store({
       state.userData = {};
       state.batches = {};
       state.questionFolders = {};
+      state.questionCount = {};
       sessionStorage.clear();
     },
 
@@ -74,6 +79,11 @@ export default new Vuex.Store({
     },
     setQuestionFolders: (state, payload) => {
       state.questionFolders = payload;
+    },
+
+    // home/create Mutations
+    setQuestionCount: (state, payload) => {
+      state.questionCount = payload;
     },
   },
   actions: {
@@ -364,6 +374,26 @@ export default new Vuex.Store({
           })
           .catch((error) => {
             reject(error.code);
+          });
+      });
+    },
+    fetchNumberOfQuestions: (context) => {
+      const ref = fire_store
+        .collection("admins")
+        .doc(context.state.auth.uid)
+        .collection("meta")
+        .doc("questionCounter");
+
+      return new Promise((resolve, reject) => {
+        ref
+          .get()
+          .then((doc) => {
+            const data = doc.data();
+            context.commit("setQuestionCount", data);
+            resolve(data);
+          })
+          .catch((error) => {
+            reject(error);
           });
       });
     },

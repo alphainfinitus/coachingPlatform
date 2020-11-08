@@ -803,8 +803,32 @@ export default {
           return `${this.selectedQuestions[section].length}`;
         }
 
-        //if not: array folder selected;
-        return `'${this.selectedQuestions[section].folderName}' folder`;
+        //if not array : fetch number from firestore;
+
+        // get from store
+        var questionCount = this.$store.getters.questionCount;
+
+        //if not found in store
+        if (
+          Object.keys(questionCount).length === 0 &&
+          questionCount.constructor === Object
+        ) {
+          this.setLoading(false);
+          this.$store
+            .dispatch("fetchNumberOfQuestions", section)
+            .then((res) => {
+              return res[this.selectedQuestions[section].folderName];
+            })
+            .catch(() => {
+              return `'${this.selectedQuestions[section].folderName}' folder`;
+            })
+            .finally(() => {
+              this.setLoading(false);
+            });
+        } else {
+          // if found in store
+          return questionCount[this.selectedQuestions[section].folderName];
+        }
       } else {
         return 0;
       }
@@ -888,7 +912,7 @@ export default {
         startDateTime: moment(this.startDate + " " + this.startTime).toDate(),
         endDateTime: moment(this.endDate + " " + this.endTime).toDate(),
         testDuration: parseInt(this.testDuration),
-        submitBeforeTime: this.submitBeforeTime
+        submitBeforeTime: this.submitBeforeTime,
       };
 
       this.$store
