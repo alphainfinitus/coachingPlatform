@@ -318,6 +318,8 @@ export default {
               .then(() => {
                 this.$router.push("/home");
               });
+          } else {
+            this.$router.push("/home");
           }
         })
         .catch(() => {
