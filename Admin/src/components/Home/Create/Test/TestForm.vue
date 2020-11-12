@@ -789,7 +789,6 @@ export default {
       this.resetFolderSelection(sectionName);
     },
     questionsSelected(payload) {
-      // TODO: reset selectedFolder
       this.$set(
         this.selectedQuestions,
         payload.sectionName,

@@ -4,7 +4,7 @@
       {{ snackbarText }}
     </v-snackbar>
 
-    <!-- TODO: Add OpenTestDialog -->
+    <!-- TODO: Add ViewTestDialog -->
 
     <!-- Delete dialog -->
     <v-dialog v-model="deleteDialog" persistent max-width="590">
