@@ -447,6 +447,9 @@ export default new Vuex.Store({
         .collection("meta")
         .doc("questionFolders");
 
+      // also fetch questionCount as it is mostly needed with this function
+      context.dispatch("fetchNumberOfQuestions");
+
       return new Promise((resolve, reject) => {
         ref
           .get()
@@ -476,6 +479,7 @@ export default new Vuex.Store({
           .set(payload)
           .then(() => {
             context.commit("setQuestionFolders", payload);
+            context.dispatch("fetchNumberOfQuestions");
             resolve();
           })
           .catch((err) => {

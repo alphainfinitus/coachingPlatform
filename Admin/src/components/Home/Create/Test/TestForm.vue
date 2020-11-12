@@ -805,30 +805,9 @@ export default {
 
         //if not array : fetch number from firestore;
 
-        // get from store
+        // get question Count from store
         var questionCount = this.$store.getters.questionCount;
-
-        //if not found in store
-        if (
-          Object.keys(questionCount).length === 0 &&
-          questionCount.constructor === Object
-        ) {
-          this.setLoading(false);
-          this.$store
-            .dispatch("fetchNumberOfQuestions", section)
-            .then((res) => {
-              return res[this.selectedQuestions[section].folderName];
-            })
-            .catch(() => {
-              return `'${this.selectedQuestions[section].folderName}' folder`;
-            })
-            .finally(() => {
-              this.setLoading(false);
-            });
-        } else {
-          // if found in store
-          return questionCount[this.selectedQuestions[section].folderName];
-        }
+        return questionCount[this.selectedQuestions[section].folderName];
       } else {
         return 0;
       }
@@ -842,7 +821,7 @@ export default {
       if (this.stepper == 5) {
         //  displayNoOfQuestions for each section is zero then not valid
         for (var i = 0; i < this.sections.length; i++) {
-          if (this.displayNoOfQuestions(this.sections[i]) == 0) {
+          if (this.displayNoOfQuestions(this.sections[i]) < 1) {
             return false;
           }
         }
