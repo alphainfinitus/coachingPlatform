@@ -1,5 +1,5 @@
 <template>
-  <nav id="navbar">
+  <nav @contextmenu.prevent id="navbar">
     <v-app-bar dense app flat elevate-on-scroll>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>

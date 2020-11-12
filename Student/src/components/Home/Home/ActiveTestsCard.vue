@@ -117,11 +117,9 @@ export default {
         queryObj[institutionUID].batchNames.push(userSubs[key].batchName);
       }
 
-      this.$store.dispatch("fetchActiveTests", queryObj).then(() => {
-        this.setLoading(false);
-      });
+      this.$store.dispatch("fetchActiveTests", queryObj);
+      this.setLoading(false);
     },
-
     testBatchText(institutionUID) {
       const userSubs = this.userData.subscriptionsData;
       for (let key of Object.keys(userSubs)) {
@@ -130,7 +128,9 @@ export default {
         }
       }
     },
-    gotoTest(test) {
+    gotoTest(testObj) {
+      var test = testObj;
+      test.batch = this.testBatchText(test.institutionUID);
       this.$router.push({ name: "Test", params: { test } });
     },
   },
