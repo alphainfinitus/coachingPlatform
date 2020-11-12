@@ -281,9 +281,5 @@ export default {
       return false;
     },
   },
-  mounted() {
-    console.log("Questions", this.questions);
-    console.log("Result", this.result);
-  },
 };
 </script>
