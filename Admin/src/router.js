@@ -68,7 +68,7 @@ const routes = [
       checkAuthStatus(to, from, next);
     },
   },
-  // /create routes
+  // create routes
   {
     path: "/create/question",
     name: "createQuestion",
@@ -108,6 +108,15 @@ const routes = [
     path: "/manage/edit-tests",
     name: "editTests",
     component: () => import("./views/home/manage/EditTests.vue"),
+    beforeEnter: (to, from, next) => {
+      checkAuthStatus(to, from, next);
+    },
+  },
+  // view routes
+  {
+    path: "/view/results",
+    name: "viewResults",
+    component: () => import("./views/home/view/Results.vue"),
     beforeEnter: (to, from, next) => {
       checkAuthStatus(to, from, next);
     },
