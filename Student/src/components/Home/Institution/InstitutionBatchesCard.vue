@@ -165,8 +165,16 @@ export default {
       };
 
       const payload = {
-        subscriptions,
-        subscriptionsData,
+        newInstitutionUID: this.institutionData.uid,
+        batchName: this.selectedBatch.name,
+        adminPayload: {
+          studentUID: this.userData.uid,
+          studentName: this.userData.fullName,
+        },
+        studentPayload: {
+          subscriptions,
+          subscriptionsData,
+        },
       };
 
       this.$store

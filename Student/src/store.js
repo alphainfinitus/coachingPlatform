@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 
 import {
-  // firestore_fieldvalue,
+  firestore_fieldvalue,
   fire_auth,
   //   fire_auth_provider,
   //   fire_functions,
@@ -310,16 +310,36 @@ export default new Vuex.Store({
       });
     },
     joinBatch: (context, payload) => {
-      const ref = fire_store.collection("students").doc(context.state.auth.uid);
+      var batch = fire_store.batch();
+
+      const studentRef = fire_store
+        .collection("students")
+        .doc(context.state.auth.uid);
+
+      batch.update(studentRef, payload.studentPayload);
+
+      const adminRef = fire_store
+        .collection("admins")
+        .doc(payload.newInstitutionUID)
+        .collection("subscriptions")
+        .doc(context.state.auth.uid);
+
+      batch.set(adminRef, payload.adminPayload, { merge: true });
+
+      batch.update(adminRef, {
+        batches: firestore_fieldvalue.arrayUnion(payload.batchName),
+      });
+
       return new Promise((resolve, reject) => {
-        ref
-          .update(payload)
+        batch
+          .commit()
           .then(() => {
-            context.dispatch("setUserData");
+            console.log("Done");
+
             resolve();
           })
-          .catch((err) => {
-            reject(err);
+          .catch((error) => {
+            reject(error.code);
           });
       });
     },
