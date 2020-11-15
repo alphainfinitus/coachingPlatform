@@ -241,7 +241,7 @@ export default {
               return obj.id == question;
             });
 
-            if (!searchQuestion.isSubjective) {
+            if (searchQuestion && !searchQuestion.isSubjective) {
               attemptedObjectiveQuestions++;
             }
           }
@@ -266,9 +266,6 @@ export default {
     setLoading(value) {
       this.loading = value;
       this.$emit("setSuperLoading", value);
-    },
-    startTest() {
-      this.$emit("startTest");
     },
     isOptionSelected(optionTitle, sectionName, questionId) {
       if (questionId in this.result.answers[sectionName]) {
