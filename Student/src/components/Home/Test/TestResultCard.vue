@@ -3,7 +3,12 @@
     <!-- Result Card -->
     <v-card :loading="loading || superLoading" class="pb-2 px-1 px-md-12 mb-4">
       <v-card-subtitle>
-        Performance (based on all objective questions):
+        <span v-if="!result.graded"
+          >Performance (based on all objective questions):
+        </span>
+        <span v-else
+          >Overall Performance (your answer sheet has been graded):</span
+        >
       </v-card-subtitle>
       <v-divider></v-divider>
       <v-container>
