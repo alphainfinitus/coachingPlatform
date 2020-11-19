@@ -741,5 +741,214 @@ export default new Vuex.Store({
           });
       });
     },
+
+    // home/view
+    getAllResults: (context, payload) => {
+      var ref = "";
+
+      switch (payload.requestType) {
+        case "prev":
+          ref = fire_store
+            .collection("admins")
+            .doc(context.state.auth.uid)
+            .collection("tests")
+            .doc(payload.testID)
+            .collection("results")
+            .orderBy("graded") // false comes first (add "desc" to make true first)
+            .endBefore(payload.doc)
+            .limit(10);
+          break;
+        case "next":
+          ref = fire_store
+            .collection("admins")
+            .doc(context.state.auth.uid)
+            .collection("tests")
+            .doc(payload.testID)
+            .collection("results")
+            .orderBy("graded")
+            .startAfter(payload.doc)
+            .limit(10);
+          break;
+        default:
+          ref = fire_store
+            .collection("admins")
+            .doc(context.state.auth.uid)
+            .collection("tests")
+            .doc(payload.testID)
+            .collection("results")
+            .orderBy("graded")
+            .limit(10);
+      }
+
+      return new Promise((resolve, reject) => {
+        ref
+          .get()
+          .then((snapshot) => {
+            const resData = snapshot.docs.map((doc) => doc.data());
+            const res = {
+              data: resData,
+              firstAndLastVisible: {
+                firstVisible: snapshot.docs[0],
+                lastVisible: snapshot.docs[snapshot.docs.length - 1],
+              },
+            };
+            resolve(res);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
+    fetchTestQuestions: (context, payload) => {
+      var promises = [];
+      var questionsObj = {};
+      var questionsLogObj = {}; //to log which question belongs to which section
+
+      for (var key of Object.keys(payload.selectedQuestions)) {
+        questionsObj[key] = [];
+
+        // if array: loop through array and push promise to fetch each document
+        if (payload.selectedQuestions[key] instanceof Array) {
+          let questionRefsArr = [];
+          payload.selectedQuestions[key].forEach((id) => {
+            questionRefsArr.push(
+              fire_store
+                .collection("admins")
+                .doc(context.state.auth.uid)
+                .collection("questions")
+                .doc(id)
+                .get()
+            );
+            questionsLogObj[id] = key;
+          });
+          promises = promises.concat(questionRefsArr);
+        } else {
+          // if not array, then folder: push promise query to fetch folder documents
+          let folderQuery = fire_store
+            .collection("admins")
+            .doc(context.state.auth.uid)
+            .collection("questions")
+            .where("folder", "==", payload.selectedQuestions[key].folderName)
+            .get();
+
+          promises.push(folderQuery);
+
+          // log which folder belongs to what section
+          questionsLogObj[payload.selectedQuestions[key].folderName] = key;
+        }
+      }
+
+      var totalObjectiveQuestions = 0;
+
+      return new Promise((resolve, reject) => {
+        return Promise.all(promises)
+          .then((resArr) => {
+            resArr.forEach((res) => {
+              if ("id" in res) {
+                //is a document
+                var docData = res.data();
+
+                //questionsLogObj[docData.id] is docSection;
+                questionsObj[questionsLogObj[docData.id]].push(docData);
+
+                if (!docData.isSubjective) {
+                  totalObjectiveQuestions++;
+                }
+              } else if (!res.empty) {
+                // is a snapshot for a folder; check if snapshot is not empty
+                res.docs.forEach((doc) => {
+                  var docData = doc.data();
+                  questionsObj[questionsLogObj[docData.folder]].push(docData);
+                  if (!docData.isSubjective) {
+                    totalObjectiveQuestions++;
+                  }
+                });
+              }
+            });
+
+            resolve({ questionsObj, totalObjectiveQuestions });
+          })
+          .catch((error) => reject(error));
+      });
+    },
+    gradeSheet: (context, payload) => {
+      const ref = fire_store
+        .collection("admins")
+        .doc(context.state.auth.uid)
+        .collection("tests")
+        .doc(payload.testID)
+        .collection("results")
+        .doc(payload.result.uid);
+
+      var finalPayload = payload.result;
+
+      return new Promise((resolve, reject) => {
+        ref
+          .update(finalPayload)
+          .then(() => {
+            resolve();
+          })
+          .catch((error) => {
+            console.log(error);
+            reject(error.code);
+          });
+      });
+    },
+    getAllResultsByScore: (context, payload) => {
+      var ref = "";
+
+      switch (payload.requestType) {
+        case "prev":
+          ref = fire_store
+            .collection("admins")
+            .doc(context.state.auth.uid)
+            .collection("tests")
+            .doc(payload.testID)
+            .collection("results")
+            .orderBy("objectiveScore", "desc")
+            .endBefore(payload.doc)
+            .limit(10);
+          break;
+        case "next":
+          ref = fire_store
+            .collection("admins")
+            .doc(context.state.auth.uid)
+            .collection("tests")
+            .doc(payload.testID)
+            .collection("results")
+            .orderBy("objectiveScore", "desc")
+            .startAfter(payload.doc)
+            .limit(10);
+          break;
+        default:
+          ref = fire_store
+            .collection("admins")
+            .doc(context.state.auth.uid)
+            .collection("tests")
+            .doc(payload.testID)
+            .collection("results")
+            .orderBy("objectiveScore", "desc")
+            .limit(10);
+      }
+
+      return new Promise((resolve, reject) => {
+        ref
+          .get()
+          .then((snapshot) => {
+            const resData = snapshot.docs.map((doc) => doc.data());
+            const res = {
+              data: resData,
+              firstAndLastVisible: {
+                firstVisible: snapshot.docs[0],
+                lastVisible: snapshot.docs[snapshot.docs.length - 1],
+              },
+            };
+            resolve(res);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
   },
 });

@@ -91,17 +91,24 @@ export default {
         colors: ["green darken-1", "green lighten-1", "green darken-1"],
         options: [
           {
+            title: "Answer Sheets",
+            subTitle:
+              "Grade and view test answer sheets submitted by students. ",
+            to: "/view/answer-sheets",
+            image: "undraw_contract_uy56.svg",
+          },
+          {
             title: "Results",
             subTitle: "Test Results with ranking and score data.",
             to: "/view/results",
-            image: "undraw_detailed_analysis_xn7y.svg",
+            image: "undraw_resume_1hqp.svg",
           },
-          {
-            title: "Student Info",
-            subTitle: "Contact information, subscription etc.",
-            to: "/view/student-info",
-            image: "undraw_personal_info_0okl.svg",
-          },
+          // {
+          //   title: "Student Info",
+          //   subTitle: "Contact information, subscription etc.",
+          //   to: "/view/student-info",
+          //   image: "undraw_personal_info_0okl.svg",
+          // },
         ],
       },
     },

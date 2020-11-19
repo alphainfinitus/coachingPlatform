@@ -11,15 +11,21 @@
         </h1>
       </v-row>
 
-      <!-- Add Batches -->
+      <!-- Tests Cards -->
       <v-row justify="center" class="my-4">
-        <span class="text-h6">Tests List Here</span>
+        <TestsCard
+          :superLoading="superLoading"
+          @setSuperLoading="setSuperLoading"
+          routeName="viewTestResult"
+        />
       </v-row>
     </v-container>
   </div>
 </template>
 
 <script>
+import TestsCard from "@/components/Home/View/Results/TestsCard.vue";
+
 export default {
   name: "Results",
   metaInfo: {
@@ -31,6 +37,9 @@ export default {
         content: "Results Page description lorem ipsum dolor sit amet.",
       },
     ],
+  },
+  components: {
+    TestsCard,
   },
   data: () => ({
     superLoading: true,

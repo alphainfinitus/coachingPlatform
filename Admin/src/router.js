@@ -121,6 +121,32 @@ const routes = [
       checkAuthStatus(to, from, next);
     },
   },
+  {
+    path: "/view/result/test",
+    name: "viewTestResult",
+    props: true,
+    component: () => import("./views/home/view/TestResult.vue"),
+    beforeEnter: (to, from, next) => {
+      checkAuthStatus(to, from, next);
+    },
+  },
+  {
+    path: "/view/answer-sheets",
+    name: "viewAnswerSheets",
+    component: () => import("./views/home/view/AnswerSheets.vue"),
+    beforeEnter: (to, from, next) => {
+      checkAuthStatus(to, from, next);
+    },
+  },
+  {
+    path: "/view/answer-sheet/test",
+    name: "viewTestAnswerSheet",
+    props: true,
+    component: () => import("./views/home/view/TestAnswerSheet.vue"),
+    beforeEnter: (to, from, next) => {
+      checkAuthStatus(to, from, next);
+    },
+  },
 ];
 
 const router = new VueRouter({

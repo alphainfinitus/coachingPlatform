@@ -334,6 +334,8 @@ export default {
           answers: this.answers,
           objectiveScore: 0,
           correctAnswers: 0,
+          subjectiveGrades: {},
+          graded: false,
         },
         studentResult: {
           submittedAt,

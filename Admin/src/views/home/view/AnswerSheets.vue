@@ -1,20 +1,22 @@
 <template>
-  <div id="editTests" class="grey lighten-3 fill-height">
+  <div id="answerSheets" class="grey lighten-3 fill-height">
     <v-container>
+      <!-- title -->
       <v-row justify="center">
-        <!-- title -->
         <h1 class="text-title">
-          <v-icon class="text-h3 mr-2" color="pink darken-1">
-            mdi-table-edit
+          <v-icon class="text-h3 mr-2" color="green darken-1">
+            mdi-clipboard-text-multiple
           </v-icon>
-          Edit Tests
+          Answer Sheets
         </h1>
       </v-row>
 
-      <v-row justify="center" class="mt-4">
+      <!-- Tests Cards -->
+      <v-row justify="center" class="my-4">
         <TestsCard
           :superLoading="superLoading"
           @setSuperLoading="setSuperLoading"
+          routeName="viewTestAnswerSheet"
         />
       </v-row>
     </v-container>
@@ -22,17 +24,17 @@
 </template>
 
 <script>
-import TestsCard from "@/components/Home/Manage/EditTests/TestsCard.vue";
+import TestsCard from "@/components/Home/View/Results/TestsCard.vue";
 
 export default {
-  name: "EditTests",
+  name: "AnswerSheets",
   metaInfo: {
-    title: "Edit Tests",
+    title: "Answer Sheets",
     meta: [
       {
         vmid: "description",
         name: "description",
-        content: "Edit Tests Page description lorem ipsum dolor sit amet.",
+        content: "Answer Sheets Page description lorem ipsum dolor sit amet.",
       },
     ],
   },
