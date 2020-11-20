@@ -1,6 +1,8 @@
 <template>
   <div id="contactUs">
-    <v-snackbar color="success" v-model="snackbar">{{ snackbar }}</v-snackbar>
+    <v-snackbar color="success" v-model="snackbar">{{
+      snackbarText
+    }}</v-snackbar>
     <v-container>
       <!-- Features headline -->
       <v-row
@@ -134,6 +136,7 @@ export default {
   data: () => ({
     loading: true,
     snackbar: "",
+    snackbarText: "",
     valid: false,
     contact_error: "",
     fullName: "",
@@ -179,7 +182,9 @@ export default {
         .then(() => {
           this.loading = false;
           this.$refs.contactForm.reset();
-          this.snackbar = "Message saved successfully, we will respond soon :)";
+          this.snackbarText =
+            "Message saved successfully, we will respond soon :)";
+          this.snackbar = true;
         })
         .catch(() => {
           this.contact_error = "Network error, please try again.";

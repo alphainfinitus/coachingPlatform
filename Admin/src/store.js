@@ -44,6 +44,21 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    // Contact Form
+    submitContactForm: (context, payload) => {
+      const ref = fire_store.collection("messages").doc();
+      return new Promise((resolve, reject) => {
+        ref
+          .set(payload)
+          .then(() => {
+            resolve();
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
+
     // Auth Mutations
     login: (state, payload) => {
       state.auth = payload;

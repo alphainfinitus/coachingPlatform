@@ -68,6 +68,21 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    // Contact Form
+    submitContactForm: (context, payload) => {
+      const ref = fire_store.collection("messages").doc();
+      return new Promise((resolve, reject) => {
+        ref
+          .set(payload)
+          .then(() => {
+            resolve();
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
+
     // Auth Actions
     register: (context, payload) => {
       return new Promise((resolve, reject) => {
