@@ -1,8 +1,12 @@
 <template>
   <div id="activeTestsCard">
+    <v-snackbar v-model="showSnackbar">
+      {{ snackbarText }}
+    </v-snackbar>
+
     <v-card :loading="loading || superLoading">
       <v-card-title class="ml-0 ml-md-2">
-        <v-icon class="mr-2">mdi-timetable</v-icon> Active Tests :
+        <v-icon class="mr-2">mdi-timetable</v-icon> Tests :
       </v-card-title>
       <v-divider></v-divider>
       <v-container class="px-3 px-md-12">
@@ -37,6 +41,11 @@
                   }})
                 </v-card-subtitle>
                 <v-card-text>
+                  <span class="d-flex align-center">
+                    <v-icon>mdi-calendar mdi-18px</v-icon>
+                    <b class="mx-1">Starts at :</b>
+                    {{ endDateTimeText(test.startDateTime.seconds * 1000) }}
+                  </span>
                   <span class="d-flex align-center">
                     <v-icon>mdi-calendar mdi-18px</v-icon>
                     <b class="mx-1">Ends at :</b>
@@ -75,6 +84,8 @@ export default {
   data: () => ({
     loading: false,
     error: "",
+    showSnackbar: false,
+    snackbarText: "",
     gradientClasses: [
       "calm-darya",
       "day-tripper",
@@ -129,9 +140,18 @@ export default {
       }
     },
     gotoTest(testObj) {
-      var test = testObj;
-      test.batch = this.testBatchText(test.institutionUID);
-      this.$router.push({ name: "Test", params: { test } });
+      const isTestLive = moment(
+        testObj.startDateTime.seconds * 1000
+      ).isSameOrBefore(moment());
+
+      if (isTestLive) {
+        var test = testObj;
+        test.batch = this.testBatchText(test.institutionUID);
+        this.$router.push({ name: "Test", params: { test } });
+      } else {
+        this.snackbarText = "The test is not live yet :(";
+        this.showSnackbar = true;
+      }
     },
   },
   created() {
