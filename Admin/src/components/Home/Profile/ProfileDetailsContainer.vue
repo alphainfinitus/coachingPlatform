@@ -63,7 +63,7 @@
                       </v-btn>
                     </template>
                     <span
-                      >Example: student.coachingplatform.com/institution/{{
+                      >Example: student.coachingplatform.web.app/institution/{{
                         !username ? "username" : lowerCaseUserName
                       }}</span
                     >

@@ -39,8 +39,19 @@
                 <span class="text-capitalize">
                   {{ result.studentData.name }}
                 </span>
-                <v-chip class="ml-3" color="red lighten-2" light small>
+                <v-chip
+                  v-if="!result.graded"
+                  class="ml-3"
+                  color="red lighten-2"
+                  light
+                  small
+                >
                   <v-icon class="mr-1">mdi-close mdi-18px</v-icon> Not
+                  Graded</v-chip
+                >
+
+                <v-chip v-else class="ml-3" color="green lighten-2" light small>
+                  <v-icon class="mr-1">mdi-check mdi-18px</v-icon>
                   Graded</v-chip
                 >
               </v-card-title>

@@ -38,7 +38,7 @@
         <v-btn
           target="_blank"
           :href="
-            'https://student.platform.com/institution/' + userData.username
+            'https://studentplatform.web.app/institution/' + userData.username
           "
         >
           <v-icon class="mr-2">mdi-earth-arrow-right</v-icon>
