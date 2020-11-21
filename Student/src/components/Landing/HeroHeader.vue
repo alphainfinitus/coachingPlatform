@@ -51,27 +51,27 @@ export default {
   data: () => ({
     slideData: [
       {
-        heading: "Teach and study online with us",
+        heading: "Study online with us",
         text:
           "In the history of modern astronomy, there is probably no one greater leap forward than the building and launch of the space telescope.",
         image: "svg/undraw_online_collaboration_7pfp.svg",
       },
       {
-        heading: "Ease of teaching test 2",
+        heading: "Easily find your institution.",
         text:
-          "In the history of modern astronomy, there is probably no one greater leap forward than the building and launch of the space telescope.",
+          "Join institutions by the institution-code or institution link provided by the institution.",
         image: "svg/undraw_teacher_35j2.svg",
       },
       {
-        heading: "Online test 3",
+        heading: "Participate in tests, online",
         text:
-          "In the history of modern astronomy, there is probably no one greater leap forward than the building and launch of the space telescope.",
+          "You can participate in tests online, with an easy to learn and intuitive interface.",
         image: "svg/undraw_online_test_gba7.svg",
       },
       {
-        heading: "Instant test analysis 4",
+        heading: "Instant result analysis",
         text:
-          "In the history of modern astronomy, there is probably no one greater leap forward than the building and launch of the space telescope known as the Hubble.",
+          "See the detailed performance analysis, and solutions provided by the institution instantly.",
         image: "svg/undraw_instat_analysis_ajld.svg",
       },
     ],
