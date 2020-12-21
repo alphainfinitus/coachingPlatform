@@ -43,14 +43,14 @@ const routes = [
       verifyAuthRoute(to, from, next);
     },
   },
-  {
-    path: "/register",
-    name: "Register",
-    component: () => import("./views/auth/Register.vue"),
-    beforeEnter: (to, from, next) => {
-      verifyAuthRoute(to, from, next);
-    },
-  },
+  // {
+  //   path: "/register",
+  //   name: "Register",
+  //   component: () => import("./views/auth/Register.vue"),
+  //   beforeEnter: (to, from, next) => {
+  //     verifyAuthRoute(to, from, next);
+  //   },
+  // },
   // User Routes
   {
     path: "/home",

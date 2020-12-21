@@ -147,6 +147,12 @@ const routes = [
       checkAuthStatus(to, from, next);
     },
   },
+  // 404
+  {
+    path: "*",
+    name: "NotFound404",
+    component: () => import("./views/NotFound404.vue"),
+  },
 ];
 
 const router = new VueRouter({
