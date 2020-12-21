@@ -1,8 +1,63 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if true;
+  
+  	//NON-AUTH
+  
+  	//anyone can write contactUs messages
+  	match /messages/{contactID} {
+      allow write;
     }
+    
+    //ADMIN
+    
+    //auth can create,read admin account; adminID writes
+    match /admins/{adminID} {
+      allow create, read: if request.auth.uid != null;
+      allow write: if request.auth.uid == adminID;
+    }
+    
+    //auth can read meta adminID writes
+    match /admins/{adminID}/meta/{documents=**} {
+      allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid == adminID;
+    }
+    
+    //auth can read questions; adminID writes
+    match /admins/{adminID}/questions/{questionID} {
+      allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid == adminID;
+    }
+    
+    //auth can read subscriptions; adminID, studentID writes
+    match /admins/{adminID}/subscriptions/{studentID} {
+      allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid == adminID || request.auth.uid == studentID;
+    }
+    
+    //auth can read tests adminID writes
+    match /admins/{adminID}/tests/{testID} {
+      allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid == adminID;
+    }
+    
+    //adminID, studentID can read, write results
+    match /admins/{adminID}/tests/{testID}/results/{studentID} {
+      allow read, write: if request.auth.uid == adminID || request.auth.uid == studentID;
+    }
+    
+    //STUDENT
+    
+    //auth can create,read student account; studentID writes
+    match /students/{studentID} {
+      allow create, read: if request.auth.uid != null;
+      allow write: if request.auth.uid == studentID;
+    }
+    
+    //studentID reads, writes results
+    match /students/{studentID}/results/{adminID}/results/{testID} {
+      allow read, write: if request.auth.uid == studentID;
+    }
+    
   }
 }
