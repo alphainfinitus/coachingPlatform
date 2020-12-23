@@ -3,7 +3,14 @@
     <v-app-bar dense app flat elevate-on-scroll>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
-        <v-btn :to="auth ? '/home' : '/'" depressed text>StudentPlatform</v-btn>
+        <v-btn
+          :to="auth ? '/home' : '/'"
+          depressed
+          text
+          class="text-capitalize"
+        >
+          ClassPariksha
+        </v-btn>
       </v-toolbar-title>
       <v-spacer></v-spacer>
 

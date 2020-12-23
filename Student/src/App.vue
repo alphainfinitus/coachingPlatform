@@ -12,7 +12,7 @@ import Navbar from "@/components/NavBar/Navbar.vue";
 export default {
   name: "App",
   metaInfo: {
-    titleTemplate: "%s - StudentPlatform",
+    titleTemplate: "%s - ClassPariksha | Student",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },

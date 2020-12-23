@@ -15,7 +15,7 @@
           </v-col>
           <v-col sm="12" md="4">
             <a
-              href="http://facebook.com/facebookHandle"
+              href="http://facebook.com/classpariksha"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -26,14 +26,14 @@
                 <v-list-item-content>
                   <v-list-item-title>Follow us on Facebook</v-list-item-title>
                   <v-list-item-subtitle>
-                    facebook.com/facebookHandle
+                    facebook.com/classpariksha
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </a>
 
             <a
-              href="http://twitter.com/twitterHandle"
+              href="http://twitter.com/classpariksha"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -46,7 +46,7 @@
                     >Engage with us on Twitter</v-list-item-title
                   >
                   <v-list-item-subtitle>
-                    twitter.com/twitterHandle
+                    twitter.com/classpariksha
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -57,7 +57,7 @@
 
       <v-container>
         <v-col class="text-center d-flex align-center justify-center" cols="12">
-          PlatformName -
+          ClassPariksha -
           {{ new Date().getFullYear() }}
           <v-icon class="ml-1">mdi-copyright</v-icon>
         </v-col>
