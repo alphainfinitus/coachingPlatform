@@ -29,9 +29,9 @@
             </v-card-title>
 
             <v-card-text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-              dolores ipsa id dolore doloribus velit modi vero nemo reiciendis,
-              lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Our platform allows you to join multiple batches, be it from the
+              same or from multiple institutions. So that you can enroll with as
+              many institutions you like to learn better.
             </v-card-text>
           </v-card>
         </v-col>
@@ -45,9 +45,9 @@
             <v-card-title class="headline"> Clear Batch Pricing </v-card-title>
 
             <v-card-text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-              dolores ipsa id dolore doloribus velit modi vero nemo reiciendis,
-              lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Pay your fee online, through our payment portal. Same price
+              provided for every student by your teachers or institutions. No
+              hidden charges, what you see is what you pay.
             </v-card-text>
           </v-card>
         </v-col>
@@ -61,9 +61,10 @@
             <v-card-title class="headline"> User-friendly design </v-card-title>
 
             <v-card-text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-              dolores ipsa id dolore doloribus velit modi vero nemo reiciendis,
-              lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Our entire platform is intuitive and simple, easy to operate, and
+              mobile friendly. Hustle free exams and features like auto exam
+              submission feature to avoid failure in submission due to network
+              issues etc.
             </v-card-text>
           </v-card>
         </v-col>
@@ -79,9 +80,9 @@
             </v-card-title>
 
             <v-card-text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-              dolores ipsa id dolore doloribus velit modi vero nemo reiciendis,
-              lorem ipsum dolor sit amet consectetur adipisicing elit.
+              No more exam fright or worry for exam patterns. Class pariksha is
+              primarily based on a government like exam interface, following
+              common norms providing you best practice sets and guidance.
             </v-card-text>
           </v-card>
         </v-col>
@@ -95,9 +96,9 @@
             <v-card-title class="headline"> Test Solutions </v-card-title>
 
             <v-card-text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-              dolores ipsa id dolore doloribus velit modi vero nemo reiciendis,
-              lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Get real time solutions right after submitting the test. Proper
+              answers provided by your institution to the be it subjective or
+              objective. Clear all your queries and doubts.
             </v-card-text>
           </v-card>
         </v-col>
@@ -111,9 +112,9 @@
             <v-card-title class="headline"> Test Analysis </v-card-title>
 
             <v-card-text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-              dolores ipsa id dolore doloribus velit modi vero nemo reiciendis,
-              lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Know your weaknesses, strengths and everything else that you need
+              to know to improve your overall score and rank. Get real time
+              ranking and gain the experience of a real exam.
             </v-card-text>
           </v-card>
         </v-col>
@@ -132,9 +133,9 @@
             </v-card-title>
 
             <v-card-text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-              dolores ipsa id dolore doloribus velit modi vero nemo reiciendis,
-              lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Our platform allows you to join multiple batches, be it from the
+              same or from multiple institutions. So that you can enroll with as
+              many institutions you like to learn better.
             </v-card-text>
           </v-card>
         </v-col>
@@ -148,9 +149,9 @@
             <v-card-title class="headline"> Clear Batch Pricing </v-card-title>
 
             <v-card-text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-              dolores ipsa id dolore doloribus velit modi vero nemo reiciendis,
-              lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Pay your fee online, through our payment portal. Same price
+              provided for every student by your teachers or institutions. No
+              hidden charges, what you see is what you pay.
             </v-card-text>
           </v-card>
         </v-col>
@@ -164,9 +165,10 @@
             <v-card-title class="headline"> User-friendly design </v-card-title>
 
             <v-card-text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-              dolores ipsa id dolore doloribus velit modi vero nemo reiciendis,
-              lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Our entire platform is intuitive and simple, easy to operate, and
+              mobile friendly. Hustle free exams and features like auto exam
+              submission feature to avoid failure in submission due to network
+              issues etc.
             </v-card-text>
           </v-card>
         </v-col>
@@ -182,9 +184,9 @@
             </v-card-title>
 
             <v-card-text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-              dolores ipsa id dolore doloribus velit modi vero nemo reiciendis,
-              lorem ipsum dolor sit amet consectetur adipisicing elit.
+              No more exam fright or worry for exam patterns. Class pariksha is
+              primarily based on a government like exam interface, following
+              common norms providing you best practice sets and guidance.
             </v-card-text>
           </v-card>
         </v-col>
@@ -198,9 +200,9 @@
             <v-card-title class="headline"> Test Solutions </v-card-title>
 
             <v-card-text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-              dolores ipsa id dolore doloribus velit modi vero nemo reiciendis,
-              lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Get real time solutions right after submitting the test. Proper
+              answers provided by your institution to the be it subjective or
+              objective. Clear all your queries and doubts.
             </v-card-text>
           </v-card>
         </v-col>
@@ -214,9 +216,9 @@
             <v-card-title class="headline"> Test Analysis </v-card-title>
 
             <v-card-text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-              dolores ipsa id dolore doloribus velit modi vero nemo reiciendis,
-              lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Know your weaknesses, strengths and everything else that you need
+              to know to improve your overall score and rank. Get real time
+              ranking and gain the experience of a real exam.
             </v-card-text>
           </v-card>
         </v-col>

@@ -7,12 +7,15 @@
           <v-col cols="12" sm="12" md="4">
             <h1 class="text-h5">About Us:</h1>
             <p class="text-body-1 mt-4">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro
-              consectetur ut hic ipsum et veritatis corrupti. Itaque eius soluta
-              optio dolorum temporibus in, atque, quos fugit sunt sit quaerat
-              dicta.
+              <b>Made by students and teachers together</b>, at Class Pariksha,
+              we have a dream of empowering every educator in the country to
+              build their online coaching and simplify their lives so that they
+              can focus only on teaching. We are on a mission to reshape the
+              process of conducting exams by a providing the user a friendly
+              interface, hustle free and smooth experience.
             </p>
           </v-col>
+
           <v-col sm="12" md="4">
             <a
               href="http://facebook.com/classpariksha"
