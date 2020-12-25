@@ -12,10 +12,11 @@
           @setSuperLoading="setSuperLoading"
         />
         <div class="my-4"></div>
-        <SocialLoginCard
+        <!-- TODO: Enable Social Login -->
+        <!-- <SocialLoginCard
           :superLoading="superLoading"
           @setSuperLoading="setSuperLoading"
-        />
+        /> -->
       </v-col>
     </v-row>
   </v-container>
@@ -23,7 +24,7 @@
 
 <script>
 import LoginCard from "@/components/Auth/Login/LoginCard.vue";
-import SocialLoginCard from "@/components/Auth/Login/SocialLoginCard.vue";
+// import SocialLoginCard from "@/components/Auth/Login/SocialLoginCard.vue";
 
 export default {
   name: "Login",
@@ -39,7 +40,7 @@ export default {
   },
   components: {
     LoginCard,
-    SocialLoginCard,
+    // SocialLoginCard,
   },
   data: () => ({
     superLoading: true,

@@ -351,7 +351,15 @@ export default new Vuex.Store({
           .then(() => {
             console.log("Done");
 
-            resolve();
+            // fetch userData again;
+            context
+              .dispatch("setUserData")
+              .then(() => {
+                resolve();
+              })
+              .catch(() => {
+                resolve();
+              });
           })
           .catch((error) => {
             reject(error.code);

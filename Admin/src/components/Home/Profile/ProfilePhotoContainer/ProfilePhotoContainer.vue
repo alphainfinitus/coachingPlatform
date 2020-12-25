@@ -34,15 +34,11 @@
         </v-dialog>
       </v-col>
 
+      <!-- Copy Link Button -->
       <v-col cols="12" sm="12" class="d-flex justify-center headline">
-        <v-btn
-          target="_blank"
-          :href="
-            'https://studentplatform.web.app/institution/' + userData.username
-          "
-        >
+        <v-btn @click="copyInstitutionURL" class="text-capitalize">
           <v-icon class="mr-2">mdi-earth-arrow-right</v-icon>
-          {{ userData.fullName }}
+          Copy Institution Link
         </v-btn>
       </v-col>
     </v-row>
@@ -83,8 +79,30 @@ export default {
       this.dialog = false;
       this.showSnackbar = true;
     },
+    copyInstitutionURL() {
+      const el = document.createElement("textarea");
+      el.value =
+        `https://classpariksha.com/institution/` + this.userData.username;
+
+      el.setAttribute("readonly", "");
+      el.style.position = "absolute";
+      el.style.left = "-9999px";
+      document.body.appendChild(el);
+      const selected =
+        document.getSelection().rangeCount > 0
+          ? document.getSelection().getRangeAt(0)
+          : false;
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+      if (selected) {
+        document.getSelection().removeAllRanges();
+        document.getSelection().addRange(selected);
+      }
+
+      this.snackbarText = "Link Copied";
+      this.showSnackbar = true;
+    },
   },
 };
 </script>
-
-

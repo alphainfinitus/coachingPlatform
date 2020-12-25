@@ -33,7 +33,7 @@
                 v-model="fullName"
                 type="text"
                 :rules="fullNameRules"
-                label="Full Name"
+                label="Institution Name"
                 :disabled="loading || superLoading"
                 required
               ></v-text-field>
