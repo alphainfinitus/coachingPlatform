@@ -8,7 +8,37 @@
           <v-col cols="12" sm="12" md="3">
             <v-list-item three-line>
               <v-list-item-icon tile size="80" color="grey">
-                <v-icon class="white--text">mdi-heart mdi-48px</v-icon>
+                <v-icon class="white--text">mdi-charity mdi-48px</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content class="white--text">
+                <v-list-item-title class="text-h4 mb-1">
+                  Made By
+                </v-list-item-title>
+                <v-list-item-subtitle class="white--text text-subtitle-1">
+                  Students and Teachers
+                </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-col>
+          <v-col cols="12" sm="12" md="3">
+            <v-list-item three-line>
+              <v-list-item-icon tile size="80" color="grey">
+                <v-icon class="white--text">mdi-map-marker mdi-48px</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content class="white--text">
+                <v-list-item-subtitle class="white--text text-subtitle-1">
+                  Made in
+                </v-list-item-subtitle>
+                <v-list-item-title class="text-h4 mb-1">
+                  India
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-col>
+          <v-col cols="12" sm="12" md="3">
+            <v-list-item three-line>
+              <v-list-item-icon tile size="80" color="grey">
+                <v-icon class="white--text">mdi-account-group mdi-48px</v-icon>
               </v-list-item-icon>
               <v-list-item-content class="white--text">
                 <v-list-item-title class="text-h4 mb-1">
@@ -23,44 +53,14 @@
           <v-col cols="12" sm="12" md="3">
             <v-list-item three-line>
               <v-list-item-icon tile size="80" color="grey">
-                <v-icon class="white--text">mdi-heart mdi-48px</v-icon>
+                <v-icon class="white--text">mdi-domain mdi-48px</v-icon>
               </v-list-item-icon>
               <v-list-item-content class="white--text">
                 <v-list-item-title class="text-h4 mb-1">
-                  500+
+                  100+
                 </v-list-item-title>
                 <v-list-item-subtitle class="white--text text-subtitle-1">
-                  Students Enrolled
-                </v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-col>
-          <v-col cols="12" sm="12" md="3">
-            <v-list-item three-line>
-              <v-list-item-icon tile size="80" color="grey">
-                <v-icon class="white--text">mdi-heart mdi-48px</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content class="white--text">
-                <v-list-item-title class="text-h4 mb-1">
-                  500+
-                </v-list-item-title>
-                <v-list-item-subtitle class="white--text text-subtitle-1">
-                  Students Enrolled
-                </v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-col>
-          <v-col cols="12" sm="12" md="3">
-            <v-list-item three-line>
-              <v-list-item-icon tile size="80" color="grey">
-                <v-icon class="white--text">mdi-heart mdi-48px</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content class="white--text">
-                <v-list-item-title class="text-h4 mb-1">
-                  500+
-                </v-list-item-title>
-                <v-list-item-subtitle class="white--text text-subtitle-1">
-                  Students Enrolled
+                  Institutions Enrolled
                 </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>

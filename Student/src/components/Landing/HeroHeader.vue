@@ -52,8 +52,7 @@ export default {
     slideData: [
       {
         heading: "Study online with us",
-        text:
-          "In the history of modern astronomy, there is probably no one greater leap forward than the building and launch of the space telescope.",
+        text: "Welcome to Class Pariksha.",
         image: "svg/undraw_online_collaboration_7pfp.svg",
       },
       {

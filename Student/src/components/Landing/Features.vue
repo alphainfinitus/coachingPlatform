@@ -22,7 +22,9 @@
         <v-col cols="12" sm="12" md="4">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()"
+                >mdi-folder-star-multiple mdi-36px</v-icon
+              >
             </v-card-subtitle>
             <v-card-title class="headline">
               Join Multiple Institutions
@@ -40,7 +42,9 @@
         <v-col cols="12" sm="12" md="4" style="margin-top: -6em">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()"
+                >mdi-marker-check mdi-36px</v-icon
+              >
             </v-card-subtitle>
             <v-card-title class="headline"> Clear Batch Pricing </v-card-title>
 
@@ -56,7 +60,9 @@
         <v-col cols="12" sm="12" md="4" style="margin-top: -12em">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()"
+                >mdi-account-heart mdi-36px</v-icon
+              >
             </v-card-subtitle>
             <v-card-title class="headline"> User-friendly design </v-card-title>
 
@@ -73,7 +79,9 @@
         <v-col cols="12" sm="12" md="4">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()"
+                >mdi-format-float-left mdi-36px</v-icon
+              >
             </v-card-subtitle>
             <v-card-title class="headline">
               Gov. like exam interface
@@ -91,7 +99,7 @@
         <v-col cols="12" sm="12" md="4" style="margin-top: -6em">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()">mdi-card-text mdi-36px</v-icon>
             </v-card-subtitle>
             <v-card-title class="headline"> Test Solutions </v-card-title>
 
@@ -107,7 +115,9 @@
         <v-col cols="12" sm="12" md="4" style="margin-top: -12em">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()"
+                >mdi-table-search mdi-36px</v-icon
+              >
             </v-card-subtitle>
             <v-card-title class="headline"> Test Analysis </v-card-title>
 
@@ -126,7 +136,9 @@
         <v-col cols="12" sm="12" md="4">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()"
+                >mdi-folder-star-multiple mdi-36px</v-icon
+              >
             </v-card-subtitle>
             <v-card-title class="headline">
               Join Multiple Institutions
@@ -144,7 +156,9 @@
         <v-col cols="12" sm="12" md="4">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()"
+                >mdi-marker-check mdi-36px</v-icon
+              >
             </v-card-subtitle>
             <v-card-title class="headline"> Clear Batch Pricing </v-card-title>
 
@@ -160,7 +174,9 @@
         <v-col cols="12" sm="12" md="4">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()"
+                >mdi-account-heart mdi-36px</v-icon
+              >
             </v-card-subtitle>
             <v-card-title class="headline"> User-friendly design </v-card-title>
 
@@ -177,7 +193,9 @@
         <v-col cols="12" sm="12" md="4">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()"
+                >mdi-format-float-left mdi-36px</v-icon
+              >
             </v-card-subtitle>
             <v-card-title class="headline">
               Gov. like exam interface
@@ -195,7 +213,7 @@
         <v-col cols="12" sm="12" md="4">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()">mdi-card-text mdi-36px</v-icon>
             </v-card-subtitle>
             <v-card-title class="headline"> Test Solutions </v-card-title>
 
@@ -211,7 +229,9 @@
         <v-col cols="12" sm="12" md="4">
           <v-card dark class="py-3 mx-md-3 px-3 pb-9">
             <v-card-subtitle>
-              <v-icon :color="getRandomColor()">mdi-heart mdi-36px</v-icon>
+              <v-icon :color="getRandomColor()"
+                >mdi-table-search mdi-36px</v-icon
+              >
             </v-card-subtitle>
             <v-card-title class="headline"> Test Analysis </v-card-title>
 

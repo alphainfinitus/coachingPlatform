@@ -21,10 +21,10 @@
               >
                 mdi-email
               </v-icon>
-              <span>email@example.com</span>
+              <span>classpariksha@gmail.com</span>
             </div>
 
-            <div class="d-flex align-center mt-2">
+            <!-- <div class="d-flex align-center mt-2">
               <v-icon
                 :class="
                   $vuetify.breakpoint.mobile ? 'mr-3 white--text' : 'mr-3'
@@ -32,7 +32,7 @@
                 >mdi-phone</v-icon
               >
               <span>+91 94832X7XX8</span>
-            </div>
+            </div> -->
           </div>
         </v-col>
         <v-col cols="12" sm="12" md="6">

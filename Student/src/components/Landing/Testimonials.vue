@@ -65,7 +65,7 @@
                       </span>
                       <v-divider class="my-3"></v-divider>
                       <span class="pa-1 pa-md-2">
-                        {{ testimonial.text }}
+                        "{{ testimonial.text }}"
                       </span>
                     </div>
                   </v-card>
@@ -124,7 +124,7 @@
                         </span>
                         <v-divider class="my-3"></v-divider>
                         <span class="text-right pa-1 pa-md-2">
-                          {{ testimonial.text }}
+                          "{{ testimonial.text }}"
                         </span>
                       </div>
                     </v-card>
@@ -146,50 +146,50 @@ export default {
     slideData: [
       [
         {
-          name: "Student Name 1",
-          role: "MBA Student",
+          name: "Sharad Kumar",
+          role: "Civil Services Student",
           text:
-            "In the history of modern astronomy, there is probably no one greater leap forward than the building and launch of the space telescope.",
+            "One of the best apps for online studies. It is very easy to use and understand the overall concept of app. Gave lots of benifit for preparation of exams.",
           image: "svg/undraw_online_collaboration_7pfp.svg",
         },
         {
-          name: "Student Name 2",
+          name: "Prabhu Bisht",
           role: "B.Tech Student",
           text:
-            "In the history of modern astronomy, there is probably no one greater leap forward than the building and launch of the space telescope.",
+            "The simple user interface and the clarity of analysis is what Class parikisha provide. Easy and smooth exam conduct.",
           image: "svg/undraw_teacher_35j2.svg",
         },
         {
-          name: "Teacher Name 3",
-          role: "MBA Teacher",
+          name: "Bhumika Garg",
+          role: "Coaching Teacher",
           text:
-            "In the history of modern astronomy, there is probably no one greater leap forward than the building and launch of the space telescope.",
+            "I went online to set up my first ever institution during the pandemic. The free trial helped me a lot to start out.",
           image: "svg/undraw_online_test_gba7.svg",
         },
       ],
-      [
-        {
-          name: "Teacher Name 4",
-          role: "Engineering Teacher",
-          text:
-            "In the history of modern astronomy, there is probably no one greater leap forward than the building and launch of the space telescope.",
-          image: "svg/undraw_online_collaboration_7pfp.svg",
-        },
-        {
-          name: "Student Name 5",
-          role: "GATE Student",
-          text:
-            "In the history of modern astronomy, there is probably no one greater leap forward than the building and launch of the space telescope.",
-          image: "svg/undraw_teacher_35j2.svg",
-        },
-        {
-          name: "Coaching Owner 6",
-          role: "Coahing MD",
-          text:
-            "In the history of modern astronomy, there is probably no one greater leap forward than the building and launch of the space telescope.",
-          image: "svg/undraw_online_test_gba7.svg",
-        },
-      ],
+      // [
+      //   {
+      //     name: "Teacher",
+      //     role: "Engineering Teacher",
+      //     text:
+      //       "In the history of modern astronomy, there is probably no one greater leap forward than the building and launch of the space telescope.",
+      //     image: "svg/undraw_online_collaboration_7pfp.svg",
+      //   },
+      //   {
+      //     name: "Student",
+      //     role: "GATE Student",
+      //     text:
+      //       "In the history of modern astronomy, there is probably no one greater leap forward than the building and launch of the space telescope.",
+      //     image: "svg/undraw_teacher_35j2.svg",
+      //   },
+      //   {
+      //     name: "Coaching",
+      //     role: "Coahing MD",
+      //     text:
+      //       "In the history of modern astronomy, there is probably no one greater leap forward than the building and launch of the space telescope.",
+      //     image: "svg/undraw_online_test_gba7.svg",
+      //   },
+      // ],
     ],
   }),
 };
