@@ -83,110 +83,113 @@
       <v-card-subtitle> Test Solution: </v-card-subtitle>
       <v-divider></v-divider>
       <v-container>
-        <v-row align="center">
-          <!-- Solution -->
-          <template v-for="(section, sectionName) in questions">
-            <div :key="sectionName">
-              <v-chip color="primary darken-2" label>
-                {{ sectionName }} :
-              </v-chip>
+        <v-row align="start">
+          <v-col sm="12">
+            <!-- Solution -->
+            <template>
+              <div v-for="(section, sectionName) in questions" :key="sectionName">
+                <v-chip color="primary darken-2" label>
+                  {{ sectionName }} :
+                </v-chip>
 
-              <template v-for="(question, i) in questions[sectionName]">
-                <v-card
-                  class="my-3"
-                  color="indigo lighten-5"
-                  elevation="0"
-                  :key="sectionName + '_' + i"
-                >
-                  <v-card-subtitle>
-                    <b> Question {{ i + 1 }}: </b>
-                  </v-card-subtitle>
-                  <v-container fluid class="mt-n4">
-                    <!-- Question -->
-                    <v-row align="center" class="px-2 pt-0 px-md-8">
-                      <span v-html="question.question"></span>
-                    </v-row>
+                <template>
+                  <v-card
+                    class="my-3"
+                    color="indigo lighten-5"
+                    elevation="0"
+                    v-for="(question, i) in questions[sectionName]"
+                    :key="sectionName + '_' + i"
+                  >
+                    <v-card-subtitle>
+                      <b> Question {{ i + 1 }}: </b>
+                    </v-card-subtitle>
+                    <v-container fluid class="mt-n4">
+                      <!-- Question -->
+                      <v-row align="center" class="px-2 pt-0 px-md-8">
+                        <span v-html="question.question"></span>
+                      </v-row>
 
-                    <v-divider class="my-2"></v-divider>
+                      <v-divider class="my-2"></v-divider>
 
-                    <!-- Subjective -->
-                    <v-row v-if="question.isSubjective">
-                      <!-- Solution -->
-                      <v-col cols="12" sm="12">
-                        <span class="text-subtitle-1 mb-2">
-                          <b class="ml-0 ml-md-2">Solution:</b>
-                        </span>
-                        <div class="ml-0 ml-md-2">
-                          <span
-                            v-html="questions[sectionName][i].solution"
-                          ></span>
-                        </div>
-                      </v-col>
-
-                      <!-- Your Answer -->
-                      <v-col cols="12" sm="12">
-                        <span class="text-subtitle-1 mb-2">
-                          <b class="ml-0 ml-md-2">Your Answer:</b>
-                        </span>
-                        <div class="ml-0 ml-md-2">
-                          <span
-                            v-html="result.answers[sectionName][question.id]"
-                          ></span>
-                        </div>
-                      </v-col>
-                    </v-row>
-
-                    <!-- Objective -->
-                    <v-row v-else class="px-0 px-md-4">
-                      <v-container fluid class="defaultCursor">
-                        <!-- Option A (loop it) -->
-                        <v-row
-                          align="center"
-                          no-gutters
-                          v-for="(optionTitle, i) in options"
-                          :key="i"
-                        >
-                          <v-col class="d-flex" cols="12" sm="12">
-                            <span class="mr-2 d-flex align-start">
-                              <v-chip
-                                :color="
-                                  question.correctAnswer ==
-                                  'Option ' + optionTitle
-                                    ? 'green'
-                                    : 'grey darken-1'
-                                "
-                                pill
-                                dark
-                                small
-                              >
-                                {{ optionTitle }}
-                              </v-chip>
-                              <v-icon
-                                v-if="
-                                  isOptionSelected(
-                                    optionTitle,
-                                    sectionName,
-                                    question.id
-                                  )
-                                "
-                                color="blue darken-2"
-                                >mdi-account-check</v-icon
-                              >
-                            </span>
+                      <!-- Subjective -->
+                      <v-row v-if="question.isSubjective">
+                        <!-- Solution -->
+                        <v-col cols="12" sm="12">
+                          <span class="text-subtitle-1 mb-2">
+                            <b class="ml-0 ml-md-2">Solution:</b>
+                          </span>
+                          <div class="ml-0 ml-md-2">
                             <span
-                              v-html="question.options['option' + optionTitle]"
+                              v-html="questions[sectionName][i].solution"
                             ></span>
-                          </v-col>
-                        </v-row>
-                      </v-container>
-                    </v-row>
-                  </v-container>
-                </v-card>
-              </template>
+                          </div>
+                        </v-col>
 
-              <v-divider></v-divider>
-            </div>
-          </template>
+                        <!-- Your Answer -->
+                        <v-col cols="12" sm="12">
+                          <span class="text-subtitle-1 mb-2">
+                            <b class="ml-0 ml-md-2">Your Answer:</b>
+                          </span>
+                          <div class="ml-0 ml-md-2" v-if="Object.keys(result.answers).length">
+                            <span
+                              v-html="result.answers[sectionName][question.id]"
+                            ></span>
+                          </div>
+                        </v-col>
+                      </v-row>
+
+                      <!-- Objective -->
+                      <v-row v-else class="px-0 px-md-4">
+                        <v-container fluid class="defaultCursor">
+                          <!-- Option A (loop it) -->
+                          <v-row
+                            align="center"
+                            no-gutters
+                            v-for="(optionTitle, i) in options"
+                            :key="i"
+                          >
+                            <v-col class="d-flex" cols="12" sm="12">
+                              <span class="mr-2 d-flex align-start">
+                                <v-chip
+                                  :color="
+                                    question.correctAnswer ==
+                                    'Option ' + optionTitle
+                                      ? 'green'
+                                      : 'grey darken-1'
+                                  "
+                                  pill
+                                  dark
+                                  small
+                                >
+                                  {{ optionTitle }}
+                                </v-chip>
+                                <v-icon
+                                  v-if="
+                                    isOptionSelected(
+                                      optionTitle,
+                                      sectionName,
+                                      question.id
+                                    )
+                                  "
+                                  color="blue darken-2"
+                                  >mdi-account-check</v-icon
+                                >
+                              </span>
+                              <span
+                                v-html="question.options['option' + optionTitle]"
+                              ></span>
+                            </v-col>
+                          </v-row>
+                        </v-container>
+                      </v-row>
+                    </v-container>
+                  </v-card>
+                </template>
+
+                <v-divider></v-divider>
+              </div>
+            </template>
+          </v-col>
         </v-row>
       </v-container>
     </v-card>
@@ -195,7 +198,7 @@
 
 <script>
 export default {
-  name: "TestInstructionsCard",
+  name: "TestResultCard",
   props: [
     "superLoading",
     "test",
@@ -236,31 +239,35 @@ export default {
     attemptedObjectiveQuestions() {
       var attemptedObjectiveQuestions = 0;
 
-      for (let question of Object.keys(this.result.questionAttemptMeta)) {
-        if (
-          this.result.questionAttemptMeta[question] == "markedAndAttempted" ||
-          this.result.questionAttemptMeta[question] == "attempted"
-        ) {
-          for (let section of Object.keys(this.questions)) {
-            var searchQuestion = this.questions[section].find((obj) => {
-              return obj.id == question;
-            });
+      // for (let question of Object.keys(this.result.questionAttemptMeta)) {
+      //   if (
+      //     this.result.questionAttemptMeta[question] == "markedAndAttempted" ||
+      //     this.result.questionAttemptMeta[question] == "attempted"
+      //   ) {
+      //     for (let section of Object.keys(this.questions)) {
+      //       var searchQuestion = this.questions[section].find((obj) => {
+      //         return obj.id == question;
+      //       });
 
-            if (searchQuestion && !searchQuestion.isSubjective) {
-              attemptedObjectiveQuestions++;
-            }
-          }
-        }
-      }
+      //       if (searchQuestion && !searchQuestion.isSubjective) {
+      //         attemptedObjectiveQuestions++;
+      //       }
+      //     }
+      //   }
+      // }
 
       return attemptedObjectiveQuestions;
     },
 
     accuracy() {
-      return (
-        (this.result.correctAnswers / this.attemptedObjectiveQuestions) *
-        100
-      ).toFixed(2);
+      if(this.attemptedObjectiveQuestions != 0){
+        return (
+          (this.result.correctAnswers / this.attemptedObjectiveQuestions) *
+          100
+        ).toFixed(2);
+      }else {
+        return "0";
+      }
     },
   },
   data: () => ({
@@ -272,8 +279,9 @@ export default {
       this.loading = value;
       this.$emit("setSuperLoading", value);
     },
+
     isOptionSelected(optionTitle, sectionName, questionId) {
-      if (questionId in this.result.answers[sectionName]) {
+      if (Object.keys(this.result.answers).length && this.result.answers[sectionName] && questionId in this.result.answers[sectionName]) {
         if (
           this.result.answers[sectionName][questionId] ==
           "Option " + optionTitle

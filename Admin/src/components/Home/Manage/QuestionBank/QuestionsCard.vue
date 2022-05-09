@@ -29,7 +29,7 @@
           :class="enableSelect ? 'mt-n2 mt-md-n7 mb-n4' : ''"
         >
           <!-- All Questions Column -->
-          <v-col cols="12" sm="12" md="6" class="d-flex">
+          <v-col cols="12" sm="12" md="4" class="d-flex">
             <v-btn
               class="mx-auto"
               color="pink darken-1"
@@ -44,8 +44,24 @@
             </v-btn>
           </v-col>
 
+          <!-- TODO: Selected Questions Column -->
+          <v-col cols="12" sm="12" md="4" class="d-flex">
+            <v-btn
+              class="mx-auto"
+              color="pink darken-1"
+              dark
+              :loading="loading || superLoading"
+              @click="getAllQuestions(null)"
+              large
+              outlined
+            >
+              <v-icon class="mr-2">mdi-checkbox-multiple-marked</v-icon>
+              Show Selected Questions
+            </v-btn>
+          </v-col>
+
           <!-- Show by folder select column -->
-          <v-col cols="12" sm="12" md="6" class="d-flex mt-n6 mt-md-0">
+          <v-col cols="12" sm="12" md="4" class="d-flex mt-n6 mt-md-0">
             <v-select
               label="or Browse folder"
               class="text-capitalize mt-7"

@@ -8,7 +8,7 @@ import Landing from "./views/Landing.vue";
 Vue.use(VueRouter);
 Vue.use(VueMeta);
 
-// for (auth) routes that should redirect if already authenticated
+// for (auth-enabling) routes that should redirect if already authenticated
 function verifyAuthRoute(to, from, next) {
   const auth = store.getters.auth;
   if (auth) {

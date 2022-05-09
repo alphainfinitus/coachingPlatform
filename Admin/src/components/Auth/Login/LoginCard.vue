@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="transparent">
     <v-snackbar v-model="snackbar">{{ snackbar }}</v-snackbar>
     <v-card
       :loading="loading || superLoading"
-      class="mx-auto pa-md-4"
+      class="mx-auto pa-md-4 transparent"
       max-width="500"
       elevation="24"
       id="LoginCard"

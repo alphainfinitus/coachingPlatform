@@ -92,6 +92,7 @@
             :askToSubmit="askToSubmit"
             @shouldSubmitTest="shouldSubmitTest"
             :canSubmitBeforeTime="test.submitBeforeTime"
+            @editorFocus="setEditorFocus"
           />
         </v-col>
       </v-row>
@@ -153,6 +154,8 @@ export default {
     showResult: false,
     result: {},
     totalObjectiveQuestions: 0,
+    tabChangeWarning: 0,
+    editorFocus: true
   }),
   methods: {
     setSuperLoading(value) {
@@ -428,6 +431,9 @@ export default {
       event.preventDefault();
       event.returnValue = "";
     },
+    setEditorFocus(focus){
+      this.editorFocus = focus;
+    }
   },
   created() {
     this.checkTestExists();
@@ -437,17 +443,33 @@ export default {
     this.fetchTestQuestions();
     this.fetchResult();
   },
+  mounted(){
+    const _this = this;
+    window.onblur = function() {
+      if(_this.startTimer && !_this.editorFocus) {
+        _this.tabChangeWarning++;
+        if(_this.tabChangeWarning == 1) {
+          alert(`Warning ${_this.tabChangeWarning}/2, the test will automatically submit on another tab change.`);
+        }else {
+          _this.superLoading = true;
+          _this.submitTest();
+        }
+      }
+    }
+  },
   beforeRouteLeave(to, from, next) {
     const answer = window.confirm(
       "Do you really want to leave? Your progress will be discarded if not submitted."
     );
     if (answer) {
+      window.onblur = "";
       next();
     } else {
       next(false);
     }
   },
   beforeDestroy() {
+    window.removeEventListener("beforeunload", this.beforeUnloadHandler);
     window.removeEventListener("beforeunload", this.beforeUnloadHandler);
   },
 };

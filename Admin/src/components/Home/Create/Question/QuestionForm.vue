@@ -162,7 +162,7 @@
             </v-col>
           </v-row>
 
-          <!-- correct answer if question is subjective -->
+          <!-- correct answer if question is not subjective -->
           <div v-if="!subjective" class="d-flex align-center">
             <v-icon>mdi-chevron-right</v-icon>
             <span class="ml-1 mr-md-2"> Correct Answer: </span>

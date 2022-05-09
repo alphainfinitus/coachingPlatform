@@ -123,10 +123,7 @@ export default {
         var timeLeft = this.testWillEndAt.diff(moment());
         this.timeLeft = moment.utc(timeLeft).format("HH:mm:ss");
         var currMoment = moment();
-        if (
-          currMoment.isSameOrAfter(this.testWillEndAt) ||
-          currMoment.isSameOrAfter(endDateTime)
-        ) {
+        if (currMoment.isSameOrAfter(this.testWillEndAt)) {
           clearInterval(this.timeInterval);
           this.timeLeft = null;
           this.$emit("timeUp");

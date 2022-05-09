@@ -44,21 +44,6 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    // Contact Form
-    submitContactForm: (context, payload) => {
-      const ref = fire_store.collection("messages").doc();
-      return new Promise((resolve, reject) => {
-        ref
-          .set(payload)
-          .then(() => {
-            resolve();
-          })
-          .catch((err) => {
-            reject(err);
-          });
-      });
-    },
-
     // Auth Mutations
     login: (state, payload) => {
       state.auth = payload;
@@ -102,6 +87,21 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    // Contact Form
+    submitContactForm: (context, payload) => {
+      const ref = fire_store.collection("messages").doc();
+      return new Promise((resolve, reject) => {
+        ref
+          .set(payload)
+          .then(() => {
+            resolve();
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
+
     // Auth Actions
     register: (context, payload) => {
       return new Promise((resolve, reject) => {
@@ -145,6 +145,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     login: (context, payload) => {
       return new Promise((resolve, reject) => {
         fire_auth
@@ -169,8 +170,9 @@ export default new Vuex.Store({
           });
       });
     },
+
     setUserData: (context) => {
-      const ref = fire_store.collection("admins").doc(context.state.auth.uid);
+      const ref = fire_store.collection("meta").doc(context.state.auth.uid);
 
       return new Promise((resolve, reject) => {
         ref
@@ -185,6 +187,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     logout: (context) => {
       return new Promise((resolve, reject) => {
         fire_auth
@@ -198,6 +201,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     resetPassword: (context, payload) => {
       return new Promise((resolve, reject) => {
         fire_auth
@@ -245,6 +249,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     checkUsernameExists: (context, payload) => {
       const ref = fire_store
         .collection("admins")
@@ -267,6 +272,7 @@ export default new Vuex.Store({
         }
       });
     },
+
     submitOrganisationDetails: (context, payload) => {
       const ref = fire_store.collection("admins").doc(context.state.auth.uid);
       return new Promise((resolve, reject) => {
@@ -290,6 +296,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     changeEmail: (context, payload) => {
       var user = fire_auth.currentUser;
       const ref = fire_store.collection("admins").doc(context.state.auth.uid);
@@ -352,6 +359,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     updateQuestion: (context, payload) => {
       const ref = fire_store
         .collection("admins")
@@ -371,6 +379,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     decrementFolderCount: (context, payload) => {
       const counterRef = fire_store
         .collection("admins")
@@ -412,6 +421,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     submitTest: (context, payload) => {
       var payloadWithUID = payload;
       payloadWithUID.institutionUID = context.state.auth.uid;
@@ -433,6 +443,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     fetchNumberOfQuestions: (context) => {
       const ref = fire_store
         .collection("admins")
@@ -482,6 +493,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     saveQuestionFolders: (context, payload) => {
       const ref = fire_store
         .collection("admins")
@@ -502,6 +514,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     getAllQuestions: (context, payload) => {
       var ref = "";
 
@@ -553,6 +566,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     getFolderQuestions: (context, payload) => {
       var ref = "";
 
@@ -606,6 +620,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     deleteQuestion: (context, payload) => {
       var batch = fire_store.batch();
 
@@ -643,6 +658,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     getBatches: (context) => {
       const ref = fire_store
         .collection("admins")
@@ -667,6 +683,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     saveBatches: (context, payload) => {
       const ref = fire_store
         .collection("admins")
@@ -686,6 +703,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     getAllTests: (context, payload) => {
       var ref = "";
 
@@ -737,6 +755,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     deleteTest: (context, payload) => {
       const ref = fire_store
         .collection("admins")
@@ -814,6 +833,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     fetchTestQuestions: (context, payload) => {
       var promises = [];
       var questionsObj = {};
@@ -886,6 +906,7 @@ export default new Vuex.Store({
           .catch((error) => reject(error));
       });
     },
+
     gradeSheet: (context, payload) => {
       const ref = fire_store
         .collection("admins")
@@ -909,6 +930,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     getAllResultsByScore: (context, payload) => {
       var ref = "";
 

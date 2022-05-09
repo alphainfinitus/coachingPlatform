@@ -62,6 +62,8 @@
               model-events="change keydown blur focus paste keyup undo redo"
               :init="tinymceInit"
               v-model="subjectiveAnswer"
+              @onfocus="editorFocus(true)"
+              @onblur="editorFocus(false)"
             ></editor>
           </v-col>
         </v-row>
@@ -230,6 +232,9 @@ export default {
     },
     shouldSubmitTest(res) {
       this.$emit("shouldSubmitTest", res);
+    },
+    editorFocus(focus){
+      this.$emit("editorFocus", focus);
     },
   },
   mounted() {},
