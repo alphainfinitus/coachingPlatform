@@ -172,7 +172,7 @@ export default new Vuex.Store({
     },
 
     setUserData: (context) => {
-      const ref = fire_store.collection("meta").doc(context.state.auth.uid);
+      const ref = fire_store.collection("admins").doc(context.state.auth.uid);
 
       return new Promise((resolve, reject) => {
         ref

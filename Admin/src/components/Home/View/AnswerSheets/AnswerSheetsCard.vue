@@ -62,162 +62,164 @@
               </v-col>
             </v-row>
 
-            <v-row align="center">
-              <!-- Loop through questions -->
-              <template v-for="(section, sectionName) in questions">
-                <div :key="sectionName">
-                  <v-chip color="primary darken-2 ml-1" label>
-                    {{ sectionName }} :
-                  </v-chip>
+            <v-row align="start">
+              <v-col cols="12" sm="12">
+                <!-- Loop through questions -->
+                <template v-for="(section, sectionName) in questions">
+                  <div :key="sectionName">
+                    <v-chip color="primary darken-2 ml-1" label>
+                      {{ sectionName }} :
+                    </v-chip>
 
-                  <template v-for="(question, i) in questions[sectionName]">
-                    <div :key="sectionName + '_' + i">
-                      <v-card
-                        v-if="isQuestionAttempted(i, sectionName)"
-                        class="my-3"
-                        color="indigo lighten-5"
-                        elevation="0"
-                      >
-                        <v-card-subtitle>
-                          <b> Question {{ i + 1 }}: </b>
-                        </v-card-subtitle>
-                        <v-container fluid class="mt-n4">
-                          <!-- Question -->
-                          <v-row align="center" class="px-2 pt-0 px-md-8">
-                            <span v-html="question.question"></span>
-                          </v-row>
+                    <template v-for="(question, i) in questions[sectionName]">
+                      <div :key="sectionName + '_' + i">
+                        <v-card
+                          v-if="isQuestionAttempted(i, sectionName)"
+                          class="my-3"
+                          color="indigo lighten-5"
+                          elevation="0"
+                        >
+                          <v-card-subtitle>
+                            <b> Question {{ i + 1 }}: </b>
+                          </v-card-subtitle>
+                          <v-container fluid class="mt-n4">
+                            <!-- Question -->
+                            <v-row align="center" class="px-2 pt-0 px-md-8">
+                              <span v-html="question.question"></span>
+                            </v-row>
 
-                          <v-divider class="my-2"></v-divider>
+                            <v-divider class="my-2"></v-divider>
 
-                          <!-- Subjective -->
-                          <v-row
-                            v-if="question.isSubjective"
-                            class="d-flex justify-center"
-                          >
-                            <!-- Student's Answer -->
-                            <v-col cols="12" sm="12">
-                              <span
-                                class="text-subtitle-1 mb-2 d-flex align-center"
-                              >
-                                <b class="ml-0 ml-md-2">Student's Answer:</b>
-                              </span>
-                              <div class="ml-0 ml-md-2">
+                            <!-- Subjective -->
+                            <v-row
+                              v-if="question.isSubjective"
+                              class="d-flex justify-center"
+                            >
+                              <!-- Student's Answer -->
+                              <v-col cols="12" sm="12">
                                 <span
-                                  v-html="
-                                    selectedSheet.answers[sectionName][
-                                      question.id
-                                    ]
-                                  "
-                                ></span>
-                              </div>
-                            </v-col>
-
-                            <!-- Solution -->
-                            <v-col cols="12" sm="12">
-                              <span class="text-subtitle-1 mb-2">
-                                <b class="ml-0 ml-md-2">Solution:</b>
-                              </span>
-                              <div class="ml-0 ml-md-2">
-                                <span
-                                  v-html="questions[sectionName][i].solution"
-                                ></span>
-                              </div>
-                            </v-col>
-
-                            <!-- Grade Field -->
-                            <v-col cols="12" sm="12" md="6" class="mt-n6">
-                              <div class="d-flex align-center justify-center">
-                                <v-btn
-                                  @click="decGrade(question.id)"
-                                  :disabled="selectedSheet.graded"
-                                  icon
-                                  ><v-icon>mdi-minus</v-icon></v-btn
+                                  class="text-subtitle-1 mb-2 d-flex align-center"
                                 >
-                                <v-text-field
-                                  v-model="subjectiveGrades[question.id]"
-                                  type="number"
-                                  label="Points"
-                                  class="mx-1 mt-6 inputNum"
-                                  :rules="basicRules"
-                                  :readonly="selectedSheet.graded"
-                                  solo
-                                ></v-text-field>
-                                <v-btn
-                                  @click="incGrade(question.id)"
-                                  :disabled="selectedSheet.graded"
-                                  icon
-                                  ><v-icon>mdi-plus</v-icon></v-btn
-                                >
-                              </div>
-                            </v-col>
-                          </v-row>
-
-                          <!-- Objective -->
-                          <v-row v-else class="px-0 px-md-4">
-                            <v-container fluid class="defaultCursor">
-                              <!-- Option A (loop it) -->
-                              <v-row
-                                align="center"
-                                no-gutters
-                                v-for="(optionTitle, i) in options"
-                                :key="i"
-                              >
-                                <v-col class="d-flex" cols="12" sm="12">
-                                  <span class="mr-2 d-flex align-start">
-                                    <v-chip
-                                      :color="
-                                        question.correctAnswer ==
-                                        'Option ' + optionTitle
-                                          ? 'green'
-                                          : 'grey darken-1'
-                                      "
-                                      pill
-                                      dark
-                                      small
-                                    >
-                                      {{ optionTitle }}
-                                    </v-chip>
-                                    <v-icon
-                                      v-if="
-                                        isOptionSelected(
-                                          optionTitle,
-                                          sectionName,
-                                          question.id
-                                        )
-                                      "
-                                      color="blue darken-2"
-                                      >mdi-account-check</v-icon
-                                    >
-                                  </span>
+                                  <b class="ml-0 ml-md-2">Student's Answer:</b>
+                                </span>
+                                <div class="ml-0 ml-md-2">
                                   <span
                                     v-html="
-                                      question.options['option' + optionTitle]
+                                      selectedSheet.answers[sectionName][
+                                        question.id
+                                      ]
                                     "
                                   ></span>
-                                </v-col>
-                              </v-row>
-                            </v-container>
-                          </v-row>
-                        </v-container>
-                      </v-card>
+                                </div>
+                              </v-col>
 
-                      <!-- Display 'Not Attempted' Card -->
-                      <v-card
-                        v-else
-                        class="my-3"
-                        color="indigo lighten-5"
-                        elevation="0"
-                      >
-                        <v-card-subtitle>
-                          <b> Question {{ i + 1 }}: </b> Not Attempted
-                        </v-card-subtitle>
-                      </v-card>
-                    </div>
-                  </template>
+                              <!-- Solution -->
+                              <v-col cols="12" sm="12">
+                                <span class="text-subtitle-1 mb-2">
+                                  <b class="ml-0 ml-md-2">Solution:</b>
+                                </span>
+                                <div class="ml-0 ml-md-2">
+                                  <span
+                                    v-html="questions[sectionName][i].solution"
+                                  ></span>
+                                </div>
+                              </v-col>
 
-                  <v-divider></v-divider>
-                </div>
-              </template>
+                              <!-- Grade Field -->
+                              <v-col cols="12" sm="12" md="6" class="mt-n6">
+                                <div class="d-flex align-center justify-center">
+                                  <v-btn
+                                    @click="decGrade(question.id)"
+                                    :disabled="selectedSheet.graded"
+                                    icon
+                                    ><v-icon>mdi-minus</v-icon></v-btn
+                                  >
+                                  <v-text-field
+                                    v-model="subjectiveGrades[question.id]"
+                                    type="number"
+                                    label="Points"
+                                    class="mx-1 mt-6 inputNum"
+                                    :rules="basicRules"
+                                    :readonly="selectedSheet.graded"
+                                    solo
+                                  ></v-text-field>
+                                  <v-btn
+                                    @click="incGrade(question.id)"
+                                    :disabled="selectedSheet.graded"
+                                    icon
+                                    ><v-icon>mdi-plus</v-icon></v-btn
+                                  >
+                                </div>
+                              </v-col>
+                            </v-row>
+
+                            <!-- Objective -->
+                            <v-row v-else class="px-0 px-md-4">
+                              <v-container fluid class="defaultCursor">
+                                <!-- Option A (loop it) -->
+                                <v-row
+                                  align="center"
+                                  no-gutters
+                                  v-for="(optionTitle, i) in options"
+                                  :key="i"
+                                >
+                                  <v-col class="d-flex" cols="12" sm="12">
+                                    <span class="mr-2 d-flex align-start">
+                                      <v-chip
+                                        :color="
+                                          question.correctAnswer ==
+                                          'Option ' + optionTitle
+                                            ? 'green'
+                                            : 'grey darken-1'
+                                        "
+                                        pill
+                                        dark
+                                        small
+                                      >
+                                        {{ optionTitle }}
+                                      </v-chip>
+                                      <v-icon
+                                        v-if="
+                                          isOptionSelected(
+                                            optionTitle,
+                                            sectionName,
+                                            question.id
+                                          )
+                                        "
+                                        color="blue darken-2"
+                                        >mdi-account-check</v-icon
+                                      >
+                                    </span>
+                                    <span
+                                      v-html="
+                                        question.options['option' + optionTitle]
+                                      "
+                                    ></span>
+                                  </v-col>
+                                </v-row>
+                              </v-container>
+                            </v-row>
+                          </v-container>
+                        </v-card>
+
+                        <!-- Display 'Not Attempted' Card -->
+                        <v-card
+                          v-else
+                          class="my-3"
+                          color="indigo lighten-5"
+                          elevation="0"
+                        >
+                          <v-card-subtitle>
+                            <b> Question {{ i + 1 }}: </b> Not Attempted
+                          </v-card-subtitle>
+                        </v-card>
+                      </div>
+                    </template>
+
+                    <v-divider></v-divider>
+                  </div>
+                </template>
+              </v-col>
             </v-row>
           </v-container>
         </v-form>
